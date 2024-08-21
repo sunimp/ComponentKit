@@ -1,5 +1,13 @@
+//
+//  MainController.swift
+//  ComponentKit-Example
+//
+//  Created by Sun on 2024/8/19.
+//
+
 import SwiftUI
 import UIKit
+
 import ThemeKit
 import SnapKit
 
@@ -11,18 +19,30 @@ class MainController: ThemeTabBarController {
         let buttonsTitle = "Buttons"
         let buttonsController = ButtonsController()
         buttonsController.title = buttonsTitle
-        buttonsController.tabBarItem = UITabBarItem(title: buttonsTitle, image: UIImage(named: "TabBar Icon"), tag: 0)
+        buttonsController.tabBarItem = UITabBarItem(
+            title: buttonsTitle,
+            image: UIImage(systemName: "button.programmable.square.fill"),
+            tag: 0
+        )
 
         let cellsTitle = "Cells"
         let cellsController = CellsController()
         cellsController.title = cellsTitle
-        cellsController.tabBarItem = UITabBarItem(title: cellsTitle, image: UIImage(named: "TabBar Icon"), tag: 0)
+        cellsController.tabBarItem = UITabBarItem(
+            title: cellsTitle,
+            image: UIImage(systemName: "tablecells.badge.ellipsis"),
+            tag: 0
+        )
 
         let experimentalTitle = "Experimental"
         let experimentalView = ExperimentalView()
         let experimentalController = UIHostingController(rootView: experimentalView)
         experimentalController.title = experimentalTitle
-        experimentalController.tabBarItem = UITabBarItem(title: experimentalTitle, image: UIImage(named: "TabBar Icon"), tag: 0)
+        experimentalController.tabBarItem = UITabBarItem(
+            title: experimentalTitle,
+            image: UIImage(named: "TabBar Icon"),
+            tag: 0
+        )
 
         viewControllers = [
             ThemeNavigationController(rootViewController: buttonsController),

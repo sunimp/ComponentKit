@@ -1,12 +1,19 @@
+//
+//  SecondaryButton.swift
+//  ComponentKit
+//
+//  Created by Sun on 2024/8/19.
+//
+
 import UIKit
 import ThemeKit
 import SnapKit
 
-open class SecondaryButton: UIButton {
+open class SecondaryButton: ComponentButton {
 
-    public init() {
-        super.init(frame: .zero)
-
+    open override func setup() {
+        super.setup()
+        
         layer.cornerCurve = .continuous
         semanticContentAttribute = .forceRightToLeft
 
@@ -18,10 +25,6 @@ open class SecondaryButton: UIButton {
         }
     }
 
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     public func set(style: Style, image: UIImage? = nil) {
         let height = Self.height(style: style)
 
@@ -30,25 +33,29 @@ open class SecondaryButton: UIButton {
         }
 
         switch style {
-        case .default, .transparent, .tab: cornerRadius = height / 2
-        case .transparent2: cornerRadius = 0
+        case .default, .transparent, .tab: 
+            cornerRadius = height / 2
+        case .transparent2: 
+            cornerRadius = 0
         }
 
         titleLabel?.font = Self.font(style: style)
 
         switch style {
         case .default:
-            setBackgroundColor(.themeSteel20, for: .normal)
-            setBackgroundColor(.themeSteel10, for: .highlighted)
-            setBackgroundColor(.themeSteel20, for: .disabled)
-            setBackgroundColor(.themeYellowD, for: .selected)
-            setBackgroundColor(.themeYellow50, for: [.selected, .highlighted])
+            setBackgroundColor(.jd016.alpha(0.2), for: .normal)
+            setBackgroundColor(.jd016.alpha(0.1), for: .highlighted)
+            setBackgroundColor(.jd016.alpha(0.2), for: .disabled)
+            setBackgroundColor(.cg005, for: .selected)
+            setBackgroundColor(.cg005.alpha(0.5), for: [.selected, .highlighted])
+            
         case .transparent:
             setBackgroundColor(.clear, for: .normal)
             setBackgroundColor(.clear, for: .highlighted)
             setBackgroundColor(.clear, for: .disabled)
-            setBackgroundColor(.themeYellowD, for: .selected)
-            setBackgroundColor(.themeYellow50, for: [.selected, .highlighted])
+            setBackgroundColor(.cg005, for: .selected)
+            setBackgroundColor(.cg005.alpha(0.5), for: [.selected, .highlighted])
+            
         case .transparent2, .tab:
             setBackgroundColor(.clear, for: .normal)
             setBackgroundColor(.clear, for: .highlighted)
@@ -59,23 +66,25 @@ open class SecondaryButton: UIButton {
 
         switch style {
         case .default, .transparent:
-            setTitleColor(.themeLeah, for: .normal)
-            setTitleColor(.themeGray, for: .highlighted)
-            setTitleColor(.themeGray50, for: .disabled)
-            setTitleColor(.themeDark, for: .selected)
-            setTitleColor(.themeDark, for: [.selected, .highlighted])
+            setTitleColor(.zx001, for: .normal)
+            setTitleColor(.zx002, for: .highlighted)
+            setTitleColor(.zx003, for: .disabled)
+            setTitleColor(.zx017, for: .selected)
+            setTitleColor(.zx017, for: [.selected, .highlighted])
+            
         case .transparent2:
-            setTitleColor(.themeGray, for: .normal)
-            setTitleColor(.themeGray50, for: .highlighted)
-            setTitleColor(.themeGray50, for: .disabled)
-            setTitleColor(.themeLeah, for: .selected)
-            setTitleColor(.themeGray, for: [.selected, .highlighted])
+            setTitleColor(.zx001, for: .normal)
+            setTitleColor(.zx003, for: .highlighted)
+            setTitleColor(.zx005, for: .disabled)
+            setTitleColor(.zx001, for: .selected)
+            setTitleColor(.zx001.alpha(0.5), for: [.selected, .highlighted])
+            
         case .tab:
-            setTitleColor(.themeGray, for: .normal)
-            setTitleColor(.themeGray, for: .highlighted)
-            setTitleColor(.themeGray50, for: .disabled)
-            setTitleColor(.themeLeah, for: .selected)
-            setTitleColor(.themeLeah, for: [.selected, .highlighted])
+            setTitleColor(.zx002, for: .normal)
+            setTitleColor(.zx003, for: .highlighted)
+            setTitleColor(.zx005, for: .disabled)
+            setTitleColor(.zx001, for: .selected)
+            setTitleColor(.zx001, for: [.selected, .highlighted])
         }
 
         let leftPadding = Self.leftPadding(style: style)
@@ -85,25 +94,37 @@ open class SecondaryButton: UIButton {
         if let image = image {
             switch style {
             case .default, .transparent, .tab:
-                setImage(image.withTintColor(.themeGray), for: .normal)
-                setImage(image.withTintColor(.themeGray), for: .highlighted)
-                setImage(image.withTintColor(.themeGray50), for: .disabled)
-                setImage(image.withTintColor(.themeDark), for: .selected)
-                setImage(image.withTintColor(.themeDark), for: [.selected, .highlighted])
+                setImage(image.tint(.zx002), for: .normal)
+                setImage(image.tint(.zx003), for: .highlighted)
+                setImage(image.tint(.zx003), for: .disabled)
+                setImage(image.tint(.zx017), for: .selected)
+                setImage(image.tint(.zx017), for: [.selected, .highlighted])
+                
             case .transparent2:
-                setImage(image.withTintColor(.themeGray), for: .normal)
-                setImage(image.withTintColor(.themeGray50), for: .highlighted)
-                setImage(image.withTintColor(.themeGray50), for: .disabled)
-                setImage(image.withTintColor(.themeGray), for: .selected)
-                setImage(image.withTintColor(.themeGray50), for: [.selected, .highlighted])
+                setImage(image.tint(.zx002), for: .normal)
+                setImage(image.tint(.zx005), for: .highlighted)
+                setImage(image.tint(.zx005), for: .disabled)
+                setImage(image.tint(.zx002), for: .selected)
+                setImage(image.tint(.zx005), for: [.selected, .highlighted])
             }
 
             let verticalPadding = (height - CGFloat.iconSize20) / 2
             titleEdgeInsets = UIEdgeInsets(top: 0, left: -imagePadding, bottom: 0, right: imagePadding)
-            contentEdgeInsets = UIEdgeInsets(top: verticalPadding, left: leftPadding + imagePadding, bottom: verticalPadding, right: rightPadding)
+            contentEdgeInsets = UIEdgeInsets(
+                top: verticalPadding,
+                left: leftPadding + imagePadding,
+                bottom: verticalPadding,
+                right: rightPadding
+            )
+            
         } else {
             titleEdgeInsets = .zero
-            contentEdgeInsets = UIEdgeInsets(top: 0, left: leftPadding, bottom: 0, right: rightPadding)
+            contentEdgeInsets = UIEdgeInsets(
+                top: 0,
+                left: leftPadding,
+                bottom: 0,
+                right: rightPadding
+            )
         }
     }
 
@@ -120,9 +141,9 @@ extension SecondaryButton {
 
     private static func font(style: Style) -> UIFont {
         switch style {
-        case .default, .transparent: return .captionSB
-        case .tab: return .subhead1
-        case .transparent2: return .subhead2
+        case .default, .transparent: return .medium13
+        case .tab: return .medium15
+        case .transparent2: return .regular15
         }
     }
 

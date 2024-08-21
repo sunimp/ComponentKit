@@ -1,11 +1,19 @@
+//
+//  CornerPath.swift
+//  ComponentKit
+//
+//  Created by Sun on 2024/8/20.
+//
+
 import UIKit
 
 open class CornerPath {
+    
     let lineWidth: CGFloat
     let offset: CGFloat
     let rect: CGRect
     let cornerRadius: CGFloat
-    var cornerCoefficient: CGFloat { 1 }
+    open var cornerCoefficient: CGFloat { 1 }
 
     public init(lineWidth: CGFloat, rect: CGRect, cornerRadius: CGFloat) {
         self.lineWidth = lineWidth
@@ -13,7 +21,6 @@ open class CornerPath {
         self.cornerRadius = cornerRadius
         offset = lineWidth / 2
     }
-
 
     open func point(edgeType: CornerEdgeType?, corner: UIRectCorner, xOffset: Bool = true, yOffset: Bool = true) -> Point {
         var a: CGFloat = 0

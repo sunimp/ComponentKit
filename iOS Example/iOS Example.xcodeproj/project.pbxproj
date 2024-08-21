@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -59,10 +59,10 @@
 		D94502F7261F98A400F6BF2E /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				D3C59F2B2A5EA43300D5F439 /* ExperimentalView.swift */,
 				3A39D09B2757536E0022CB8B /* AppDelegate.swift */,
 				3A39D0A3275769A00022CB8B /* ButtonsController.swift */,
 				3A39D09F275769A00022CB8B /* CellsController.swift */,
+				D3C59F2B2A5EA43300D5F439 /* ExperimentalView.swift */,
 				3A39D0A4275769A00022CB8B /* Images.xcassets */,
 				3A39D0A5275769A00022CB8B /* MainController.swift */,
 				D9450301261F98A500F6BF2E /* Info.plist */,
@@ -106,8 +106,9 @@
 		D94502ED261F98A400F6BF2E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1540;
 				TargetAttributes = {
 					D94502F4261F98A400F6BF2E = {
 						CreatedOnToolsVersion = 12.4;
@@ -124,6 +125,8 @@
 				Base,
 			);
 			mainGroup = D94502EC261F98A400F6BF2E;
+			packageReferences = (
+			);
 			productRefGroup = D94502F6261F98A400F6BF2E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -197,6 +200,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -258,6 +262,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -290,7 +295,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "io.horizontalsystems.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sunimp.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "ComponentKit Demo";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -315,7 +320,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "io.horizontalsystems.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sunimp.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "ComponentKit Demo";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

@@ -1,15 +1,25 @@
+//
+//  TransactionImageComponent.swift
+//  ComponentKit
+//
+//  Created by Sun on 2024/8/20.
+//
+
 import UIKit
+
+import ThemeKit
 import SnapKit
 import Kingfisher
 import HUD
 
 public class TransactionImageComponent: UIView {
+    
     private let spinner = HUDProgressView(
             progress: 0,
             strokeLineWidth: 2,
             radius: 21,
-            strokeColor: .themeGray,
-            donutColor: .themeSteel10,
+            strokeColor: .zx003,
+            donutColor: .zx005.alpha(0.5),
             duration: 2
     )
 
@@ -20,7 +30,7 @@ public class TransactionImageComponent: UIView {
     private let frontImageMask = UIView()
     private let frontImageView = UIImageView()
 
-    init() {
+    public init() {
         super.init(frame: .zero)
 
         addSubview(spinner)
@@ -68,9 +78,10 @@ public class TransactionImageComponent: UIView {
             maker.center.equalTo(frontImageView).offset(-1)
         }
 
-        frontImageMask.backgroundColor = .themeTyler
+        frontImageMask.backgroundColor = .zx009
     }
 
+    @available(*, unavailable)
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

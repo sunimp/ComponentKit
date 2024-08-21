@@ -1,6 +1,14 @@
+//
+//  BorderedView.swift
+//  ComponentKit
+//
+//  Created by Sun on 2024/8/20.
+//
+
 import UIKit
 
 public class BorderedView: UIView {
+    
     private let borderLayer = CAShapeLayer()
 
     private var _cornerRadius: CGFloat = 0
@@ -55,7 +63,7 @@ public class BorderedView: UIView {
     }
 
     @available(*, unavailable)
-    required init?(coder _: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -89,7 +97,8 @@ public class BorderedView: UIView {
                     path.move(to: CGPoint(x: end.x, y: bottomBorderY))
                     path.addLine(to: end)
                 }
-            default: ()
+            default:
+                break
             }
         }
         return path
@@ -117,7 +126,8 @@ public class BorderedView: UIView {
             let start = cornerPath.point(edgeType: hasTop ? .end : nil, corner: .topRight, yOffset: hasTop).cgPoint
             let end = cornerPath.point(edgeType: hasBottom ? .start : nil, corner: .bottomRight, yOffset: hasBottom).cgPoint
             return styledLinePath(border: border, cornerPath: cornerPath, start: start, end: end)
-        default: return UIBezierPath()
+        default: 
+            return UIBezierPath()
         }
     }
 
@@ -159,6 +169,7 @@ public class BorderedView: UIView {
 }
 
 extension BorderedView {
+    
     public enum BorderStyle {
         case solid
         case corners(length: CGFloat)

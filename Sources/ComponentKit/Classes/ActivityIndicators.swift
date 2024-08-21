@@ -1,8 +1,17 @@
+//
+//  ActivityIndicators.swift
+//  ComponentKit
+//
+//  Created by Sun on 2024/8/20.
+//
+
 import UIKit
+
 import HUD
 import ThemeKit
 
 public enum ActivityIndicatorStyle {
+    
     case small20
     case medium24
     case large48
@@ -65,12 +74,12 @@ public enum ActivityIndicatorStyle {
 
 extension HUDActivityView {
 
-    static public func create(with style: ActivityIndicatorStyle) -> HUDActivityView {
+    static public func create(with style: ActivityIndicatorStyle, strokeColor: UIColor = .gray) -> HUDActivityView {
         let activityView = HUDActivityView(
                 dashHeight: style.dashHeight,
                 dashStrokeWidth: style.dashStrokeWidth,
                 radius: style.radius,
-                strokeColor: .gray,
+                strokeColor: strokeColor,
                 duration: 0.834
         )
         activityView.edgeInsets = style.edgeInsets

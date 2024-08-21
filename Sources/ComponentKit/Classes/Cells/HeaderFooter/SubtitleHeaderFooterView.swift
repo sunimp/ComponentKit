@@ -1,8 +1,17 @@
+//
+//  SubtitleHeaderFooterView.swift
+//  ComponentKit
+//
+//  Created by Sun on 2024/8/19.
+//
+
 import UIKit
+
 import SnapKit
 import ThemeKit
 
 open class SubtitleHeaderFooterView: UITableViewHeaderFooterView {
+    
     private let label = UILabel()
 
     override public init(reuseIdentifier: String?) {
@@ -16,10 +25,11 @@ open class SubtitleHeaderFooterView: UITableViewHeaderFooterView {
             maker.centerY.equalToSuperview()
         }
 
-        label.font = .subhead1
-        label.textColor = .themeGray
+        label.font = .medium13
+        label.textColor = .zx003
     }
 
+    @available(*, unavailable)
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -32,5 +42,6 @@ open class SubtitleHeaderFooterView: UITableViewHeaderFooterView {
 }
 
 extension SubtitleHeaderFooterView {
+    
     public static let height: CGFloat = .margin32
 }

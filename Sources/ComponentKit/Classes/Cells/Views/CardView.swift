@@ -1,7 +1,17 @@
+//
+//  CardView.swift
+//  ComponentKit
+//
+//  Created by Sun on 2024/8/19.
+//
+
 import UIKit
+
+import ThemeKit
 import SnapKit
 
 open class CardView: UIView {
+    
     private let roundedBackground = UIView()
     private let clippingView = UIView()
     public let contentView = UIView()
@@ -14,7 +24,7 @@ open class CardView: UIView {
             maker.edges.equalToSuperview()
         }
 
-        roundedBackground.backgroundColor = .themeLawrence
+        roundedBackground.backgroundColor = .zx009
         roundedBackground.layer.cornerRadius = .cornerRadius16
         roundedBackground.layer.cornerCurve = .continuous
 
@@ -38,8 +48,9 @@ open class CardView: UIView {
         updateUI()
     }
 
+    @available(*, unavailable)
     required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        fatalError("init(coder:) has not been implemented")
     }
 
     public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -49,7 +60,7 @@ open class CardView: UIView {
     }
 
     private func updateUI() {
-        roundedBackground.layer.shadowColor = UIColor.themeAndy.cgColor
+        roundedBackground.layer.shadowColor = UIColor.zx003.cgColor
     }
 
 }

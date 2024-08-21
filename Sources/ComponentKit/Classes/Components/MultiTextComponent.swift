@@ -1,8 +1,17 @@
+//
+//  MultiTextComponent.swift
+//  ComponentKit
+//
+//  Created by Sun on 2024/8/20.
+//
+
 import UIKit
+
 import ThemeKit
 import SnapKit
 
 public class MultiTextComponent: UIView {
+    
     private let titleStackView = UIStackView()
     private let subtitleStackView = UIStackView()
 
@@ -15,6 +24,10 @@ public class MultiTextComponent: UIView {
     public let subtitleBadge = BadgeView()
     public let subtitleLeft = TextComponent()
     public let subtitleRight = TextComponent()
+
+    public var subtitle: TextComponent {
+        subtitleRight
+    }
 
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -71,14 +84,11 @@ public class MultiTextComponent: UIView {
         subtitleStackView.addArrangedSubview(subtitleRight)
     }
 
+    @available(*, unavailable)
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    public var subtitle: TextComponent {
-        subtitleRight
-    }
-
+    
     public func set(style: Style) {
         title.isHidden = true
         titleBadge.isHidden = true

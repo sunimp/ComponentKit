@@ -1,11 +1,20 @@
+//
+//  PrimaryButtonComponent.swift
+//  ComponentKit
+//
+//  Created by Sun on 2024/8/20.
+//
+
 import UIKit
+
 import SnapKit
 
 public class PrimaryButtonComponent: UIView {
+    
     public let button = PrimaryButton()
-    private let dummyButton = UIButton()
+    private let dummyButton = ComponentButton()
 
-    public var onTap: (() -> ())?
+    public var onTap: (() -> Void)?
 
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,14 +31,16 @@ public class PrimaryButtonComponent: UIView {
             maker.centerY.equalToSuperview()
         }
 
-        button.addTarget(self, action: #selector(_onTap), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleTap), for: .touchUpInside)
     }
 
+    @available(*, unavailable)
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    @objc private func _onTap() {
+    @objc 
+    private func handleTap() {
         onTap?()
     }
 

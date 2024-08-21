@@ -1,8 +1,17 @@
+//
+//  ComponentSelectableCell.swift
+//  ComponentKit
+//
+//  Created by Sun on 2024/8/19.
+//
+
 import UIKit
+
 import SnapKit
 import ThemeKit
 
-open class BaseSelectableThemeCell: BaseThemeCell {
+open class ComponentSelectableCell: ComponentCell {
+    
     private let selectView = UIView()
 
     override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -20,20 +29,22 @@ open class BaseSelectableThemeCell: BaseThemeCell {
         selectView.alpha = 0
     }
 
+    @available(*, unavailable)
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    open override func set(backgroundStyle: BackgroundStyle, cornerRadius: CGFloat = .cornerRadius12, isFirst: Bool = false, isLast: Bool = false) {
+    override open func set(backgroundStyle: BackgroundStyle, cornerRadius: CGFloat = .cornerRadius12, isFirst: Bool = false, isLast: Bool = false) {
         super.set(backgroundStyle: backgroundStyle, cornerRadius: cornerRadius, isFirst: isFirst, isLast: isLast)
 
         switch backgroundStyle {
         case .lawrence, .bordered, .externalBorderOnly:
-            selectView.backgroundColor = .themeLawrencePressed
+            selectView.backgroundColor = .zx007
             selectView.layer.cornerRadius = wrapperView.cornerRadius
             selectView.layer.maskedCorners = corners(isFirst: isFirst, isLast: isLast)
+            
         case .transparent:
-            selectView.backgroundColor = .themeLawrencePressed
+            selectView.backgroundColor = .zx007
             selectView.layer.cornerRadius = 0
             selectView.layer.maskedCorners = []
         }

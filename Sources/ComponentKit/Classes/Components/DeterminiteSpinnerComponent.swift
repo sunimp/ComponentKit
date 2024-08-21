@@ -1,17 +1,27 @@
+//
+//  DeterminiteSpinnerComponent.swift
+//  ComponentKit
+//
+//  Created by Sun on 2024/8/20.
+//
+
 import UIKit
+
 import SnapKit
+import ThemeKit
 import HUD
 
 public class DeterminiteSpinnerComponent: UIView {
+    
     private let spinner: HUDProgressView
 
-    init(size: CGFloat) {
+    public init(size: CGFloat) {
         spinner = HUDProgressView(
                 progress: 0,
                 strokeLineWidth: 2,
                 radius: (size - 2) / 2,
-                strokeColor: .themeGray,
-                donutColor: .themeSteel10,
+                strokeColor: .zx003,
+                donutColor: .zx005.alpha(0.5),
                 duration: 2
         )
 
@@ -25,6 +35,7 @@ public class DeterminiteSpinnerComponent: UIView {
         }
     }
 
+    @available(*, unavailable)
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

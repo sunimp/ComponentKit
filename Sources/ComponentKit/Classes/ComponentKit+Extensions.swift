@@ -1,22 +1,11 @@
+//
+//  ComponentKit+Extensions.swift
+//  ComponentKit
+//
+//  Created by Sun on 2024/8/20.
+//
+
 import UIKit
-
-public extension UIButton {
-
-    func setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
-        UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
-
-        if let context = UIGraphicsGetCurrentContext() {
-            context.setFillColor(UIColor.white.cgColor)
-            context.fill(CGRect(x: 0, y: 0, width: 1, height: 1))
-
-            let image = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-
-            setBackgroundImage(image?.withTintColor(color), for: state)
-        }
-    }
-
-}
 
 extension UIView {
 
@@ -33,6 +22,7 @@ extension UIView {
 }
 
 extension UIRectEdge {
+    
     var toArray: [UIRectEdge] {
         let all: [UIRectEdge] = [.top, .right, .bottom, .left]
         return all.filter { edge in contains(edge) }

@@ -1,8 +1,17 @@
+//
+//  HUDHelper.swift
+//  ComponentKit
+//
+//  Created by Sun on 2024/8/20.
+//
+
 import UIKit
+
 import HUD
 
-public class HudHelper {
-    public static let instance = HudHelper()
+public class HUDHelper {
+    
+    public static let shared = HUDHelper()
 
     private enum ImageType { case success, error, attention }
 
@@ -14,7 +23,7 @@ public class HudHelper {
         case .success: statusImage = ComponentKit.image(named: "checkmark_48")
         case .error:
             statusImage = ComponentKit.image(named: "close_48")
-            statusConfig.imageTintColor = .themeLeah
+            statusConfig.imageTintColor = .zx001
         case .attention: statusImage = ComponentKit.image(named: "attention_48")
         }
 
@@ -22,17 +31,17 @@ public class HudHelper {
             return
         }
 
-        HUD.instance.config = themeConfigHud()
+        HUD.shared.config = themeConfigHud()
 
         let textLength = (title?.count ?? 0) + (subtitle?.count ?? 0)
         let textReadDelay = min(max(1, Double(textLength) / 10), 3)
 
         statusConfig.dismissTimeInterval = textReadDelay
 
-        HUDStatusFactory.instance.config = statusConfig
+        HUDStatusFactory.shared.config = statusConfig
 
-        let content = HUDStatusFactory.instance.view(type: .custom(image), title: title, subtitle: subtitle)
-        HUD.instance.showHUD(content, onTapHUD: { hud in
+        let content = HUDStatusFactory.shared.view(type: .custom(image), title: title, subtitle: subtitle)
+        HUD.shared.showHUD(content, onTapHUD: { hud in
             hud.hide()
         })
     }
@@ -44,26 +53,26 @@ public class HudHelper {
         config.startAdjustSize = 0.8
         config.finishAdjustSize = 0.8
         config.preferredSize = CGSize(width: 146, height: 114)
-        config.backgroundColor = UIColor.themeTyler.withAlphaComponent(0.4)//todo .4 does not work for theme, it needs themed color. But it's not working without 0.4 as well
+        config.backgroundColor = .zx009.alpha(0.4)
         config.blurEffectStyle = .themeHud
 
         return config
     }
 
     private func configStatusModel() -> HUDStatusModel {
-        let config = HUDStatusFactory.instance.config
-        config.titleLabelFont = .subhead1
-        config.titleLabelColor = .themeLeah
+        let config = HUDStatusFactory.shared.config
+        config.titleLabelFont = .medium13
+        config.titleLabelColor = .zx001
 
-        config.subtitleLabelFont = .subhead1
-        config.subtitleLabelColor = .themeLeah
+        config.subtitleLabelFont = .medium13
+        config.subtitleLabelColor = .zx002
 
         return config
     }
 
 }
 
-extension HudHelper {
+extension HUDHelper {
 
     public func showSuccess(title: String? = nil, subtitle: String? = nil) {
         show(type: .success, title: title, subtitle: subtitle)
@@ -90,14 +99,14 @@ extension HudHelper {
         customConfig.hapticType = nil
         customConfig.userInteractionEnabled = userInteractionEnabled
 
-        HUD.instance.config = customConfig
+        HUD.shared.config = customConfig
 
         let statusConfig = configStatusModel()
 
         statusConfig.dismissTimeInterval = nil
         statusConfig.customShowCancelInterval = nil
 
-        HUDStatusFactory.instance.config = statusConfig
+        HUDStatusFactory.shared.config = statusConfig
 
         let activityView = HUDActivityView.create(with: .large48)
         activityView.snp.removeConstraints()
@@ -113,7 +122,7 @@ extension HudHelper {
         }
 
         let content = HUDStatusView(frame: .zero, imageView: activityView, titleLabel: titleLabel, subtitleLabel: nil, config: statusConfig)
-        HUD.instance.showHUD(content, onTapHUD: { hud in
+        HUD.shared.showHUD(content, onTapHUD: { hud in
             hud.hide()
         })
 
@@ -121,12 +130,12 @@ extension HudHelper {
     }
 
     public func hide() {
-        HUD.instance.hide()
+        HUD.shared.hide()
     }
 
 }
 
-extension HudHelper {
+extension HUDHelper {
 
     private func show(banner: BannerType) {
         var config = HUDConfig()
@@ -138,10 +147,10 @@ extension HudHelper {
 
         config.coverBlurEffectStyle = nil
         config.coverBlurEffectIntensity = nil
-        config.coverBackgroundColor = .themeBlack50
+        config.coverBackgroundColor = .zx010.alpha(0.5)
 
         config.blurEffectStyle = .themeHud
-        config.backgroundColor = .themeAndy
+        config.backgroundColor = .zx010.alpha(0.2)
         config.blurEffectIntensity = 0.4
 
         config.cornerRadius = 28
@@ -154,7 +163,7 @@ extension HudHelper {
                 isLoading: banner.isLoading
         )
 
-        HUD.instance.show(config: config, viewItem: viewItem, forced: banner.forced)
+        HUD.shared.show(config: config, viewItem: viewItem, forced: banner.forced)
     }
 
     private enum BannerType {
@@ -172,8 +181,8 @@ extension HudHelper {
 
         var color: UIColor {
             switch self {
-            case .error: return .themeLucian
-            case .success: return .themeRemus
+            case .error: return .cg002
+            case .success: return .cg001
             }
         }
 

@@ -1,9 +1,25 @@
+//
+//  ComponentCell.swift
+//  ComponentKit
+//
+//  Created by Sun on 2024/8/19.
+//
+
+import UIKit
+
 import SkeletonView
 import SnapKit
-import UIKit
 import ThemeKit
 
-open class BaseThemeCell: UITableViewCell {
+open class ComponentCell: UITableViewCell {
+    
+    public enum BackgroundStyle {
+        case lawrence
+        case bordered
+        case externalBorderOnly
+        case transparent
+    }
+
     public static let leftInset: CGFloat = .margin16
     public static let rightInset: CGFloat = .margin16
     public static let middleInset: CGFloat = .margin16
@@ -11,11 +27,15 @@ open class BaseThemeCell: UITableViewCell {
     public let wrapperView = BorderedView()
     public let topSeparatorView = UIView()
 
-    let stackView = UIStackView()
-    var rootView: UIView?
+    public let stackView = UIStackView()
+    public var rootView: UIView?
 
     public var isVisible = true
-    var id: String?
+    public var id: String?
+
+    open var cellHeight: CGFloat {
+        isVisible ? .heightCell44 : 0
+    }
 
     override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -49,19 +69,24 @@ open class BaseThemeCell: UITableViewCell {
         stackView.insetsLayoutMarginsFromSafeArea = false
 
         wrapperView.borderWidth = .heightOneDp
-        topSeparatorView.backgroundColor = .themeSteel10
+        topSeparatorView.backgroundColor = .zx005.alpha(0.5)
     }
 
     @available(*, unavailable)
-    public required init?(coder _: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    open var cellHeight: CGFloat {
-        isVisible ? .heightSingleLineCell : 0
+    public static func margin(backgroundStyle: BackgroundStyle) -> UIEdgeInsets {
+        switch backgroundStyle {
+        case .lawrence, .bordered, .externalBorderOnly:
+            return UIEdgeInsets(top: 0, left: .margin16, bottom: 0, right: .margin16)
+        case .transparent:
+            return UIEdgeInsets.zero
+        }
     }
 
-    func corners(isFirst: Bool, isLast: Bool) -> CACornerMask {
+    open func corners(isFirst: Bool, isLast: Bool) -> CACornerMask {
         var maskedCorners: CACornerMask = []
         if isFirst {
             maskedCorners.insert(.layerMinXMinYCorner)
@@ -90,8 +115,9 @@ open class BaseThemeCell: UITableViewCell {
             maskedCorners = corners(isFirst: isFirst, isLast: isLast)
 
             topSeparatorView.isHidden = isFirst
-            wrapperView.backgroundColor = .themeLawrence
+            wrapperView.backgroundColor = .zx009
             wrapperView.borderColor = .clear
+            
         case .bordered, .externalBorderOnly:
             var borders: UIRectEdge = [.left, .right]
             if isFirst || isLast {
@@ -116,7 +142,8 @@ open class BaseThemeCell: UITableViewCell {
             wrapperView.borderWidth = .heightOneDp
             wrapperView.borders = borders
             wrapperView.cornerRadius = resolvedCornerRadius
-            wrapperView.borderColor = .themeSteel20
+            wrapperView.borderColor = .zx005.alpha(0.5)
+            
         case .transparent:
             var borders: UIRectEdge = []
             if !isFirst {
@@ -128,7 +155,7 @@ open class BaseThemeCell: UITableViewCell {
 
             topSeparatorView.isHidden = true
             wrapperView.backgroundColor = .clear
-            wrapperView.borderColor = .themeSteel10
+            wrapperView.borderColor = .zx005.alpha(0.5)
             wrapperView.borderWidth = .heightOneDp
             wrapperView.borders = borders
         }
@@ -141,7 +168,7 @@ open class BaseThemeCell: UITableViewCell {
         wrapperView.layer.maskedCorners = maskedCorners
     }
 
-    public func bind(rootElement: CellBuilderNew.CellElement) {
+    public func bind(rootElement: CellBuilder.CellElement) {
         guard let rootView = rootView else {
             return
         }
@@ -165,22 +192,6 @@ open class BaseThemeCell: UITableViewCell {
         }
 
         return view
-    }
-
-    public static func margin(backgroundStyle: BackgroundStyle) -> UIEdgeInsets {
-        switch backgroundStyle {
-        case .lawrence, .bordered, .externalBorderOnly:
-            return UIEdgeInsets(top: 0, left: .margin16, bottom: 0, right: .margin16)
-        case .transparent:
-            return UIEdgeInsets.zero
-        }
-    }
-
-    public enum BackgroundStyle {
-        case lawrence
-        case bordered
-        case externalBorderOnly
-        case transparent
     }
 
 }

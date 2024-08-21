@@ -1,60 +1,76 @@
+//
+//  PrimaryCircleButton.swift
+//  ComponentKit
+//
+//  Created by Sun on 2024/8/19.
+//
+
 import UIKit
+
 import ThemeKit
 import SnapKit
 
-open class PrimaryCircleButton: UIButton {
-    public static let size: CGFloat = .heightButton
-
+open class PrimaryCircleButton: ComponentButton {
+    
+    public enum Style {
+        
+        case blue
+        case red
+        case gray
+    }
+    
     private var style: Style?
 
-    public init() {
-        super.init(frame: .zero)
-
-        cornerRadius = Self.size / 2
-
-        setBackgroundColor(.themeSteel20, for: .disabled)
+    open override func setup() {
+        super.setup()
+        
+        cornerRadius = self.buttonHeight / 2
 
         snp.makeConstraints { maker in
-            maker.size.equalTo(Self.size)
+            maker.size.equalTo(self.buttonHeight)
         }
-    }
-
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 
     public func set(image: UIImage?) {
-        if let style = style, case .yellow = style {
-            setImage(image?.withTintColor(.themeDark), for: .normal)
-            setImage(image?.withTintColor(.themeDark), for: .highlighted)
-        } else {
-            setImage(image?.withTintColor(.themeClaude), for: .normal)
-            setImage(image?.withTintColor(.themeClaude), for: .highlighted)
+        guard let style = style else {
+            setImage(image?.tint(.zx001), for: .normal)
+            setImage(image?.tint(.zx003), for: .highlighted)
+            setImage(image?.tint(.zx005), for: .disabled)
+            return
         }
-        setImage(image?.withTintColor(.themeSteel20), for: .disabled)
+        switch style {
+        case .blue, .red:
+            setImage(image?.tint(.zx017), for: .normal)
+            setImage(image?.tint(.zx017), for: .highlighted)
+            setImage(image?.tint(.zx017.alpha(0.5)), for: .disabled)
+            
+        case .gray:
+            setImage(image?.tint(.zx001), for: .normal)
+            setImage(image?.tint(.zx003), for: .highlighted)
+            setImage(image?.tint(.zx005), for: .disabled)
+        }
     }
 
     public func set(style: Style) {
         self.style = style
 
         switch style {
-        case .yellow:
-            setImage(imageView?.image?.withTintColor(.themeDark), for: .normal)
-            setBackgroundColor(.themeYellowD, for: .normal)
-            setBackgroundColor(.themeYellow50, for: .highlighted)
-        case .red:
-            setBackgroundColor(.themeLucian, for: .normal)
-            setBackgroundColor(.themeRed50, for: .highlighted)
-        case .gray:
-            setBackgroundColor(.themeLeah, for: .normal)
-            setBackgroundColor(.themeNina, for: .highlighted)
-        }
-    }
+        case .blue:
+            setImage(imageView?.image?.tint(.cg005), for: .normal)
+            setBackgroundColor(.cg005, for: .normal)
+            setBackgroundColor(.cg005.alpha(0.5), for: .highlighted)
+            setBackgroundColor(.cg005.alpha(0.2), for: .disabled)
 
-    public enum Style {
-        case yellow
-        case red
-        case gray
+        case .red:
+            setBackgroundColor(.jd003, for: .normal)
+            setBackgroundColor(.jd003.alpha(0.5), for: .highlighted)
+            setBackgroundColor(.jd003.alpha(0.2), for: .disabled)
+            
+        case .gray:
+            setBackgroundColor(.zx007, for: .normal)
+            setBackgroundColor(.zx008, for: .highlighted)
+            setBackgroundColor(.zx007.alpha(0.2), for: .disabled)
+        }
     }
 
 }

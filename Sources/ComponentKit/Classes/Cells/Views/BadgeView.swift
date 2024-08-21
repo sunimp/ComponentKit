@@ -1,13 +1,55 @@
+//
+//  BadgeView.swift
+//  ComponentKit
+//
+//  Created by Sun on 2024/8/19.
+//
+
 import UIKit
+
+import ThemeKit
 import SnapKit
 
 public class BadgeView: UIView {
+    
     static private let sideMargin: CGFloat = .margin6
     static private let spacing: CGFloat = .margin2
 
     private let stackView = UIStackView()
     private let label = UILabel()
     private let changeLabel = UILabel()
+
+    public var font: UIFont {
+        get { label.font }
+        set {
+            label.font = newValue
+            changeLabel.font = newValue
+        }
+    }
+    
+    public var textColor: UIColor {
+        get { label.textColor }
+        set { label.textColor = newValue }
+    }
+    
+    public var text: String? {
+        get { label.text }
+        set { label.text = newValue }
+    }
+    
+    public var change: Change? {
+        didSet {
+            changeLabel.isHidden = change == nil
+            changeLabel.text = change?.text
+            changeLabel.textColor = change?.color
+        }
+    }
+
+    public var compressionResistance: UILayoutPriority = .required {
+        didSet {
+            label.setContentCompressionResistancePriority(compressionResistance, for: .horizontal)
+        }
+    }
 
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,6 +80,17 @@ public class BadgeView: UIView {
         changeLabel.isHidden = true
     }
 
+    @available(*, unavailable)
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    public static func width(for text: String, change: Change?, style: Style) -> CGFloat {
+        let textWidth = text.size(containerWidth: .greatestFiniteMagnitude, font: style.font).width
+        let changeWidth = change.map { $0.text.size(containerWidth: .greatestFiniteMagnitude, font: style.font).width + spacing } ?? 0
+        return textWidth + changeWidth + sideMargin * 2
+    }
+
     public func set(style: Style) {
         backgroundColor = style.backgroundColor
         label.textColor = style.textColor
@@ -47,48 +100,6 @@ public class BadgeView: UIView {
         snp.updateConstraints { maker in
             maker.height.equalTo(style.height)
         }
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    public var compressionResistance: UILayoutPriority = .required {
-        didSet {
-            label.setContentCompressionResistancePriority(compressionResistance, for: .horizontal)
-        }
-    }
-
-    public var font: UIFont {
-        get { label.font }
-        set {
-            label.font = newValue
-            changeLabel.font = newValue
-        }
-    }
-
-    public var textColor: UIColor {
-        get { label.textColor }
-        set { label.textColor = newValue }
-    }
-
-    public var text: String? {
-        get { label.text }
-        set { label.text = newValue }
-    }
-
-    public var change: Change? {
-        didSet {
-            changeLabel.isHidden = change == nil
-            changeLabel.text = change?.text
-            changeLabel.textColor = change?.color
-        }
-    }
-
-    static public func width(for text: String, change: Change?, style: Style) -> CGFloat {
-        let textWidth = text.size(containerWidth: .greatestFiniteMagnitude, font: style.font).width
-        let changeWidth = change.map { $0.text.size(containerWidth: .greatestFiniteMagnitude, font: style.font).width + spacing } ?? 0
-        return textWidth + changeWidth + sideMargin * 2
     }
 
 }
@@ -108,22 +119,22 @@ extension BadgeView {
 
         var font: UIFont {
             switch self {
-            case .small: return .microSB
-            case .medium: return .captionSB
+            case .small: return .medium9
+            case .medium: return .medium11
             }
         }
 
         var textColor: UIColor {
             switch self {
-            case .small: return .themeBran
-            case .medium: return .themeWhite
+            case .small: return .zx001
+            case .medium: return .zx017
             }
         }
 
         var backgroundColor: UIColor {
             switch self {
-            case .small: return .themeJeremy
-            case .medium: return .themeLucian
+            case .small: return .zx007
+            case .medium: return .cg002
             }
         }
 
@@ -142,8 +153,8 @@ extension BadgeView {
 
         var color: UIColor {
             switch self {
-            case .up: return .themeRemus
-            case .down: return .themeLucian
+            case .up: return .cg003
+            case .down: return .cg004
             }
         }
 

@@ -1,10 +1,20 @@
+//
+//  StackComponent.swift
+//  ComponentKit
+//
+//  Created by Sun on 2024/8/20.
+//
+
 import UIKit
+
+import ThemeKit
 import SnapKit
 
 public class StackComponent: UIView {
-    let stackView = UIStackView()
+    
+    public let stackView = UIStackView()
 
-    init(centered: Bool) {
+    public init(centered: Bool) {
         super.init(frame: .zero)
 
         addSubview(stackView)
@@ -18,8 +28,8 @@ public class StackComponent: UIView {
         }
     }
 
+    @available(*, unavailable)
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }

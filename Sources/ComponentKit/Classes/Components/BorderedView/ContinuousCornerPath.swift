@@ -1,10 +1,30 @@
+//
+//  ContinuousCornerPath.swift
+//  ComponentKit
+//
+//  Created by Sun on 2024/8/20.
+//
+
 import UIKit
 
 open class ContinuousCornerPath: CornerPath {
+    
     private static let ellipseCoefficient: CGFloat = 1.28195
-    private static let coefficients: [CGFloat] = [0.04641, 0.08715, 0.13357, 0.16296, 0.21505, 0.290086, 0.32461, 0.37801, 0.44576, 0.6074, 0.77037]
+    private static let coefficients: [CGFloat] = [
+        0.04641,
+        0.08715,
+        0.13357,
+        0.16296,
+        0.21505,
+        0.290086,
+        0.32461,
+        0.37801,
+        0.44576,
+        0.6074,
+        0.77037
+    ]
 
-    override var cornerCoefficient: CGFloat { Self.ellipseCoefficient }
+    override open var cornerCoefficient: CGFloat { Self.ellipseCoefficient }
 
     private func points(corner: UIRectCorner) -> [ControlPoint] {
         let radius = cornerRadius

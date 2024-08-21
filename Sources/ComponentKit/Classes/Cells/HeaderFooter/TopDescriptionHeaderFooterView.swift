@@ -1,7 +1,17 @@
+//
+//  TopDescriptionHeaderFooterView.swift
+//  ComponentKit
+//
+//  Created by Sun on 2024/8/19.
+//
+
 import UIKit
+
+import ThemeKit
 import SnapKit
 
 open class TopDescriptionHeaderFooterView: UITableViewHeaderFooterView {
+    
     private let descriptionView = TopDescriptionView()
 
     override public init(reuseIdentifier: String?) {
@@ -13,6 +23,7 @@ open class TopDescriptionHeaderFooterView: UITableViewHeaderFooterView {
         }
     }
 
+    @available(*, unavailable)
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

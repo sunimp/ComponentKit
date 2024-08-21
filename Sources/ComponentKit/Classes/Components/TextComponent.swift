@@ -1,4 +1,13 @@
+//
+//  TextComponent.swift
+//  ComponentKit
+//
+//  Created by Sun on 2024/8/20.
+//
+
 import UIKit
+
+import ThemeKit
 import SnapKit
 
 public class TextComponent: UILabel {
