@@ -18,14 +18,16 @@ open class SecondaryCircleButton: ComponentButton {
         case red
     }
     
+    
+    public static let size: CGFloat = 28
+    
     override open func setup() {
         super.setup()
-        self.buttonHeight = 28
 
-        cornerRadius = self.buttonHeight / 2
+        cornerRadius = Self.size / 2
 
         snp.makeConstraints { maker in
-            maker.size.equalTo(self.buttonHeight)
+            maker.size.equalTo(Self.size)
         }
     }
 
