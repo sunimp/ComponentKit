@@ -28,7 +28,7 @@ struct ExperimentalView: View {
                                     .padding(EdgeInsets(top: .margin12, leading: .margin16, bottom: .margin12, trailing: .margin16))
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .foregroundColor(.zx001)
-                                    .font(.regular15)
+                                    .font(.themeBody)
                                 
                                 Image("icon_20")
                                     .renderingMode(.template)
@@ -43,7 +43,7 @@ struct ExperimentalView: View {
                                 .padding(EdgeInsets(top: .margin12, leading: .margin16, bottom: .margin12, trailing: .margin16))
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .foregroundColor(.zx001)
-                                .font(.regular15)
+                                .font(.themeBody)
                             
                             Image("icon_20")
                                 .renderingMode(.template)
@@ -121,7 +121,7 @@ struct HighlightedDescriptionView: View {
             .padding(EdgeInsets(top: .margin12, leading: .margin16, bottom: .margin12, trailing: .margin16))
             .frame(maxWidth: .infinity, alignment: .leading)
             .foregroundColor(.zx001)
-            .font(.regular13)
+            .font(.themeSubhead2)
             .background(RoundedRectangle(cornerRadius: .cornerRadius12, style: .continuous).fill(style.color.opacity(0.2)))
             .overlay(
                 RoundedRectangle(cornerRadius: .cornerRadius12, style: .continuous).stroke(style.color, lineWidth: .heightOneDp)

@@ -25,7 +25,7 @@ open class SubtitleHeaderFooterView: UITableViewHeaderFooterView {
             maker.centerY.equalToSuperview()
         }
 
-        label.font = .medium13
+        label.font = .subhead1
         label.textColor = .zx003
     }
 

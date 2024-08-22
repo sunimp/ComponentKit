@@ -95,7 +95,7 @@ open class SliderButton: UIView {
         }
         
         label.textAlignment = .center
-        label.font = .medium15
+        label.font = .headline2
         
         let finalLabelWrapper = UIView()
         
@@ -113,7 +113,7 @@ open class SliderButton: UIView {
         }
         
         finalLabel.textAlignment = .center
-        finalLabel.font = .medium15
+        finalLabel.font = .headline2
         finalLabel.textColor = .zx003
         
         addSubview(fillView)

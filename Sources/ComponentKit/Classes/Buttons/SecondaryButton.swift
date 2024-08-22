@@ -6,13 +6,14 @@
 //
 
 import UIKit
+
 import ThemeKit
 import SnapKit
 
-open class SecondaryButton: ComponentButton {
+open class SecondaryButton: UIButton {
 
-    open override func setup() {
-        super.setup()
+    public init() {
+        super.init(frame: .zero)
         
         layer.cornerCurve = .continuous
         semanticContentAttribute = .forceRightToLeft
@@ -23,6 +24,11 @@ open class SecondaryButton: ComponentButton {
         snp.makeConstraints { maker in
             maker.height.equalTo(Self.height(style: .default))
         }
+    }
+    
+    @available(*, unavailable)
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     public func set(style: Style, image: UIImage? = nil) {
@@ -141,9 +147,9 @@ extension SecondaryButton {
 
     private static func font(style: Style) -> UIFont {
         switch style {
-        case .default, .transparent: return .medium13
-        case .tab: return .medium15
-        case .transparent2: return .regular15
+        case .default, .transparent: return .captionSB
+        case .tab: return .subhead1
+        case .transparent2: return .subhead2
         }
     }
 

@@ -63,7 +63,7 @@ class ButtonsController: ThemeViewController {
             rootElement: .hStack(
                 [
                     .text { component in
-                        component.font = .medium13
+                        component.font = .subhead1
                         component.textColor = .zx001
                         component.text = "Primary"
                     },
@@ -88,7 +88,7 @@ class ButtonsController: ThemeViewController {
         CellBuilder.buildStatic(cell: primaryBlueIconCell, rootElement: .hStack(
             [
                 .text { component in
-                    component.font = .medium13
+                    component.font = .subhead1
                     component.textColor = .zx001
                     component.text = "Primary Icon"
                 },
@@ -113,19 +113,19 @@ class ButtonsController: ThemeViewController {
         CellBuilder.buildStatic(cell: primaryBlueSpinnerCell, rootElement: .hStack(
             [
                 .text { component in
-                    component.font = .medium13
+                    component.font = .subhead1
                     component.textColor = .zx001
                     component.text = "Primary Spinner"
                 },
                 .primaryButton { component in
-                    component.button.set(style: .blue, accessoryType: .spinner())
+                    component.button.set(style: .blue, accessoryType: .spinner)
                     component.button.setTitle("Blue", for: .normal)
                     component.button.setContentHuggingPriority(.required, for: .horizontal)
                     component.button.setContentCompressionResistancePriority(.required, for: .horizontal)
                 },
                 .margin8,
                 .primaryButton { component in
-                    component.button.set(style: .blue, accessoryType: .spinner())
+                    component.button.set(style: .blue, accessoryType: .spinner)
                     component.button.isEnabled = false
                     component.button.setTitle("Disabled", for: .normal)
                     component.button.setContentHuggingPriority(.required, for: .horizontal)
@@ -150,7 +150,7 @@ class ButtonsController: ThemeViewController {
         CellBuilder.buildStatic(cell: primaryBlueSpinnerCell2, rootElement: .hStack(
             [
                 .primaryButton { component in
-                    component.button.set(style: .blue, accessoryType: .spinner())
+                    component.button.set(style: .blue, accessoryType: .spinner)
                     component.button.setTitle("Blue", for: .normal)
                     component.button.setContentHuggingPriority(.required, for: .horizontal)
                     component.button.setContentCompressionResistancePriority(.required, for: .horizontal)
@@ -181,7 +181,7 @@ class ButtonsController: ThemeViewController {
         CellBuilder.buildStatic(cell: primaryRedCell, rootElement: .hStack(
             [
                 .text { component in
-                    component.font = .medium13
+                    component.font = .subhead1
                     component.textColor = .zx001
                     component.text = "Primary"
                 },
@@ -204,7 +204,7 @@ class ButtonsController: ThemeViewController {
         CellBuilder.buildStatic(cell: primaryRedIconCell, rootElement: .hStack(
             [
                 .text { component in
-                    component.font = .medium13
+                    component.font = .subhead1
                     component.textColor = .zx001
                     component.text = "Primary"
                 },
@@ -229,7 +229,7 @@ class ButtonsController: ThemeViewController {
         CellBuilder.buildStatic(cell: primaryGrayCell, rootElement: .hStack(
             [
                 .text { component in
-                    component.font = .medium13
+                    component.font = .subhead1
                     component.textColor = .zx001
                     component.text = "Primary"
                 },
@@ -252,7 +252,7 @@ class ButtonsController: ThemeViewController {
         CellBuilder.buildStatic(cell: primaryGrayIconCell, rootElement: .hStack(
             [
                 .text { component in
-                    component.font = .medium13
+                    component.font = .subhead1
                     component.textColor = .zx001
                     component.text = "Primary"
                 },
@@ -277,7 +277,7 @@ class ButtonsController: ThemeViewController {
         CellBuilder.buildStatic(cell: primaryTransparentCell, rootElement: .hStack(
             [
                 .text { component in
-                    component.font = .medium13
+                    component.font = .subhead1
                     component.textColor = .zx001
                     component.text = "Primary"
                 },
@@ -304,7 +304,7 @@ class ButtonsController: ThemeViewController {
         CellBuilder.buildStatic(cell: primaryTransparentIconCell, rootElement: .hStack(
             [
                 .text { component in
-                    component.font = .medium13
+                    component.font = .subhead1
                     component.textColor = .zx001
                     component.text = "Primary"
                 },
@@ -333,7 +333,7 @@ class ButtonsController: ThemeViewController {
         CellBuilder.buildStatic(cell: primaryCircleCell, rootElement: .hStack(
             [
                 .text { component in
-                    component.font = .medium13
+                    component.font = .subhead1
                     component.textColor = .zx001
                     component.text = "Primary Circle"
                 },
@@ -364,7 +364,7 @@ class ButtonsController: ThemeViewController {
         CellBuilder.buildStatic(cell: secondaryCell, rootElement: .hStack(
             [
                 .text { component in
-                    component.font = .medium13
+                    component.font = .subhead1
                     component.textColor = .zx001
                     component.text = "Secondary"
                 },
@@ -391,7 +391,7 @@ class ButtonsController: ThemeViewController {
         CellBuilder.buildStatic(cell: secondaryTransparentCell, rootElement: .hStack(
             [
                 .text { component in
-                    component.font = .medium13
+                    component.font = .subhead1
                     component.textColor = .zx001
                     component.text = "Transparent"
                 },
@@ -422,7 +422,7 @@ class ButtonsController: ThemeViewController {
         CellBuilder.buildStatic(cell: secondaryTransparent2Cell, rootElement: .hStack(
             [
                 .text { component in
-                    component.font = .medium13
+                    component.font = .subhead1
                     component.textColor = .zx001
                     component.text = "Transparent 2"
                 },
@@ -455,7 +455,7 @@ class ButtonsController: ThemeViewController {
         CellBuilder.buildStatic(cell: secondaryFullCell, rootElement: .hStack(
             [
                 .text { component in
-                    component.font = .medium13
+                    component.font = .subhead1
                     component.textColor = .zx001
                     component.text = "Full"
                 },
@@ -482,7 +482,7 @@ class ButtonsController: ThemeViewController {
         CellBuilder.buildStatic(cell: secondaryFull2Cell, rootElement: .hStack(
             [
                 .text { component in
-                    component.font = .medium13
+                    component.font = .subhead1
                     component.textColor = .zx001
                     component.text = "Full 2"
                 },
@@ -515,7 +515,7 @@ class ButtonsController: ThemeViewController {
         CellBuilder.buildStatic(cell: secondaryCircleCell, rootElement: .hStack(
             [
                 .text { component in
-                    component.font = .medium13
+                    component.font = .subhead1
                     component.textColor = .zx001
                     component.text = "Secondary Circle"
                 },
@@ -543,7 +543,7 @@ class ButtonsController: ThemeViewController {
         CellBuilder.buildStatic(cell: transparentIconCell, rootElement: .hStack(
             [
                 .text { component in
-                    component.font = .medium13
+                    component.font = .subhead1
                     component.textColor = .zx001
                     component.text = "Sec Circle Trans"
                 },
@@ -581,11 +581,11 @@ extension ButtonsController: SectionsDataSource {
                 headerState: .margin(height: .margin12),
                 footerState: .margin(height: .margin32),
                 rows: [
-                    StaticRow(cell: primaryBlueCell, id: "primary-yellow", height: .heightCell64),
-                    StaticRow(cell: primaryBlueIconCell, id: "primary-yellow-icon", height: .heightCell64),
-                    StaticRow(cell: primaryBlueSpinnerCell, id: "primary-yellow-spinner", height: .heightCell64),
-                    StaticRow(cell: primaryBlueIconCell2, id: "primary-yellow-icon-2", height: .heightCell64),
-                    StaticRow(cell: primaryBlueSpinnerCell2, id: "primary-yellow-spinner-2", height: .heightCell64),
+                    StaticRow(cell: primaryBlueCell, id: "primary-blue", height: .heightCell64),
+                    StaticRow(cell: primaryBlueIconCell, id: "primary-blue-icon", height: .heightCell64),
+                    StaticRow(cell: primaryBlueSpinnerCell, id: "primary-blue-spinner", height: .heightCell64),
+                    StaticRow(cell: primaryBlueIconCell2, id: "primary-blue-icon-2", height: .heightCell64),
+                    StaticRow(cell: primaryBlueSpinnerCell2, id: "primary-blue-spinner-2", height: .heightCell64),
                     StaticRow(cell: sliderCell, id: "slider", height: 80),
                     StaticRow(cell: sliderDisabledCell, id: "slider-disabled", height: 80),
                     StaticRow(cell: primaryRedCell, id: "primary-red", height: .heightCell64),

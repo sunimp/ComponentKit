@@ -13,7 +13,7 @@ import SnapKit
 open class BottomDescriptionView: UIView {
     
     private static let sideMargin: CGFloat = .margin32
-    private static let font: UIFont = .regular13
+    private static let font: UIFont = .subhead2
 
     private let label = UILabel()
 

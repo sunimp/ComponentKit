@@ -15,7 +15,7 @@ open class TopDescriptionView: UIView {
     private static let sideMargin: CGFloat = .margin6x
     private static let topMargin: CGFloat = .margin3x
     private static let bottomMargin: CGFloat = .margin6x
-    private static let font: UIFont = .regular13
+    private static let font: UIFont = .subhead2
 
     private let label = UILabel()
 

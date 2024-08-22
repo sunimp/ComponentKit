@@ -61,10 +61,10 @@ public class HUDHelper {
 
     private func configStatusModel() -> HUDStatusModel {
         let config = HUDStatusFactory.shared.config
-        config.titleLabelFont = .medium13
+        config.titleLabelFont = .subhead1
         config.titleLabelColor = .zx001
 
-        config.subtitleLabelFont = .medium13
+        config.subtitleLabelFont = .subhead1
         config.subtitleLabelColor = .zx002
 
         return config

@@ -11,30 +11,27 @@ import SnapKit
 import ThemeKit
 import HUD
 
-open class PrimaryButton: ComponentButton {
+open class PrimaryButton: UIButton {
     
     public enum Style {
         case blue
-        case cyan
-        case purple
-        case blueGray
-        case green
         case red
         case gray
         case transparent
     }
     
     public enum AccessoryType {
-        
-        case icon(image: UIImage?, position: ComponentButton.ImagePosition = .left(.margin8))
-        case spinner(position: ComponentButton.ImagePosition = .left(.margin8))
+        case icon(image: UIImage?)
+        case spinner
         case none
     }
 
     private static let horizontalPadding: CGFloat = .margin16
-    private static let leftPaddingWithImage: CGFloat = 14
-    private static let rightPaddingWithImage: CGFloat = 26
+    private static let leftPaddingWithImage: CGFloat = .margin16
+    private static let rightPaddingWithImage: CGFloat = .margin20
     private static let imageMargin: CGFloat = .margin8
+    
+    public static let height: CGFloat = .heightButton
     
     private var style: Style = .transparent
     private let spinner = HUDActivityView.create(with: .medium24)
@@ -62,16 +59,16 @@ open class PrimaryButton: ComponentButton {
         }
     }
     
-    open override func setup() {
-        super.setup()
-     
-        self.cornerRadius = self.buttonHeight / 2
-        self.layer.cornerCurve = .continuous
-
-        titleLabel?.font = .medium15
+    public init() {
+        super.init(frame: .zero)
+        
+        cornerRadius = Self.height / 2
+        layer.cornerCurve = .continuous
+        
+        titleLabel?.font = .headline2
         
         snp.makeConstraints { make in
-            make.height.equalTo(self.buttonHeight)
+            make.height.equalTo(Self.height)
         }
         
         addSubview(spinner)
@@ -85,50 +82,35 @@ open class PrimaryButton: ComponentButton {
         }
     }
 
+    @available(*, unavailable)
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     open func set(style: Style, accessoryType: AccessoryType = .none) {
         self.style = style
         switch style {
-        case .blue, .green, .red, .cyan, .purple, .blueGray:
-            let fromColor: UIColor
-            let toColor: UIColor
-            switch style {
-            case .blue:
-                fromColor = .jd009
-                toColor = .jd010
-            case .green:
-                fromColor = .jd001
-                toColor = .jd002
-            case .red:
-                fromColor = .cg002
-                toColor = .cg002
-            case .cyan:
-                fromColor = .jd011
-                toColor = .jd012
-            case .purple:
-                fromColor = .jd013
-                toColor = .jd014
-            case .blueGray:
-                fromColor = .jd015
-                toColor = .jd016
-            default:
-                fromColor = .zx009
-                toColor = .zx008
-            }
+        case .blue:
             setBackgroundColor(
-                fromColor,
-                gradient: ([fromColor, toColor], direction: .leftToRight),
+                .jd009,
+                gradient: ([.jd009, .jd010], direction: .leftToRight),
                 for: .normal
             )
             setBackgroundColor(
-                fromColor.alpha(0.5),
-                gradient: ([fromColor.alpha(0.5), toColor.alpha(0.5)], direction: .leftToRight),
+                .jd009.alpha(0.5),
+                gradient: ([.jd009.alpha(0.5), .jd010.alpha(0.5)], direction: .leftToRight),
                 for: .highlighted
             )
             setBackgroundColor(
-                fromColor.alpha(0.2),
-                gradient: ([fromColor.alpha(0.2), toColor.alpha(0.2)], direction: .leftToRight),
+                .jd009.alpha(0.2),
+                gradient: ([.jd009.alpha(0.2), .jd010.alpha(0.2)], direction: .leftToRight),
                 for: .disabled
             )
+            
+        case .red:
+            setBackgroundColor(.cg002, for: .normal)
+            setBackgroundColor(.cg002.alpha(0.5), for: .highlighted)
+            setBackgroundColor(.cg002.alpha(0.2), for: .disabled)
             
         case .gray:
             setBackgroundColor(.zx007, for: .normal)
@@ -142,7 +124,7 @@ open class PrimaryButton: ComponentButton {
         }
 
         switch style {
-        case .blue, .green, .red, .cyan, .purple, .blueGray:
+        case .blue, .red:
             setTitleColor(.zx017, for: .normal)
             setTitleColor(.zx017, for: .highlighted)
             setTitleColor(.zx017.alpha(0.5), for: .disabled)
@@ -159,9 +141,9 @@ open class PrimaryButton: ComponentButton {
         }
 
         switch accessoryType {
-        case let .icon(image, position):
+        case .icon(let image):
             switch style {
-            case .blue, .green, .red, .cyan, .purple, .blueGray:
+            case .blue, .red:
                 setImage(image?.tint(.zx017), for: .normal)
                 setImage(image?.tint(.zx017), for: .highlighted)
                 setImage(image?.tint(.zx017.alpha(0.5)), for: .disabled)
@@ -177,29 +159,31 @@ open class PrimaryButton: ComponentButton {
                 setImage(image?.tint(.zx005), for: .disabled)
             }
 
-            let verticalPadding = (self.buttonHeight - CGFloat.iconSize24) / 2
+            let verticalPadding = (self.height - CGFloat.iconSize24) / 2
+            imageEdgeInsets = .only(right: Self.imageMargin)
             contentEdgeInsets = UIEdgeInsets(
                 top: verticalPadding,
                 left: Self.leftPaddingWithImage,
                 bottom: verticalPadding,
                 right: Self.rightPaddingWithImage
             )
-            self.imagePosition = position
+            
             spinner.isHidden = true
             spinner.stopAnimating()
             
-        case .spinner(let position):
+        case .spinner:
             setImage(nil, for: .normal)
             setImage(nil, for: .highlighted)
             setImage(nil, for: .disabled)
 
+            imageEdgeInsets = .zero
             contentEdgeInsets = UIEdgeInsets(
                 top: 0,
                 left: Self.leftPaddingWithImage + .iconSize24 + Self.imageMargin,
                 bottom: 0,
                 right: Self.rightPaddingWithImage
             )
-            self.imagePosition = position
+            
             spinner.isHidden = false
             spinner.startAnimating()
             
@@ -210,7 +194,7 @@ open class PrimaryButton: ComponentButton {
 
             imageEdgeInsets = .zero
             contentEdgeInsets = UIEdgeInsets(
-                top: 0, 
+                top: 0,
                 left: Self.horizontalPadding,
                 bottom: 0,
                 right: Self.horizontalPadding
@@ -245,7 +229,7 @@ open class PrimaryButton: ComponentButton {
             return
         }
         switch style {
-        case .blue, .green, .red, .cyan, .purple, .blueGray:
+        case .blue, .red:
             spinner.set(strokeColor: isEnabled ? .zx017 : .zx017.alpha(0.5))
             
         case .gray:

@@ -13,7 +13,7 @@ import SnapKit
 public class PrimaryCircleButtonComponent: UIView {
     
     public let button = PrimaryCircleButton()
-    private let dummyButton = ComponentButton()
+    private let dummyButton = UIButton()
 
     public var onTap: (() -> Void)?
 
