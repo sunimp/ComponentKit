@@ -21,7 +21,7 @@ class MainController: ThemeTabBarController {
         buttonsController.title = buttonsTitle
         buttonsController.tabBarItem = ThemeTabBarItem(
             title: buttonsTitle,
-            image: UIImage(systemName: "button.programmable.square.fill")?.withRenderingMode(.alwaysTemplate).resize(CGSize(width: 28, height: 25)),
+            image: UIImage(systemName: "button.programmable.square.fill")?.withRenderingMode(.alwaysTemplate),
             tag: 0
         )
         
@@ -30,7 +30,7 @@ class MainController: ThemeTabBarController {
         cellsController.title = cellsTitle
         cellsController.tabBarItem = ThemeTabBarItem(
             title: cellsTitle,
-            image: UIImage(systemName: "tablecells.badge.ellipsis")?.withRenderingMode(.alwaysTemplate).resize(CGSize(width: 28, height: 22)),
+            image: UIImage(systemName: "tablecells.badge.ellipsis")?.withRenderingMode(.alwaysTemplate),
             tag: 0
         )
         
@@ -40,7 +40,7 @@ class MainController: ThemeTabBarController {
         experimentalController.title = experimentalTitle
         experimentalController.tabBarItem = ThemeTabBarItem(
             title: experimentalTitle,
-            image: UIImage(named: "TabBar Icon")?.resize(CGSize(width: 24, height: 24)),
+            image: UIImage(named: "TabBar Icon")?.resize(CGSize(width: 18, height: 18)),
             tag: 0
         )
         

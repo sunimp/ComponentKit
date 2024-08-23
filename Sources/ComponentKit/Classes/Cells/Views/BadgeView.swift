@@ -119,8 +119,8 @@ extension BadgeView {
 
         var font: UIFont {
             switch self {
-            case .small: return .microSB
-            case .medium: return .captionSB
+            case .small: return .microM
+            case .medium: return .captionM
             }
         }
 

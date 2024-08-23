@@ -147,7 +147,7 @@ extension SecondaryButton {
 
     private static func font(style: Style) -> UIFont {
         switch style {
-        case .default, .transparent: return .captionSB
+        case .default, .transparent: return .captionM
         case .tab: return .subhead1
         case .transparent2: return .subhead2
         }
