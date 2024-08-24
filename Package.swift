@@ -18,7 +18,7 @@ let package = Package(
             .package(url: "https://github.com/sunimp/HUD.Swift.git", .upToNextMajor(from: "2.0.7")),
             .package(url: "https://github.com/sunimp/SectionsTableView.Swift.git", .upToNextMajor(from: "1.0.2")),
             .package(url: "https://github.com/sunimp/ThemeKit.Swift.git", .upToNextMajor(from: "2.1.0")),
-            .package(url: "https://github.com/sunimp/UIExtensions.Swift.git", .upToNextMajor(from: "1.1.2")),
+            .package(url: "https://github.com/sunimp/UIExtensions.Swift.git", .upToNextMajor(from: "1.1.4")),
         ],
         targets: [
             .target(

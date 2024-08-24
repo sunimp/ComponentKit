@@ -133,7 +133,7 @@ public enum CellBuilder {
         verticalPadding: CGFloat = defaultMargin,
         elements: [LayoutElement]
     ) -> CGFloat {
-        var textWidth = containerWidth - ComponentCell.margin(backgroundStyle: backgroundStyle).width
+        var textWidth = containerWidth - ComponentCell.margin(backgroundStyle: backgroundStyle).horizontal
 
         var lastMargin = defaultMargin
 
