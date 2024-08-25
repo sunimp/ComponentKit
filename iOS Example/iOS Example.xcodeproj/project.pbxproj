@@ -65,8 +65,8 @@
 				3A39D0A3275769A00022CB8B /* ButtonsController.swift */,
 				3A39D09F275769A00022CB8B /* CellsController.swift */,
 				D3C59F2B2A5EA43300D5F439 /* ExperimentalView.swift */,
-				3A39D0A4275769A00022CB8B /* Images.xcassets */,
 				3A39D0A5275769A00022CB8B /* MainController.swift */,
+				3A39D0A4275769A00022CB8B /* Images.xcassets */,
 				D9450301261F98A500F6BF2E /* Info.plist */,
 			);
 			path = Sources;

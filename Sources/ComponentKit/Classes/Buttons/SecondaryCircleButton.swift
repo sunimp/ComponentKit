@@ -10,7 +10,7 @@ import UIKit
 import ThemeKit
 import SnapKit
 
-open class SecondaryCircleButton: UIButton {
+open class SecondaryCircleButton: ComponentButton {
     
     public enum Style {
         case `default`
@@ -18,22 +18,20 @@ open class SecondaryCircleButton: UIButton {
         case red
     }
     
-    
     public static let size: CGFloat = 28
     
     public init() {
-        super.init(frame: .zero)
-
+        super.init(imagePosition: .left, spacing: 0)
+    }
+    
+    override open func setup() {
+        super.setup()
+        
         cornerRadius = Self.size / 2
 
         snp.makeConstraints { maker in
             maker.size.equalTo(Self.size)
         }
-    }
-    
-    @available(*, unavailable)
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 
     public func set(image: UIImage?, style: Style = .default) {

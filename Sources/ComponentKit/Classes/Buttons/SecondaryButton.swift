@@ -10,10 +10,21 @@ import UIKit
 import ThemeKit
 import SnapKit
 
-open class SecondaryButton: UIButton {
+open class SecondaryButton: ComponentButton {
 
+    public enum Style {
+        case `default`
+        case transparent
+        case transparent2
+        case tab
+    }
+    
     public init() {
-        super.init(frame: .zero)
+        super.init(imagePosition: .left, spacing: 0)
+    }
+    
+    override open func setup() {
+        super.setup()
         
         layer.cornerCurve = .continuous
         semanticContentAttribute = .forceRightToLeft
@@ -26,11 +37,6 @@ open class SecondaryButton: UIButton {
         }
     }
     
-    @available(*, unavailable)
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     public func set(style: Style, image: UIImage? = nil) {
         let height = Self.height(style: style)
 
@@ -94,7 +100,7 @@ open class SecondaryButton: UIButton {
         }
 
         let leftPadding = Self.leftPadding(style: style)
-        let rightPadding = Self.rightPadding(style: style, hasImage: image != nil)
+        let rightPadding = Self.rightPadding(style: style)
         let imagePadding = Self.imagePadding(style: style)
 
         if let image = image {
@@ -115,32 +121,19 @@ open class SecondaryButton: UIButton {
             }
 
             let verticalPadding = (height - CGFloat.iconSize20) / 2
-            titleEdgeInsets = UIEdgeInsets(top: 0, left: -imagePadding, bottom: 0, right: imagePadding)
-            contentEdgeInsets = UIEdgeInsets(
+            imageSpacing = imagePadding
+            contentInsets = UIEdgeInsets(
                 top: verticalPadding,
-                left: leftPadding + imagePadding,
+                left: leftPadding,
                 bottom: verticalPadding,
                 right: rightPadding
             )
             
         } else {
-            titleEdgeInsets = .zero
-            contentEdgeInsets = UIEdgeInsets(
-                top: 0,
-                left: leftPadding,
-                bottom: 0,
-                right: rightPadding
-            )
+            imageSpacing = 0
+            contentInsets = .only(left: leftPadding, right: rightPadding)
         }
     }
-
-    public enum Style {
-        case `default`
-        case transparent
-        case transparent2
-        case tab
-    }
-
 }
 
 extension SecondaryButton {
@@ -155,23 +148,28 @@ extension SecondaryButton {
 
     private static func leftPadding(style: Style) -> CGFloat {
         switch style {
-        case .default, .transparent, .tab: return .margin16
-        case .transparent2: return 0
+        case .default, .transparent, .tab: 
+            return .margin16
+        case .transparent2: 
+            return 0
         }
     }
 
-    private static func rightPadding(style: Style, hasImage: Bool) -> CGFloat {
+    private static func rightPadding(style: Style) -> CGFloat {
         switch style {
-        case .default, .transparent: return hasImage ? .margin8 : .margin16
-        case .tab: return .margin16
-        case .transparent2: return 0
+        case .default, .transparent, .tab:
+            return .margin16
+        case .transparent2: 
+            return 0
         }
     }
 
     private static func imagePadding(style: Style) -> CGFloat {
         switch style {
-        case .default, .transparent, .tab: return .margin2
-        case .transparent2: return .margin8
+        case .default, .transparent, .tab: 
+            return .margin2
+        case .transparent2: 
+            return .margin8
         }
     }
 
@@ -189,7 +187,7 @@ extension SecondaryButton {
             width += CGFloat.iconSize20 + imagePadding(style: style)
         }
 
-        return width + leftPadding(style: style) + rightPadding(style: style, hasImage: hasImage)
+        return width + leftPadding(style: style) + rightPadding(style: style)
     }
 
 }

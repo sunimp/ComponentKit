@@ -10,10 +10,9 @@ import UIKit
 import ThemeKit
 import SnapKit
 
-open class PrimaryCircleButton: UIButton {
+open class PrimaryCircleButton: ComponentButton {
     
     public enum Style {
-        
         case blue
         case red
         case gray
@@ -22,10 +21,14 @@ open class PrimaryCircleButton: UIButton {
     public static let size: CGFloat = .heightButton
     
     private var style: Style?
-
+    
     public init() {
-        super.init(frame: .zero)
-        
+        super.init(imagePosition: .left, spacing: 0)
+    }
+    
+    override open func setup() {
+        super.setup()
+    
         cornerRadius = Self.size / 2
 
         snp.makeConstraints { maker in
@@ -33,11 +36,6 @@ open class PrimaryCircleButton: UIButton {
         }
     }
     
-    @available(*, unavailable)
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     public func set(image: UIImage?) {
         guard let style = style else {
             setImage(image?.tint(.zx001), for: .normal)

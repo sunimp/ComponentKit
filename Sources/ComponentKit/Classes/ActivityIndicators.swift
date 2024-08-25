@@ -16,7 +16,7 @@ public enum ActivityIndicatorStyle {
     case medium24
     case large48
 
-    var dashHeight: CGFloat {
+    public var dashHeight: CGFloat {
         switch self {
         case .small20:
             return 4
@@ -27,7 +27,7 @@ public enum ActivityIndicatorStyle {
         }
     }
 
-    var dashStrokeWidth: CGFloat {
+    public var dashStrokeWidth: CGFloat {
         switch self {
         case .small20:
             return 1 + .heightOnePixel
@@ -38,7 +38,7 @@ public enum ActivityIndicatorStyle {
         }
     }
 
-    var radius: CGFloat {
+    public var radius: CGFloat {
         switch self {
         case .small20:
             return 8
@@ -49,7 +49,7 @@ public enum ActivityIndicatorStyle {
         }
     }
 
-    var edgeInsets: UIEdgeInsets {
+    public var edgeInsets: UIEdgeInsets {
         switch self {
         case .small20:
             return UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
@@ -60,7 +60,7 @@ public enum ActivityIndicatorStyle {
         }
     }
 
-    var size: CGFloat {
+    public var size: CGFloat {
         switch self {
         case .small20:
             return 20

@@ -9,9 +9,10 @@ import UIKit
 
 import SnapKit
 import ThemeKit
+import UIExtensions
 import HUD
 
-open class PrimaryButton: UIButton {
+open class PrimaryButton: ComponentButton {
     
     public enum Style {
         case blue
@@ -26,15 +27,11 @@ open class PrimaryButton: UIButton {
         case none
     }
 
-    private static let horizontalPadding: CGFloat = .margin16
-    private static let leftPaddingWithImage: CGFloat = .margin16
-    private static let rightPaddingWithImage: CGFloat = .margin20
-    private static let imageMargin: CGFloat = .margin8
-    
     public static let height: CGFloat = .heightButton
     
     private var style: Style = .transparent
-    private let spinner = HUDActivityView.create(with: .medium24)
+    private let spinnerStyle: ActivityIndicatorStyle = .medium24
+    private lazy var spinner = HUDActivityView.create(with: spinnerStyle)
 
     public var isScaleHighlightedEnabled: Bool = true
     
@@ -60,9 +57,12 @@ open class PrimaryButton: UIButton {
     }
     
     public init() {
-        super.init(frame: .zero)
+        super.init(imagePosition: .left, spacing: 0)
+    }
+    
+    override open func setup() {
+        super.setup()
         
-        cornerRadius = Self.height / 2
         layer.cornerCurve = .continuous
         
         titleLabel?.font = .headline2
@@ -72,23 +72,11 @@ open class PrimaryButton: UIButton {
         }
         
         addSubview(spinner)
-        spinner.snp.makeConstraints { make in
-            if let titleLabel {
-                make.trailing.equalTo(titleLabel.snp.leading).offset(-Self.imageMargin)
-            } else {
-                make.leading.equalToSuperview().inset(Self.leftPaddingWithImage)
-            }
-            make.centerY.equalToSuperview()
-        }
     }
 
-    @available(*, unavailable)
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     open func set(style: Style, accessoryType: AccessoryType = .none) {
         self.style = style
+        
         switch style {
         case .blue:
             setBackgroundColor(
@@ -122,52 +110,34 @@ open class PrimaryButton: UIButton {
             setBackgroundColor(.clear, for: .highlighted)
             setBackgroundColor(.clear, for: .disabled)
         }
-
+        
+        let titleColor: (normal: UIColor, highlighted: UIColor, disabled: UIColor)
         switch style {
         case .blue, .red:
-            setTitleColor(.zx017, for: .normal)
-            setTitleColor(.zx017, for: .highlighted)
-            setTitleColor(.zx017.alpha(0.5), for: .disabled)
-            
+            titleColor = (.zx017, .zx017, .zx017.alpha(0.5))
         case .gray:
-            setTitleColor(.cg005, for: .normal)
-            setTitleColor(.cg005, for: .highlighted)
-            setTitleColor(.cg005.alpha(0.5), for: .disabled)
-            
+            titleColor = (.cg005, .cg005, .cg005.alpha(0.5))
         case .transparent:
-            setTitleColor(.zx001, for: .normal)
-            setTitleColor(.zx003, for: .highlighted)
-            setTitleColor(.zx005, for: .disabled)
+            titleColor = (.zx001, .zx003, .zx005)
         }
+        
+        setTitleColor(titleColor.normal, for: .normal)
+        setTitleColor(titleColor.highlighted, for: .highlighted)
+        setTitleColor(titleColor.disabled, for: .disabled)
 
         switch accessoryType {
         case .icon(let image):
-            switch style {
-            case .blue, .red:
-                setImage(image?.tint(.zx017), for: .normal)
-                setImage(image?.tint(.zx017), for: .highlighted)
-                setImage(image?.tint(.zx017.alpha(0.5)), for: .disabled)
-                
-            case .gray:
-                setImage(image?.tint(.cg005), for: .normal)
-                setImage(image?.tint(.cg005), for: .highlighted)
-                setImage(image?.tint(.cg005.alpha(0.5)), for: .disabled)
-                
-            case .transparent:
-                setImage(image?.tint(.zx001), for: .normal)
-                setImage(image?.tint(.zx003), for: .highlighted)
-                setImage(image?.tint(.zx005), for: .disabled)
-            }
+            setImage(image?.tint(titleColor.normal), for: .normal)
+            setImage(image?.tint(titleColor.highlighted), for: .highlighted)
+            setImage(image?.tint(titleColor.disabled), for: .disabled)
 
-            let verticalPadding = (self.height - CGFloat.iconSize24) / 2
-            imageEdgeInsets = .only(right: Self.imageMargin)
-            contentEdgeInsets = UIEdgeInsets(
-                top: verticalPadding,
-                left: Self.leftPaddingWithImage,
-                bottom: verticalPadding,
-                right: Self.rightPaddingWithImage
+            let verticalPadding = (Self.height - CGFloat.iconSize24) / 2
+            imageSpacing = .margin8
+            contentInsets = .symmetric(
+                vertical: verticalPadding,
+                horizontal: .margin16
             )
-            
+            cornerRadius = Self.height / 2
             spinner.isHidden = true
             spinner.stopAnimating()
             
@@ -176,13 +146,78 @@ open class PrimaryButton: UIButton {
             setImage(nil, for: .highlighted)
             setImage(nil, for: .disabled)
 
-            imageEdgeInsets = .zero
-            contentEdgeInsets = UIEdgeInsets(
-                top: 0,
-                left: Self.leftPaddingWithImage + .iconSize24 + Self.imageMargin,
-                bottom: 0,
-                right: Self.rightPaddingWithImage
-            )
+            imageSpacing = 0
+            switch imagePosition {
+            case .left:
+                contentInsets = .only(
+                    left: CGFloat.margin16 + .iconSize24 + .margin8,
+                    right: .margin16
+                )
+                snp.updateConstraints { make in
+                    make.height.equalTo(Self.height)
+                }
+                spinner.snp.remakeConstraints { make in
+                    if let titleLabel, titleLabel.superview != nil {
+                        make.trailing.equalTo(titleLabel.snp.leading).offset(-CGFloat.margin8)
+                    } else {
+                        make.leading.equalToSuperview().inset(CGFloat.margin16)
+                    }
+                    make.centerY.equalToSuperview()
+                    make.size.equalTo(self.spinnerStyle.size)
+                }
+                cornerRadius = Self.height / 2
+                
+            case .right:
+                contentInsets = .only(
+                    left: .margin16,
+                    right: CGFloat.margin16 + .iconSize24 + .margin8
+                )
+                snp.updateConstraints { make in
+                    make.height.equalTo(Self.height)
+                }
+                spinner.snp.remakeConstraints { make in
+                    if let titleLabel, titleLabel.superview != nil {
+                        make.leading.equalTo(titleLabel.snp.trailing).offset(CGFloat.margin8)
+                    } else {
+                        make.trailing.equalToSuperview().inset(CGFloat.margin16)
+                    }
+                    make.centerY.equalToSuperview()
+                    make.size.equalTo(self.spinnerStyle.size)
+                }
+                cornerRadius = Self.height / 2
+                
+            case .top:
+                contentInsets = .only(
+                    top: CGFloat.margin12 + .iconSize24 + .margin4,
+                    left: .margin16,
+                    right: .margin16
+                )
+                snp.updateConstraints { make in
+                    make.height.equalTo(Self.height + .iconSize24 + .margin4)
+                }
+                spinner.snp.remakeConstraints { make in
+                    make.top.equalToSuperview().inset(CGFloat.margin12)
+                    make.centerX.equalToSuperview()
+                    make.size.equalTo(self.spinnerStyle.size)
+                }
+                cornerRadius = (Self.height + .iconSize24 + .margin4) / 2
+                
+            case .bottom:
+                contentInsets = .only(
+                    left: .margin16,
+                    bottom: CGFloat.margin12 + .iconSize24 + .margin4,
+                    right: .margin16
+                )
+                snp.updateConstraints { make in
+                    make.height.equalTo(Self.height + .iconSize24 + .margin4)
+                }
+                spinner.snp.remakeConstraints { make in
+                    make.bottom.equalToSuperview().inset(CGFloat.margin12)
+                    make.centerX.equalToSuperview()
+                    make.size.equalTo(self.spinnerStyle.size)
+                }
+                cornerRadius = (Self.height + .iconSize24 + .margin4) / 2
+            }
             
             spinner.isHidden = false
             spinner.startAnimating()
@@ -191,14 +226,11 @@ open class PrimaryButton: UIButton {
             setImage(nil, for: .normal)
             setImage(nil, for: .highlighted)
             setImage(nil, for: .disabled)
-
-            imageEdgeInsets = .zero
-            contentEdgeInsets = UIEdgeInsets(
-                top: 0,
-                left: Self.horizontalPadding,
-                bottom: 0,
-                right: Self.horizontalPadding
-            )
+            
+            imageSpacing = 0
+            contentInsets = .symmetric(horizontal: .margin16)
+            cornerRadius = Self.height / 2
+            
             spinner.isHidden = true
             spinner.stopAnimating()
         }
