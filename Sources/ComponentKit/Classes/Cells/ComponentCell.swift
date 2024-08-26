@@ -14,7 +14,7 @@ import ThemeKit
 open class ComponentCell: UITableViewCell {
     
     public enum BackgroundStyle {
-        case lawrence
+        case grouped
         case bordered
         case externalBorderOnly
         case transparent
@@ -79,7 +79,7 @@ open class ComponentCell: UITableViewCell {
 
     public static func margin(backgroundStyle: BackgroundStyle) -> UIEdgeInsets {
         switch backgroundStyle {
-        case .lawrence, .bordered, .externalBorderOnly:
+        case .grouped, .bordered, .externalBorderOnly:
             return UIEdgeInsets(top: 0, left: .margin16, bottom: 0, right: .margin16)
         case .transparent:
             return UIEdgeInsets.zero
@@ -108,7 +108,7 @@ open class ComponentCell: UITableViewCell {
         wrapperView.cornerRadius = 0
 
         switch backgroundStyle {
-        case .lawrence:
+        case .grouped:
             if isFirst || isLast {
                 resolvedCornerRadius = cornerRadius
             }

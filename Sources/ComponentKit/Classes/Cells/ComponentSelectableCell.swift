@@ -38,7 +38,7 @@ open class ComponentSelectableCell: ComponentCell {
         super.set(backgroundStyle: backgroundStyle, cornerRadius: cornerRadius, isFirst: isFirst, isLast: isLast)
 
         switch backgroundStyle {
-        case .lawrence, .bordered, .externalBorderOnly:
+        case .grouped, .bordered, .externalBorderOnly:
             selectView.backgroundColor = .zx007
             selectView.layer.cornerRadius = wrapperView.cornerRadius
             selectView.layer.maskedCorners = corners(isFirst: isFirst, isLast: isLast)
