@@ -15,7 +15,7 @@ open class SecondaryButton: ComponentButton {
     public enum Style {
         case `default`
         case transparent
-        case transparent2
+        case transparent2(Bool)
         case tab
     }
     
@@ -40,14 +40,18 @@ open class SecondaryButton: ComponentButton {
     public func set(style: Style, image: UIImage? = nil) {
         let height = Self.height(style: style)
 
-        snp.updateConstraints { maker in
-            maker.height.equalTo(height)
+        if case .transparent2(let customHeight) = style, !customHeight {
+            // do nothings
+        } else {
+            snp.updateConstraints { maker in
+                maker.height.equalTo(height)
+            }
         }
 
         switch style {
         case .default, .transparent, .tab: 
             cornerRadius = height / 2
-        case .transparent2: 
+        case .transparent2:
             cornerRadius = 0
         }
 
