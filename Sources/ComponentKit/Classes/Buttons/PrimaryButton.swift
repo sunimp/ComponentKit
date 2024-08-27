@@ -74,8 +74,13 @@ open class PrimaryButton: ComponentButton {
         addSubview(spinner)
     }
 
-    open func set(style: Style, accessoryType: AccessoryType = .none) {
+    open func set(
+        style: Style,
+        imagePosition: ImagePosition = .left,
+        accessoryType: AccessoryType = .none
+    ) {
         self.style = style
+        self.imagePosition = imagePosition
         
         switch style {
         case .blue:

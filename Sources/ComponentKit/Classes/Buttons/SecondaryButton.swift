@@ -38,9 +38,10 @@ open class SecondaryButton: ComponentButton {
         }
     }
     
-    public func set(style: Style, image: UIImage? = nil) {
+    public func set(style: Style, imagePosition: ImagePosition = .left, image: UIImage? = nil) {
         let height = Self.height(style: style)
-
+        self.imagePosition = imagePosition
+        
         if case .transparent3 = style {
             // do nothings
         } else {
