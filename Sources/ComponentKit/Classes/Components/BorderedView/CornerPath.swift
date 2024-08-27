@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - CornerPath
+
 open class CornerPath {
     
     let lineWidth: CGFloat
@@ -36,28 +38,35 @@ open class CornerPath {
             a = rect.width - correctedXOffset
             b = rect.origin.y + correctedYOffset
             aOp = -1
+
         case .topLeft:
             a = rect.origin.y + correctedYOffset
             b = rect.origin.x + correctedXOffset
             rotated = true
+
         case .bottomRight:
             a = rect.height - correctedYOffset
             b = rect.width - correctedXOffset
             aOp = -1
             bOp = -1
             rotated = true
+
         case .bottomLeft:
             a = rect.origin.x + correctedXOffset
             b = rect.height - correctedYOffset
             bOp = -1
+
         default: ()
         }
         switch edgeType {
         case .start: a += aOp * cornerRadius * cornerCoefficient
+
         case .end: b += bOp * cornerRadius * cornerCoefficient
+
         case .center:
             a += aOp * cornerRadius * cornerCoefficient
             b += bOp * cornerRadius * cornerCoefficient
+
         case .none: ()
         }
 
@@ -72,34 +81,44 @@ open class CornerPath {
         case .topLeft:
             startAngle = .pi
             endAngle = -0.5 * .pi
+
         case .topRight:
             startAngle = 1.5 * .pi
             endAngle = 2 * .pi
+
         case .bottomRight:
             startAngle = 0
             endAngle = 0.5 * .pi
+
         case .bottomLeft:
             startAngle = 0.5 * .pi
             endAngle = .pi
+
         default:
             startAngle = 0
             endAngle = 0
         }
         path.move(to: point(edgeType: .start, corner: corner).cgPoint)
-        path.addArc(withCenter: point(edgeType: .center, corner: corner).cgPoint, radius: cornerRadius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
+        path.addArc(
+            withCenter: point(edgeType: .center, corner: corner).cgPoint,
+            radius: cornerRadius,
+            startAngle: startAngle,
+            endAngle: endAngle,
+            clockwise: true
+        )
 
         return path
     }
 
 }
 
-public extension CornerPath {
+extension CornerPath {
 
-    enum CornerEdgeType {
+    public enum CornerEdgeType {
         case start, end, center
     }
 
-    struct Point {
+    public struct Point {
         let x: CGFloat
         let y: CGFloat
         let rotated: Bool
@@ -119,7 +138,7 @@ public extension CornerPath {
         }
     }
 
-    struct ControlPoint {
+    public struct ControlPoint {
         let point: CGPoint
         let cp1: CGPoint
         let cp2: CGPoint

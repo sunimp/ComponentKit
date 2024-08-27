@@ -7,8 +7,10 @@
 
 import UIKit
 
-import ThemeKit
 import SnapKit
+import ThemeKit
+
+// MARK: - BottomDescriptionHeaderFooterView
 
 open class BottomDescriptionHeaderFooterView: UITableViewHeaderFooterView {
     
@@ -24,7 +26,7 @@ open class BottomDescriptionHeaderFooterView: UITableViewHeaderFooterView {
     }
 
     @available(*, unavailable)
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -46,11 +48,11 @@ extension BottomDescriptionHeaderFooterView {
         text: String,
         topMargin: CGFloat = .margin12,
         bottomMargin: CGFloat = .margin32
-) -> CGFloat {
+    ) -> CGFloat {
         BottomDescriptionView.height(
             containerWidth: containerWidth,
             text: text,
-            topMargin: topMargin, 
+            topMargin: topMargin,
             bottomMargin: bottomMargin
         )
     }

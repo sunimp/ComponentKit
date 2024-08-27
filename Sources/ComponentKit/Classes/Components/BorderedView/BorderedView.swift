@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - BorderedView
+
 public class BorderedView: UIView {
     
     private let borderLayer = CAShapeLayer()
@@ -63,7 +65,7 @@ public class BorderedView: UIView {
     }
 
     @available(*, unavailable)
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -73,7 +75,8 @@ public class BorderedView: UIView {
         case .solid:
             path.move(to: start)
             path.addLine(to: end)
-        case let .corners(length):
+
+        case .corners(let length):
             switch border {
             case .top, .bottom:
                 let leftBorderX = min(max(length, start.x), end.x)
@@ -86,6 +89,7 @@ public class BorderedView: UIView {
                     path.move(to: CGPoint(x: rightBorderX, y: end.y))
                     path.addLine(to: end)
                 }
+
             case .right, .left:
                 let topBorderY = min(max(length, start.y), end.y)
                 let bottomBorderY = max(min(bounds.height - length, end.y), start.y)
@@ -97,6 +101,7 @@ public class BorderedView: UIView {
                     path.move(to: CGPoint(x: end.x, y: bottomBorderY))
                     path.addLine(to: end)
                 }
+
             default:
                 break
             }
@@ -114,43 +119,48 @@ public class BorderedView: UIView {
             let start = cornerPath.point(edgeType: hasLeft ? .end : nil, corner: .topLeft, xOffset: hasLeft).cgPoint
             let end = cornerPath.point(edgeType: hasRight ? .start : nil, corner: .topRight, xOffset: hasRight).cgPoint
             return styledLinePath(border: border, cornerPath: cornerPath, start: start, end: end)
+
         case .bottom:
             let start = cornerPath.point(edgeType: hasLeft ? .start : nil, corner: .bottomLeft, xOffset: hasLeft).cgPoint
             let end = cornerPath.point(edgeType: hasRight ? .end : nil, corner: .bottomRight, xOffset: hasRight).cgPoint
             return styledLinePath(border: border, cornerPath: cornerPath, start: start, end: end)
+
         case .left:
             let start = cornerPath.point(edgeType: hasTop ? .start : nil, corner: .topLeft, yOffset: hasTop).cgPoint
             let end = cornerPath.point(edgeType: hasBottom ? .end : nil, corner: .bottomLeft, yOffset: hasBottom).cgPoint
             return styledLinePath(border: border, cornerPath: cornerPath, start: start, end: end)
+
         case .right:
             let start = cornerPath.point(edgeType: hasTop ? .end : nil, corner: .topRight, yOffset: hasTop).cgPoint
             let end = cornerPath.point(edgeType: hasBottom ? .start : nil, corner: .bottomRight, yOffset: hasBottom).cgPoint
             return styledLinePath(border: border, cornerPath: cornerPath, start: start, end: end)
-        default: 
+
+        default:
             return UIBezierPath()
         }
     }
 
     private func updateSubLayers() {
         borderLayer.frame = layer.bounds
-        guard !borderLayer.frame.isEmpty,
-              let borderColor = borderColor
+        guard
+            !borderLayer.frame.isEmpty,
+            let borderColor
         else {
             borderLayer.path = nil
             return
         }
 
-        let cornerPath: CornerPath
-        switch layer.cornerCurve {
-        case .circular: cornerPath = CornerPath(lineWidth: borderWidth, rect: bounds, cornerRadius: cornerRadius)
-        default: cornerPath = ContinuousCornerPath(lineWidth: borderWidth, rect: bounds, cornerRadius: cornerRadius)
-        }
+        let cornerPath: CornerPath =
+            switch layer.cornerCurve {
+            case .circular: CornerPath(lineWidth: borderWidth, rect: bounds, cornerRadius: cornerRadius)
+            default: ContinuousCornerPath(lineWidth: borderWidth, rect: bounds, cornerRadius: cornerRadius)
+            }
 
         let path = UIBezierPath()
-        borders.toArray.forEach { edge in
+        for edge in borders.toArray {
             path.append(linePath(border: edge, cornerPath: cornerPath))
         }
-        borders.corners.forEach { corner in
+        for corner in borders.corners {
             path.append(cornerPath.corner(corner: corner))
         }
 
@@ -162,11 +172,13 @@ public class BorderedView: UIView {
         borderLayer.removeAllAnimations()
     }
 
-    public override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         updateSubLayers()
     }
 }
+
+// MARK: BorderedView.BorderStyle
 
 extension BorderedView {
     

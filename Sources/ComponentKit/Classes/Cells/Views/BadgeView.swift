@@ -7,13 +7,15 @@
 
 import UIKit
 
-import ThemeKit
 import SnapKit
+import ThemeKit
+
+// MARK: - BadgeView
 
 public class BadgeView: UIView {
     
-    static private let sideMargin: CGFloat = .margin6
-    static private let spacing: CGFloat = .margin2
+    private static let sideMargin: CGFloat = .margin6
+    private static let spacing: CGFloat = .margin2
 
     private let stackView = UIStackView()
     private let label = UILabel()
@@ -81,13 +83,14 @@ public class BadgeView: UIView {
     }
 
     @available(*, unavailable)
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     public static func width(for text: String, change: Change?, style: Style) -> CGFloat {
         let textWidth = text.size(containerWidth: .greatestFiniteMagnitude, font: style.font).width
-        let changeWidth = change.map { $0.text.size(containerWidth: .greatestFiniteMagnitude, font: style.font).width + spacing } ?? 0
+        let changeWidth = change
+            .map { $0.text.size(containerWidth: .greatestFiniteMagnitude, font: style.font).width + spacing } ?? 0
         return textWidth + changeWidth + sideMargin * 2
     }
 
@@ -112,29 +115,29 @@ extension BadgeView {
 
         var height: CGFloat {
             switch self {
-            case .small: return 15
-            case .medium: return 18
+            case .small: 15
+            case .medium: 18
             }
         }
 
         var font: UIFont {
             switch self {
-            case .small: return .microM
-            case .medium: return .captionM
+            case .small: .microM
+            case .medium: .captionM
             }
         }
 
         var textColor: UIColor {
             switch self {
-            case .small: return .zx001
-            case .medium: return .zx017
+            case .small: .zx001
+            case .medium: .zx017
             }
         }
 
         var backgroundColor: UIColor {
             switch self {
-            case .small: return .zx007
-            case .medium: return .cg002
+            case .small: .zx007
+            case .medium: .cg002
             }
         }
 
@@ -146,22 +149,22 @@ extension BadgeView {
 
         private var symbol: String {
             switch self {
-            case .up: return "↑"
-            case .down: return "↓"
+            case .up: "↑"
+            case .down: "↓"
             }
         }
 
         var color: UIColor {
             switch self {
-            case .up: return .cg003
-            case .down: return .cg004
+            case .up: .cg003
+            case .down: .cg004
             }
         }
 
         var text: String {
             switch self {
-            case let .down(text): return symbol + text
-            case let .up(text): return symbol + text
+            case .down(let text): symbol + text
+            case .up(let text): symbol + text
             }
         }
     }

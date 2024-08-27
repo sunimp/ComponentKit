@@ -10,6 +10,8 @@ import UIKit
 import HUD
 import ThemeKit
 
+// MARK: - ActivityIndicatorStyle
+
 public enum ActivityIndicatorStyle {
     
     case small20
@@ -19,68 +21,68 @@ public enum ActivityIndicatorStyle {
     public var dashHeight: CGFloat {
         switch self {
         case .small20:
-            return 4
+            4
         case .medium24:
-            return 5
+            5
         case .large48:
-            return 10
+            10
         }
     }
 
     public var dashStrokeWidth: CGFloat {
         switch self {
         case .small20:
-            return 1 + .heightOnePixel
+            1 + .heightOnePixel
         case .medium24:
-            return 2
+            2
         case .large48:
-            return 4
+            4
         }
     }
 
     public var radius: CGFloat {
         switch self {
         case .small20:
-            return 8
+            8
         case .medium24:
-            return 10
+            10
         case .large48:
-            return 20
+            20
         }
     }
 
     public var edgeInsets: UIEdgeInsets {
         switch self {
         case .small20:
-            return UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+            UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         case .medium24:
-            return UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+            UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         case .large48:
-            return UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+            UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
         }
     }
 
     public var size: CGFloat {
         switch self {
         case .small20:
-            return 20
+            20
         case .medium24:
-            return 24
+            24
         case .large48:
-            return 48
+            48
         }
     }
 }
 
 extension HUDActivityView {
 
-    static public func create(with style: ActivityIndicatorStyle, strokeColor: UIColor = .gray) -> HUDActivityView {
+    public static func create(with style: ActivityIndicatorStyle, strokeColor: UIColor = .gray) -> HUDActivityView {
         let activityView = HUDActivityView(
-                dashHeight: style.dashHeight,
-                dashStrokeWidth: style.dashStrokeWidth,
-                radius: style.radius,
-                strokeColor: strokeColor,
-                duration: 0.834
+            dashHeight: style.dashHeight,
+            dashStrokeWidth: style.dashStrokeWidth,
+            radius: style.radius,
+            strokeColor: strokeColor,
+            duration: 0.834
         )
         activityView.edgeInsets = style.edgeInsets
 

@@ -9,6 +9,8 @@ import UIKit
 
 import HUD
 
+// MARK: - HUDHelper
+
 public class HUDHelper {
     
     public static let shared = HUDHelper()
@@ -21,9 +23,11 @@ public class HUDHelper {
         let statusImage: UIImage?
         switch type {
         case .success: statusImage = ComponentKit.image(named: "checkmark_48")
+
         case .error:
             statusImage = ComponentKit.image(named: "close_48")
             statusConfig.imageTintColor = .zx001
+
         case .attention: statusImage = ComponentKit.image(named: "attention_48")
         }
 
@@ -111,8 +115,8 @@ extension HUDHelper {
         let activityView = HUDActivityView.create(with: .large48)
         activityView.snp.removeConstraints()
 
-        var titleLabel: UILabel?
-        if let title = title {
+        var titleLabel: UILabel? = nil
+        if let title {
             titleLabel = UILabel()
             titleLabel?.font = statusConfig.titleLabelFont
             titleLabel?.textColor = statusConfig.titleLabelColor
@@ -121,7 +125,13 @@ extension HUDHelper {
             titleLabel?.text = title
         }
 
-        let content = HUDStatusView(frame: .zero, imageView: activityView, titleLabel: titleLabel, subtitleLabel: nil, config: statusConfig)
+        let content = HUDStatusView(
+            frame: .zero,
+            imageView: activityView,
+            titleLabel: titleLabel,
+            subtitleLabel: nil,
+            config: statusConfig
+        )
         HUD.shared.showHUD(content, onTapHUD: { hud in
             hud.hide()
         })
@@ -156,11 +166,11 @@ extension HUDHelper {
         config.cornerRadius = 28
 
         let viewItem = HUD.ViewItem(
-                icon: banner.icon,
-                iconColor: banner.color,
-                title: banner.title,
-                showingTime: banner.showingTime,
-                isLoading: banner.isLoading
+            icon: banner.icon,
+            iconColor: banner.color,
+            title: banner.title,
+            showingTime: banner.showingTime,
+            isLoading: banner.isLoading
         )
 
         HUD.shared.show(config: config, viewItem: viewItem, forced: banner.forced)
@@ -171,25 +181,25 @@ extension HUDHelper {
         case error(string: String)
 
         var icon: UIImage? {
-            let image: UIImage?
-            switch self {
-            case .success: image = UIImage(named: "circle_check_24")
-            case .error: image = UIImage(named: "warning_2_24")
-            }
+            let image: UIImage? =
+                switch self {
+                case .success: UIImage(named: "circle_check_24")
+                case .error: UIImage(named: "warning_2_24")
+                }
             return image?.withRenderingMode(.alwaysTemplate)
         }
 
         var color: UIColor {
             switch self {
-            case .error: return .cg002
-            case .success: return .cg001
+            case .error: .cg002
+            case .success: .cg001
             }
         }
 
         var title: String {
             switch self {
-            case .success(let title): return title
-            case .error(let description): return description
+            case .success(let title): title
+            case .error(let description): description
             }
         }
 

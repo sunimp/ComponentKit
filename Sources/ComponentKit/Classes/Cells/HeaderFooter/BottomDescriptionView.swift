@@ -7,8 +7,10 @@
 
 import UIKit
 
-import ThemeKit
 import SnapKit
+import ThemeKit
+
+// MARK: - BottomDescriptionView
 
 open class BottomDescriptionView: UIView {
     
@@ -33,12 +35,12 @@ open class BottomDescriptionView: UIView {
     }
     
     @available(*, unavailable)
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     public func bind(
-        text: String, 
+        text: String,
         textColor: UIColor = .zx003,
         topMargin: CGFloat = .margin12,
         bottomMargin: CGFloat = .margin32

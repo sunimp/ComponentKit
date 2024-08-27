@@ -73,16 +73,16 @@ open class ComponentCell: UITableViewCell {
     }
 
     @available(*, unavailable)
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     public static func margin(backgroundStyle: BackgroundStyle) -> UIEdgeInsets {
         switch backgroundStyle {
         case .grouped, .bordered, .externalBorderOnly:
-            return UIEdgeInsets(top: 0, left: .margin16, bottom: 0, right: .margin16)
+            UIEdgeInsets(top: 0, left: .margin16, bottom: 0, right: .margin16)
         case .transparent:
-            return UIEdgeInsets.zero
+            UIEdgeInsets.zero
         }
     }
 
@@ -99,7 +99,12 @@ open class ComponentCell: UITableViewCell {
         return maskedCorners
     }
 
-    open func set(backgroundStyle: BackgroundStyle, cornerRadius: CGFloat = .cornerRadius12, isFirst: Bool = false, isLast: Bool = false) {
+    open func set(
+        backgroundStyle: BackgroundStyle,
+        cornerRadius: CGFloat = .cornerRadius12,
+        isFirst: Bool = false,
+        isLast: Bool = false
+    ) {
         var maskedCorners: CACornerMask = []
         var resolvedCornerRadius: CGFloat = 0
 
@@ -169,7 +174,7 @@ open class ComponentCell: UITableViewCell {
     }
 
     public func bind(rootElement: CellBuilder.CellElement) {
-        guard let rootView = rootView else {
+        guard let rootView else {
             return
         }
 

@@ -7,10 +7,10 @@
 
 import UIKit
 
+import HUD
 import SnapKit
 import ThemeKit
 import UIExtensions
-import HUD
 
 open class PrimaryButton: ComponentButton {
     
@@ -33,23 +33,23 @@ open class PrimaryButton: ComponentButton {
     private let spinnerStyle: ActivityIndicatorStyle = .medium24
     private lazy var spinner = HUDActivityView.create(with: spinnerStyle)
 
-    public var isScaleHighlightedEnabled: Bool = true
+    public var isScaleHighlightedEnabled = true
     
-    open override var isEnabled: Bool {
+    override open var isEnabled: Bool {
         didSet {
             updateSpinnerStrokeColor()
         }
     }
     
-    open override var isHighlighted: Bool {
+    override open var isHighlighted: Bool {
         get {
-            return super.isHighlighted
+            super.isHighlighted
         }
         set {
             if !super.isHighlighted, newValue {
-                self.scaleHighlightedAnimation(newValue)
+                scaleHighlightedAnimation(newValue)
             } else if super.isHighlighted, !newValue {
-                self.scaleHighlightedAnimation(newValue)
+                scaleHighlightedAnimation(newValue)
             }
             super.isHighlighted = newValue
             updateSpinnerStrokeColor()
@@ -116,15 +116,15 @@ open class PrimaryButton: ComponentButton {
             setBackgroundColor(.clear, for: .disabled)
         }
         
-        let titleColor: (normal: UIColor, highlighted: UIColor, disabled: UIColor)
-        switch style {
-        case .blue, .red:
-            titleColor = (.zx017, .zx017, .zx017.alpha(0.5))
-        case .gray:
-            titleColor = (.cg005, .cg005, .cg005.alpha(0.5))
-        case .transparent:
-            titleColor = (.zx001, .zx003, .zx005)
-        }
+        let titleColor: (normal: UIColor, highlighted: UIColor, disabled: UIColor) =
+            switch style {
+            case .blue, .red:
+                (.zx017, .zx017, .zx017.alpha(0.5))
+            case .gray:
+                (.cg005, .cg005, .cg005.alpha(0.5))
+            case .transparent:
+                (.zx001, .zx003, .zx005)
+            }
         
         setTitleColor(titleColor.normal, for: .normal)
         setTitleColor(titleColor.highlighted, for: .highlighted)
@@ -244,7 +244,7 @@ open class PrimaryButton: ComponentButton {
     }
     
     open func scaleHighlightedAnimation(_ isHighlighted: Bool) {
-        guard self.isScaleHighlightedEnabled else { return }
+        guard isScaleHighlightedEnabled else { return }
         
         let animation = CABasicAnimation(keyPath: "transform.scale")
         let ratio: Float = 0.96
@@ -257,8 +257,8 @@ open class PrimaryButton: ComponentButton {
         animation.timingFunction = CAMediaTimingFunction(controlPoints: 0.33, 0, 0.67, 1)
         
         let key = "highlight_Animation_Transform.scale"
-        self.layer.removeAnimation(forKey: key)
-        self.layer.add(animation, forKey: key)
+        layer.removeAnimation(forKey: key)
+        layer.add(animation, forKey: key)
     }
 
     private func updateSpinnerStrokeColor() {

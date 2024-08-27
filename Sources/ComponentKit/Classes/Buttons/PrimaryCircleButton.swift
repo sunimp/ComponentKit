@@ -7,8 +7,8 @@
 
 import UIKit
 
-import ThemeKit
 import SnapKit
+import ThemeKit
 
 open class PrimaryCircleButton: ComponentButton {
     
@@ -37,7 +37,7 @@ open class PrimaryCircleButton: ComponentButton {
     }
     
     public func set(image: UIImage?) {
-        guard let style = style else {
+        guard let style else {
             setImage(image?.tint(.zx001), for: .normal)
             setImage(image?.tint(.zx003), for: .highlighted)
             setImage(image?.tint(.zx005), for: .disabled)

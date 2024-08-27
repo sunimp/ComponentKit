@@ -7,9 +7,9 @@
 
 import UIKit
 
-import ThemeKit
-import SnapKit
 import HUD
+import SnapKit
+import ThemeKit
 
 public class SpinnerComponent: UIView {
     
@@ -30,7 +30,7 @@ public class SpinnerComponent: UIView {
     }
 
     @available(*, unavailable)
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 

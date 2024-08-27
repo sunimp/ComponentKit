@@ -7,8 +7,10 @@
 
 import UIKit
 
-import ThemeKit
 import SnapKit
+import ThemeKit
+
+// MARK: - MultiTextComponent
 
 public class MultiTextComponent: UIView {
     
@@ -85,7 +87,7 @@ public class MultiTextComponent: UIView {
     }
 
     @available(*, unavailable)
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -102,28 +104,34 @@ public class MultiTextComponent: UIView {
         case .m1:
             title.isHidden = false
             subtitleRight.isHidden = false
+
         case .m2:
             title.isHidden = false
             subtitleLeft.isHidden = false
             subtitleRight.isHidden = false
+
         case .m3:
             title.isHidden = false
             subtitleBadge.isHidden = false
             subtitleRight.isHidden = false
+
         case .m4:
             title.isHidden = false
             titleBadge.isHidden = false
             subtitleLeft.isHidden = false
             subtitleRight.isHidden = false
+
         case .m5:
             title.isHidden = false
             titleImageLeft.isHidden = false
             subtitleRight.isHidden = false
+
         case .m6:
             title.isHidden = false
             titleImageLeft.isHidden = false
             titleImageRight.isHidden = false
             subtitleRight.isHidden = false
+
         case .m7:
             title.isHidden = false
             titleBadge.isHidden = false
@@ -132,6 +140,8 @@ public class MultiTextComponent: UIView {
     }
 
 }
+
+// MARK: MultiTextComponent.Style
 
 extension MultiTextComponent {
 

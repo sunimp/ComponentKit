@@ -8,7 +8,7 @@ UI components
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/sunimp/ComponentKit.Swift.git", .upToNextMajor(from: "2.1.0"))
+    .package(url: "https://github.com/sunimp/ComponentKit.Swift.git", .upToNextMajor(from: "2.2.2"))
 ]
 ```
 

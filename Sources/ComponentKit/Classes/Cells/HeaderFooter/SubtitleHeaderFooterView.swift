@@ -10,6 +10,8 @@ import UIKit
 import SnapKit
 import ThemeKit
 
+// MARK: - SubtitleHeaderFooterView
+
 open class SubtitleHeaderFooterView: UITableViewHeaderFooterView {
     
     private let label = UILabel()
@@ -30,7 +32,7 @@ open class SubtitleHeaderFooterView: UITableViewHeaderFooterView {
     }
 
     @available(*, unavailable)
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 

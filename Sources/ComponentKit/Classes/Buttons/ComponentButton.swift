@@ -32,10 +32,10 @@ open class ComponentButton: UIButton {
     
     open var contentInsets: UIEdgeInsets {
         get {
-            return self.contentEdgeInsets
+            contentEdgeInsets
         }
         set {
-            self.contentEdgeInsets = newValue
+            contentEdgeInsets = newValue
         }
     }
     
@@ -57,7 +57,7 @@ open class ComponentButton: UIButton {
     
     public init(imagePosition: ImagePosition = .left, spacing: CGFloat = .margin8) {
         self.imagePosition = imagePosition
-        self.imageSpacing = spacing
+        imageSpacing = spacing
         
         super.init(frame: .zero)
         
@@ -65,7 +65,7 @@ open class ComponentButton: UIButton {
     }
     
     @available(*, unavailable)
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -89,10 +89,9 @@ open class ComponentButton: UIButton {
         
         var imageTotalSize: CGSize = .zero
         var titleTotalSize: CGSize = .zero
-        let imageSpacing: CGFloat = isImageViewShowing && isTitleLabelShowing ? self
-            .imageSpacing : 0
+        let imageSpacing: CGFloat = isImageViewShowing && isTitleLabelShowing ? imageSpacing : 0
         
-        let contentInsets = self.contentInsets
+        let contentInsets = contentInsets
         var resultSize: CGSize = .zero
         let contentLimitSize = CGSize(
             width: newSize.width - contentInsets.horizontal,
@@ -104,14 +103,14 @@ open class ComponentButton: UIButton {
             if isImageViewShowing {
                 let imageLimitWidth = contentLimitSize.width - imageEdgeInsets.horizontal
                 var imageSize: CGSize = .zero
-                if let imageView = imageView, imageView.image != nil {
+                if let imageView, imageView.image != nil {
                     imageSize = imageView
                         .sizeThatFits(CGSize(
                             width: imageLimitWidth,
                             height: .greatestFiniteMagnitude
                         ))
                 } else {
-                    if let currentImage = currentImage {
+                    if let currentImage {
                         imageSize = currentImage.size
                     }
                 }
@@ -130,7 +129,7 @@ open class ComponentButton: UIButton {
                     )
                     
                     var titleSize: CGSize = .zero
-                    if let titleLabel = titleLabel {
+                    if let titleLabel {
                         titleSize = titleLabel.sizeThatFits(titleLimitSize)
                     }
                     titleSize.height = .minimum(titleSize.height, titleLimitSize.height)
@@ -150,14 +149,14 @@ open class ComponentButton: UIButton {
             if isImageViewShowing {
                 let imageLimitHeight = contentLimitSize.height - imageEdgeInsets.vertical
                 var imageSize: CGSize = .zero
-                if let imageView = imageView, imageView.image != nil {
+                if let imageView, imageView.image != nil {
                     imageSize = imageView
                         .sizeThatFits(CGSize(
                             width: .greatestFiniteMagnitude,
                             height: imageLimitHeight
                         ))
                 } else {
-                    if let currentImage = currentImage {
+                    if let currentImage {
                         imageSize = currentImage.size
                     }
                 }
@@ -207,12 +206,13 @@ open class ComponentButton: UIButton {
         var imageTotalSize: CGSize = .zero
         var titleTotalSize: CGSize = .zero
         
-        let imageSpacing: CGFloat = (isImageViewShowing && isTitleLabelShowing) ?
-        self.imageSpacing : 0
+        let imageSpacing: CGFloat = (isImageViewShowing && isTitleLabelShowing)
+            ? imageSpacing
+            : 0
         
         var imageFrame: CGRect = .zero
         var titleFrame: CGRect = .zero
-        let contentInsets = self.contentInsets
+        let contentInsets = contentInsets
         let contentSize = CGSize(
             width: bounds.width - contentInsets.horizontal,
             height: bounds.height - contentInsets.vertical
@@ -227,7 +227,7 @@ open class ComponentButton: UIButton {
             if let imageView = _imageView, imageView.image != nil {
                 imageSize = imageView.sizeThatFits(imageLimitSize)
             } else {
-                if let currentImage = currentImage {
+                if let currentImage {
                     imageSize = currentImage.size
                 }
             }
@@ -291,10 +291,12 @@ open class ComponentButton: UIButton {
                 
             case .center:
                 if isImageViewShowing {
-                    imageFrame.origin.x = contentInsets.left + imageEdgeInsets.left + (imageLimitSize.width - imageFrame.width) / 2.0
+                    imageFrame.origin.x = contentInsets.left + imageEdgeInsets
+                        .left + (imageLimitSize.width - imageFrame.width) / 2.0
                 }
                 if isTitleLabelShowing {
-                    titleFrame.origin.x = contentInsets.left + titleEdgeInsets.left + (titleLimitSize.width - titleFrame.width) / 2.0
+                    titleFrame.origin.x = contentInsets.left + titleEdgeInsets
+                        .left + (titleLimitSize.width - titleFrame.width) / 2.0
                 }
                 
             case .right:
@@ -358,7 +360,7 @@ open class ComponentButton: UIButton {
                     }
                     
                 case .fill:
-                    if isImageViewShowing && isTitleLabelShowing {
+                    if isImageViewShowing, isTitleLabelShowing {
                         imageFrame.origin.y = contentInsets.top + imageEdgeInsets.top
                         titleFrame.origin.y = contentInsets.top + imageTotalSize
                             .height + imageSpacing + titleEdgeInsets.top
@@ -376,7 +378,7 @@ open class ComponentButton: UIButton {
                     break
                 }
             } else {
-                switch self.contentVerticalAlignment {
+                switch contentVerticalAlignment {
                 case .top:
                     if isTitleLabelShowing {
                         titleFrame.origin.y = contentInsets.top + titleEdgeInsets.top
@@ -412,10 +414,11 @@ open class ComponentButton: UIButton {
                     
                 case .fill:
                     
-                    if isImageViewShowing && isTitleLabelShowing {
+                    if isImageViewShowing, isTitleLabelShowing {
                         imageFrame.origin.y = bounds.height - contentInsets.bottom - imageEdgeInsets.bottom - imageFrame.height
                         titleFrame.origin.y = contentInsets.top + titleEdgeInsets.top
-                        titleFrame.size.height = bounds.height - contentInsets.bottom - imageTotalSize.height - imageSpacing - titleEdgeInsets.bottom - titleFrame.minY
+                        titleFrame.size.height = bounds.height - contentInsets.bottom - imageTotalSize
+                            .height - imageSpacing - titleEdgeInsets.bottom - titleFrame.minY
                     } else if isImageViewShowing {
                         imageFrame.origin.y = contentInsets.top + imageEdgeInsets.top
                         imageFrame.size.height = contentSize.height - imageEdgeInsets.vertical
@@ -423,6 +426,7 @@ open class ComponentButton: UIButton {
                         titleFrame.origin.y = contentInsets.top + titleEdgeInsets.top
                         titleFrame.size.height = contentSize.height - titleEdgeInsets.vertical
                     }
+
                 default:
                     break
                 }
@@ -456,7 +460,7 @@ open class ComponentButton: UIButton {
                 )
             }
             
-            switch self.contentVerticalAlignment {
+            switch contentVerticalAlignment {
             case .top:
                 if isImageViewShowing {
                     imageFrame.origin.y = contentInsets.top + imageEdgeInsets.top
@@ -492,12 +496,13 @@ open class ComponentButton: UIButton {
                     titleFrame.origin.y = contentInsets.top + titleEdgeInsets.top
                     titleFrame.size.height = contentSize.height - titleEdgeInsets.vertical
                 }
+
             default:
                 break
             }
             
             if case .left = imagePosition {
-                switch self.contentHorizontalAlignment {
+                switch contentHorizontalAlignment {
                 case .left:
                     if isImageViewShowing {
                         imageFrame.origin.x = contentInsets.left + imageEdgeInsets.left
@@ -519,8 +524,10 @@ open class ComponentButton: UIButton {
                     }
                     
                 case .right:
-                    if imageTotalSize.width + imageSpacing + titleTotalSize
-                        .width > contentSize.width {
+                    if
+                        imageTotalSize.width + imageSpacing + titleTotalSize
+                            .width > contentSize.width
+                    {
                         if isImageViewShowing {
                             imageFrame.origin.x = contentInsets.left + imageEdgeInsets.left
                         }
@@ -542,7 +549,7 @@ open class ComponentButton: UIButton {
                     }
                     
                 case .fill:
-                    if isImageViewShowing && isTitleLabelShowing {
+                    if isImageViewShowing, isTitleLabelShowing {
                         imageFrame.origin.x = contentInsets.left + imageEdgeInsets.left
                         titleFrame.origin.x = contentInsets.left + imageTotalSize.width + imageSpacing + titleEdgeInsets.left
                         titleFrame.size.width = bounds.width - contentInsets.right - titleEdgeInsets.right - titleFrame.minX
@@ -553,14 +560,16 @@ open class ComponentButton: UIButton {
                         titleFrame.origin.x = contentInsets.left + titleEdgeInsets.left
                         titleFrame.size.width = contentSize.width - titleEdgeInsets.horizontal
                     }
+
                 default:
                     break
                 }
             } else {
-                switch self.contentHorizontalAlignment {
+                switch contentHorizontalAlignment {
                 case .left:
-                    if imageTotalSize.width + imageSpacing + titleTotalSize
-                        .width > contentSize.width
+                    if
+                        imageTotalSize.width + imageSpacing + titleTotalSize
+                            .width > contentSize.width
                     {
                         if isImageViewShowing {
                             imageFrame.origin.x = bounds.width - contentInsets.right - imageEdgeInsets
@@ -605,7 +614,7 @@ open class ComponentButton: UIButton {
                     }
                     
                 case .fill:
-                    if isImageViewShowing && isTitleLabelShowing {
+                    if isImageViewShowing, isTitleLabelShowing {
                         imageFrame.origin.x = bounds.width - contentInsets.right - imageEdgeInsets
                             .right - imageFrame.width
                         titleFrame.origin.x = contentInsets.left + titleEdgeInsets.left
@@ -620,6 +629,7 @@ open class ComponentButton: UIButton {
                         titleFrame.origin.x = contentInsets.left + titleEdgeInsets.left
                         titleFrame.size.width = contentSize.width - titleEdgeInsets.horizontal
                     }
+
                 default:
                     break
                 }

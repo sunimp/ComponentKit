@@ -30,10 +30,10 @@ extension UIRectEdge {
 
     var corners: [UIRectCorner] {
         var corners = [UIRectCorner]()
-        if self.contains([.top, .left]) { corners.append(.topLeft) }
-        if self.contains([.top, .right]) { corners.append(.topRight) }
-        if self.contains([.bottom, .left]) { corners.append(.bottomLeft) }
-        if self.contains([.bottom, .right]) { corners.append(.bottomRight) }
+        if contains([.top, .left]) { corners.append(.topLeft) }
+        if contains([.top, .right]) { corners.append(.topRight) }
+        if contains([.bottom, .left]) { corners.append(.bottomLeft) }
+        if contains([.bottom, .right]) { corners.append(.bottomRight) }
         return corners
     }
 }

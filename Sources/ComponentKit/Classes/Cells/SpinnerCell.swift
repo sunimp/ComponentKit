@@ -7,8 +7,8 @@
 
 import UIKit
 
-import SnapKit
 import HUD
+import SnapKit
 
 open class SpinnerCell: UITableViewCell {
     
@@ -30,7 +30,7 @@ open class SpinnerCell: UITableViewCell {
     }
 
     @available(*, unavailable)
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 

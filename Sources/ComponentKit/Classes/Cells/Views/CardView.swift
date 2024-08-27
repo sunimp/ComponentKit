@@ -7,8 +7,8 @@
 
 import UIKit
 
-import ThemeKit
 import SnapKit
+import ThemeKit
 
 open class CardView: UIView {
     
@@ -49,11 +49,11 @@ open class CardView: UIView {
     }
 
     @available(*, unavailable)
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
 
         updateUI()

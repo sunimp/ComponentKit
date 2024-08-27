@@ -7,9 +7,9 @@
 
 import UIKit
 
+import HUD
 import SnapKit
 import ThemeKit
-import HUD
 
 public class DeterminiteSpinnerComponent: UIView {
     
@@ -17,12 +17,12 @@ public class DeterminiteSpinnerComponent: UIView {
 
     public init(size: CGFloat) {
         spinner = HUDProgressView(
-                progress: 0,
-                strokeLineWidth: 2,
-                radius: (size - 2) / 2,
-                strokeColor: .zx003,
-                donutColor: .zx005.alpha(0.5),
-                duration: 2
+            progress: 0,
+            strokeLineWidth: 2,
+            radius: (size - 2) / 2,
+            strokeColor: .zx003,
+            donutColor: .zx005.alpha(0.5),
+            duration: 2
         )
 
         super.init(frame: .zero)
@@ -36,7 +36,7 @@ public class DeterminiteSpinnerComponent: UIView {
     }
 
     @available(*, unavailable)
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 

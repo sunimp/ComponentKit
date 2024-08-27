@@ -7,8 +7,10 @@
 
 import UIKit
 
-import ThemeKit
 import SnapKit
+import ThemeKit
+
+// MARK: - SecondaryButton
 
 open class SecondaryButton: ComponentButton {
 
@@ -51,7 +53,7 @@ open class SecondaryButton: ComponentButton {
         }
 
         switch style {
-        case .default, .transparent, .tab: 
+        case .default, .transparent, .tab:
             cornerRadius = height / 2
         case .transparent2, .transparent3:
             cornerRadius = 0
@@ -109,7 +111,7 @@ open class SecondaryButton: ComponentButton {
         let rightPadding = Self.rightPadding(style: style)
         let imagePadding = Self.imagePadding(style: style)
 
-        if let image = image {
+        if let image {
             switch style {
             case .default, .transparent, .tab:
                 setImage(image.tint(.zx002), for: .normal)
@@ -146,50 +148,50 @@ extension SecondaryButton {
 
     private static func font(style: Style) -> UIFont {
         switch style {
-        case .default, .transparent: 
-            return .captionM
+        case .default, .transparent:
+            .captionM
         case .tab:
-            return .subhead1
+            .subhead1
         case .transparent2, .transparent3:
-            return .subhead2
+            .subhead2
         }
     }
 
     private static func leftPadding(style: Style) -> CGFloat {
         switch style {
-        case .default, .transparent, .tab: 
-            return .margin16
+        case .default, .transparent, .tab:
+            .margin16
         case .transparent2, .transparent3:
-            return 0
+            0
         }
     }
 
     private static func rightPadding(style: Style) -> CGFloat {
         switch style {
         case .default, .transparent, .tab:
-            return .margin16
+            .margin16
         case .transparent2, .transparent3:
-            return 0
+            0
         }
     }
 
     private static func imagePadding(style: Style) -> CGFloat {
         switch style {
-        case .default, .transparent, .tab: 
-            return .margin2
+        case .default, .transparent, .tab:
+            .margin2
         case .transparent2, .transparent3:
-            return .margin8
+            .margin8
         }
     }
 
     public static func height(style: Style) -> CGFloat {
         switch style {
-        case .default, .transparent, .tab: 
-            return 28
-        case .transparent2: 
-            return 20
+        case .default, .transparent, .tab:
+            28
+        case .transparent2:
+            20
         case .transparent3:
-            return 0
+            0
         }
     }
 

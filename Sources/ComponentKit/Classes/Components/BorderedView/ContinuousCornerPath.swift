@@ -21,7 +21,7 @@ open class ContinuousCornerPath: CornerPath {
         0.37801,
         0.44576,
         0.6074,
-        0.77037
+        0.77037,
     ]
 
     override open var cornerCoefficient: CGFloat { Self.ellipseCoefficient }
@@ -52,7 +52,7 @@ open class ContinuousCornerPath: CornerPath {
             ControlPoint(p0.cgPoint, p0cp1.cgPoint, p0cp2.cgPoint),
             ControlPoint(p1.cgPoint, p1cp1.cgPoint, p1cp2.cgPoint),
             ControlPoint(p2.cgPoint, p2cp1.cgPoint, p2cp2.cgPoint),
-            ControlPoint(p3.cgPoint, .zero, .zero)
+            ControlPoint(p3.cgPoint, .zero, .zero),
         ]
     }
 

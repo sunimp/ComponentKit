@@ -54,7 +54,7 @@ open class SliderButton: UIView {
         set { finalImageView.image = newValue?.tint(.zx017) }
     }
 
-    public var isEnabled: Bool = true {
+    public var isEnabled = true {
         didSet {
             syncState()
         }
@@ -63,11 +63,11 @@ open class SliderButton: UIView {
     public init() {
         super.init(frame: .zero)
 
-        self.setup()
+        setup()
     }
 
     @available(*, unavailable)
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -192,40 +192,40 @@ open class SliderButton: UIView {
         finalImageView.isHidden = false
 
         UIView.animate(
-                withDuration: 0.4,
-                delay: 0,
-                options: .curveEaseInOut,
-                animations: { [weak self] in
-                    self?.slideImageView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-                    self?.finalImageView.transform = CGAffineTransform(scaleX: 1, y: 1)
-                    self?.layoutIfNeeded()
-                },
-                completion: { [weak self] _ in
-                    self?.slideImageView.isHidden = true
-                    self?.handleFinish2()
-                }
+            withDuration: 0.4,
+            delay: 0,
+            options: .curveEaseInOut,
+            animations: { [weak self] in
+                self?.slideImageView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+                self?.finalImageView.transform = CGAffineTransform(scaleX: 1, y: 1)
+                self?.layoutIfNeeded()
+            },
+            completion: { [weak self] _ in
+                self?.slideImageView.isHidden = true
+                self?.handleFinish2()
+            }
         )
     }
 
     private func handleFinish2() {
         UIView.animate(
-                withDuration: 0.2,
-                delay: 0,
-                options: .curveEaseInOut,
-                animations: { [weak self] in
-                    self?.fillInitialConstraint?.deactivate()
-                    self?.fillFinalConstraint?.activate()
-                    self?.layoutIfNeeded()
-                },
-                completion: { [weak self] _ in
-                    self?.onTap?()
-                }
+            withDuration: 0.2,
+            delay: 0,
+            options: .curveEaseInOut,
+            animations: { [weak self] in
+                self?.fillInitialConstraint?.deactivate()
+                self?.fillFinalConstraint?.activate()
+                self?.layoutIfNeeded()
+            },
+            completion: { [weak self] _ in
+                self?.onTap?()
+            }
         )
     }
 
-    @objc 
+    @objc
     private func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
-        guard isEnabled && !finished else {
+        guard isEnabled, !finished else {
             return
         }
 
@@ -255,6 +255,7 @@ open class SliderButton: UIView {
             }
 
             circleConstraint?.update(offset: newPosition)
+
         case .ended:
             if touchedView.frame.origin.x == maxPosition {
                 handleFinish()
@@ -264,6 +265,7 @@ open class SliderButton: UIView {
                     self?.layoutIfNeeded()
                 }
             }
+
         default:
             break
         }

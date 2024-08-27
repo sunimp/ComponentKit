@@ -7,8 +7,8 @@
 
 import UIKit
 
-import ThemeKit
 import SnapKit
+import ThemeKit
 
 public class SecondaryCircleButtonComponent: UIView {
     
@@ -36,11 +36,11 @@ public class SecondaryCircleButtonComponent: UIView {
     }
 
     @available(*, unavailable)
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    @objc 
+    @objc
     private func handleTap() {
         onTap?()
     }

@@ -7,8 +7,8 @@
 
 import UIKit
 
-import ThemeKit
 import SnapKit
+import ThemeKit
 
 open class SecondaryCircleButton: ComponentButton {
     
