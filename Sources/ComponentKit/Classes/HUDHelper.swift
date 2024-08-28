@@ -115,7 +115,7 @@ extension HUDHelper {
         let activityView = HUDActivityView.create(with: .large48)
         activityView.snp.removeConstraints()
 
-        var titleLabel: UILabel? = nil
+        var titleLabel: UILabel?
         if let title {
             titleLabel = UILabel()
             titleLabel?.font = statusConfig.titleLabelFont
