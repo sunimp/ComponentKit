@@ -44,7 +44,7 @@ open class SliderButton: UIView {
     public var slideImage: UIImage? {
         get { slideImageView.image }
         set {
-            slideImageView.image = newValue
+            slideImageView.image = newValue?.tint(.zx017)
             syncState()
         }
     }
