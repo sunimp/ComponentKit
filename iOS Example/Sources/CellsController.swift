@@ -623,6 +623,38 @@ extension CellsController: SectionsDataSource {
             id: "row-settings-6",
             height: .heightCell48,
             bind: { cell in
+                cell.set(backgroundStyle: .bordered)
+            }
+        )
+    }
+    
+    private func rowSettings7() -> RowProtocol {
+        CellBuilder.row(
+            rootElement: .hStack([
+                .image20 { component in
+                    component.imageView.image = UIImage(systemName: "tornado")
+                    component.imageView.tintColor = .zx003
+                    component.imageView.contentMode = .scaleAspectFit
+                },
+                .text { component in
+                    component.font = .body
+                    component.textColor = .zx001
+                    component.text = "Frequency"
+                },
+                .segmentedControl { component in
+                    component.segmentedControl.insertSegment(withTitle: "Hourly", at: 0, animated: false)
+                    component.segmentedControl.insertSegment(withTitle: "Daily", at: 1, animated: false)
+                    component.segmentedControl.insertSegment(withTitle: "Weekly", at: 2, animated: false)
+                    component.segmentedControl.selectedSegmentIndex = 0
+                    component.onChange = {
+                        print("Did change select: \($0)")
+                    }
+                }
+            ]),
+            tableView: tableView,
+            id: "row-settings-7",
+            height: .heightCell48,
+            bind: { cell in
                 cell.set(backgroundStyle: .bordered, isLast: true)
             }
         )
@@ -652,6 +684,7 @@ extension CellsController: SectionsDataSource {
                     rowSettings4(),
                     rowSettings5(),
                     rowSettings6(),
+                    rowSettings7(),
                 ]
             )
         ]

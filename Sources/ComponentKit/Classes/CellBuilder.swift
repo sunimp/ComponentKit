@@ -226,6 +226,7 @@ public enum CellBuilder {
         case .image24: ImageComponent(size: .iconSize24)
         case .image32: ImageComponent(size: .iconSize32)
         case .transactionImage: TransactionImageComponent()
+        case .segmentedControl: SegmentedControlComponent()
         case .switch: SwitchComponent()
         case .primaryButton: PrimaryButtonComponent()
         case .primaryCircleButton: PrimaryCircleButtonComponent()
@@ -280,6 +281,7 @@ extension CellBuilder {
         case image24(_ bind: (ImageComponent) -> Void)
         case image32(_ bind: (ImageComponent) -> Void)
         case transactionImage(_ bind: (TransactionImageComponent) -> Void)
+        case segmentedControl(_ bind: (SegmentedControlComponent) -> Void)
         case `switch`(_ bind: (SwitchComponent) -> Void)
         case primaryButton(_ bind: (PrimaryButtonComponent) -> Void)
         case primaryCircleButton(_ bind: (PrimaryCircleButtonComponent) -> Void)
@@ -314,6 +316,7 @@ extension CellBuilder {
             case .image24: "image24"
             case .image32: "image32"
             case .transactionImage: "transactionImage"
+            case .segmentedControl: "segmentedControl"
             case .switch: "switch"
             case .primaryButton: "primaryButton"
             case .primaryCircleButton: "primaryCircleButton"
@@ -368,7 +371,12 @@ extension CellBuilder {
                 if let component = view as? TransactionImageComponent {
                     bind(component)
                 }
-
+                
+            case .segmentedControl(let bind):
+                if let component = view as? SegmentedControlComponent {
+                    bind(component)
+                }
+                
             case .switch(let bind):
                 if let component = view as? SwitchComponent {
                     bind(component)
