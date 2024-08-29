@@ -42,16 +42,15 @@ open class SliderButton: UIView {
     }
     
     public var slideImage: UIImage? {
-        get { slideImageView.image }
-        set {
-            slideImageView.image = newValue?.tint(.zx017)
+        didSet {
             syncState()
         }
     }
     
     public var finalImage: UIImage? {
-        get { finalImageView.image }
-        set { finalImageView.image = newValue?.tint(.zx017) }
+        didSet {
+            syncState()
+        }
     }
 
     public var isEnabled = true {
@@ -180,7 +179,8 @@ open class SliderButton: UIView {
     private func syncState() {
         fillView.backgroundColor = isEnabled ? .cg005.alpha(0.3) : .zx007
         circleView.backgroundColor = isEnabled ? .cg005 : .zx004
-        slideImageView.image = slideImageView.image?.tint(isEnabled ? .zx017 : .zx003.alpha(0.5))
+        slideImageView.image = slideImage?.tint(isEnabled ? .zx017 : .zx003.alpha(0.5))
+        finalImageView.image = finalImage?.tint(.zx017)
         label.textColor = isEnabled ? .zx003 : .zx003.alpha(0.5)
 
         reset()
