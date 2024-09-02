@@ -1,8 +1,7 @@
 //
 //  CornerPath.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/20.
+//  Created by Sun on 2022/10/6.
 //
 
 import UIKit
@@ -10,12 +9,18 @@ import UIKit
 // MARK: - CornerPath
 
 open class CornerPath {
-    
+    // MARK: Properties
+
     let lineWidth: CGFloat
     let offset: CGFloat
     let rect: CGRect
     let cornerRadius: CGFloat
+
+    // MARK: Computed Properties
+
     open var cornerCoefficient: CGFloat { 1 }
+
+    // MARK: Lifecycle
 
     public init(lineWidth: CGFloat, rect: CGRect, cornerRadius: CGFloat) {
         self.lineWidth = lineWidth
@@ -24,7 +29,15 @@ open class CornerPath {
         offset = lineWidth / 2
     }
 
-    open func point(edgeType: CornerEdgeType?, corner: UIRectCorner, xOffset: Bool = true, yOffset: Bool = true) -> Point {
+    // MARK: Functions
+
+    open func point(
+        edgeType: CornerEdgeType?,
+        corner: UIRectCorner,
+        xOffset: Bool = true,
+        yOffset: Bool = true
+    )
+        -> Point {
         var a: CGFloat = 0
         var b: CGFloat = 0
         var aOp: CGFloat = 1
@@ -109,19 +122,29 @@ open class CornerPath {
 
         return path
     }
-
 }
 
 extension CornerPath {
-
     public enum CornerEdgeType {
-        case start, end, center
+        case start
+        case end
+        case center
     }
 
     public struct Point {
+        // MARK: Properties
+
         let x: CGFloat
         let y: CGFloat
         let rotated: Bool
+
+        // MARK: Computed Properties
+
+        var cgPoint: CGPoint {
+            CGPoint(x: rotated ? y : x, y: rotated ? x : y)
+        }
+
+        // MARK: Lifecycle
 
         init(x: CGFloat, y: CGFloat, rotated: Bool = false) {
             self.x = x
@@ -129,29 +152,32 @@ extension CornerPath {
             self.rotated = rotated
         }
 
+        // MARK: Functions
+
         func shifted(x: CGFloat = 0, y: CGFloat = 0) -> Point {
             Point(x: self.x + x, y: self.y + y, rotated: rotated)
-        }
-
-        var cgPoint: CGPoint {
-            CGPoint(x: rotated ? y : x, y: rotated ? x : y)
         }
     }
 
     public struct ControlPoint {
+        // MARK: Properties
+
         let point: CGPoint
         let cp1: CGPoint
         let cp2: CGPoint
+
+        // MARK: Computed Properties
+
+        var description: String {
+            "P: [\(point.x): \(point.y)] CP1: [\(cp1.x): \(cp1.y)]  CP2: [\(cp2.x): \(cp2.y)]"
+        }
+
+        // MARK: Lifecycle
 
         init(_ point: CGPoint, _ cp1: CGPoint = .zero, _ cp2: CGPoint = .zero) {
             self.point = point
             self.cp1 = cp1
             self.cp2 = cp2
         }
-
-        var description: String {
-            "P: [\(point.x): \(point.y)] CP1: [\(cp1.x): \(cp1.y)]  CP2: [\(cp2.x): \(cp2.y)]"
-        }
     }
-
 }

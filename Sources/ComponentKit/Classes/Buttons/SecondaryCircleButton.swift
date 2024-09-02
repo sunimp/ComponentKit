@@ -1,8 +1,7 @@
 //
 //  SecondaryCircleButton.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/20.
+//  Created by Sun on 2021/12/1.
 //
 
 import UIKit
@@ -11,19 +10,26 @@ import SnapKit
 import ThemeKit
 
 open class SecondaryCircleButton: ComponentButton {
-    
+    // MARK: Nested Types
+
     public enum Style {
         case `default`
         case transparent
         case red
     }
-    
+
+    // MARK: Static Properties
+
     public static let size: CGFloat = 28
-    
+
+    // MARK: Lifecycle
+
     public init() {
         super.init(imagePosition: .left, spacing: 0)
     }
-    
+
+    // MARK: Overridden Functions
+
     override open func setup() {
         super.setup()
         
@@ -34,9 +40,12 @@ open class SecondaryCircleButton: ComponentButton {
         }
     }
 
+    // MARK: Functions
+
     public func set(image: UIImage?, style: Style = .default) {
         switch style {
-        case .default, .red:
+        case .default,
+             .red:
             setBackgroundColor(.zx005.alpha(0.5), for: .normal)
             setBackgroundColor(.zx006, for: .highlighted)
             setBackgroundColor(.zx007, for: .disabled)
@@ -70,5 +79,4 @@ open class SecondaryCircleButton: ComponentButton {
             setImage(image?.tint(.cg005.alpha(0.5)), for: [.selected, .highlighted])
         }
     }
-
 }

@@ -1,8 +1,7 @@
 //
 //  HUDHelper.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/20.
+//  Created by Sun on 2021/12/1.
 //
 
 import UIKit
@@ -12,10 +11,15 @@ import HUD
 // MARK: - HUDHelper
 
 public class HUDHelper {
-    
-    public static let shared = HUDHelper()
+    // MARK: Nested Types
 
     private enum ImageType { case success, error, attention }
+
+    // MARK: Static Properties
+
+    public static let shared = HUDHelper()
+
+    // MARK: Functions
 
     private func show(type: ImageType, title: String?, subtitle: String?) {
         let statusConfig = configStatusModel()
@@ -73,11 +77,9 @@ public class HUDHelper {
 
         return config
     }
-
 }
 
 extension HUDHelper {
-
     public func showSuccess(title: String? = nil, subtitle: String? = nil) {
         show(type: .success, title: title, subtitle: subtitle)
     }
@@ -142,11 +144,9 @@ extension HUDHelper {
     public func hide() {
         HUD.shared.hide()
     }
-
 }
 
 extension HUDHelper {
-
     private func show(banner: BannerType) {
         var config = HUDConfig()
 
@@ -180,6 +180,8 @@ extension HUDHelper {
         case success(title: String)
         case error(string: String)
 
+        // MARK: Computed Properties
+
         var icon: UIImage? {
             let image: UIImage? =
                 switch self {
@@ -198,8 +200,8 @@ extension HUDHelper {
 
         var title: String {
             switch self {
-            case .success(let title): title
-            case .error(let description): description
+            case let .success(title): title
+            case let .error(description): description
             }
         }
 
@@ -218,7 +220,5 @@ extension HUDHelper {
         var forced: Bool {
             true
         }
-
     }
-
 }

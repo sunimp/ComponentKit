@@ -1,8 +1,7 @@
 //
 //  BadgeComponent.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/20.
+//  Created by Sun on 2021/12/1.
 //
 
 import UIKit
@@ -10,8 +9,11 @@ import UIKit
 import SnapKit
 
 public class BadgeComponent: UIView {
-    
+    // MARK: Properties
+
     public let badgeView = BadgeView()
+
+    // MARK: Lifecycle
 
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,5 +29,4 @@ public class BadgeComponent: UIView {
     public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }

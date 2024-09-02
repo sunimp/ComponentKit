@@ -1,8 +1,7 @@
 //
 //  TextButtonComponent.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/20.
+//  Created by Sun on 2022/10/6.
 //
 
 import UIKit
@@ -13,8 +12,17 @@ import ThemeKit
 // MARK: - TextButtonComponent
 
 public class TextButtonComponent: UIButton {
-    
+    // MARK: Overridden Properties
+
+    override public var intrinsicContentSize: CGSize {
+        titleLabel?.intrinsicContentSize ?? super.intrinsicContentSize
+    }
+
+    // MARK: Properties
+
     public var onTap: (() -> Void)?
+
+    // MARK: Computed Properties
 
     public var font: UIFont? {
         get { titleLabel?.font }
@@ -30,10 +38,8 @@ public class TextButtonComponent: UIButton {
         get { title(for: .normal) }
         set { setTitle(newValue, for: .normal) }
     }
-    
-    override public var intrinsicContentSize: CGSize {
-        titleLabel?.intrinsicContentSize ?? super.intrinsicContentSize
-    }
+
+    // MARK: Lifecycle
 
     public init() {
         super.init(frame: .zero)
@@ -46,6 +52,8 @@ public class TextButtonComponent: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: Functions
+
     @objc
     private func handleTap() {
         onTap?()
@@ -53,7 +61,6 @@ public class TextButtonComponent: UIButton {
 }
 
 extension TextButtonComponent {
-
     public static func height(width: CGFloat, font: UIFont, text: String) -> CGFloat {
         text.height(forContainerWidth: width, font: font)
     }
@@ -61,5 +68,4 @@ extension TextButtonComponent {
     public static func width(font: UIFont, text: String) -> CGFloat {
         text.size(containerWidth: CGFloat.greatestFiniteMagnitude, font: font).width
     }
-
 }

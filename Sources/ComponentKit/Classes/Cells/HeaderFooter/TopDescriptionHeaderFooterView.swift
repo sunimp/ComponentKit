@@ -1,8 +1,7 @@
 //
 //  TopDescriptionHeaderFooterView.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/19.
+//  Created by Sun on 2021/12/1.
 //
 
 import UIKit
@@ -13,8 +12,11 @@ import ThemeKit
 // MARK: - TopDescriptionHeaderFooterView
 
 open class TopDescriptionHeaderFooterView: UITableViewHeaderFooterView {
-    
+    // MARK: Properties
+
     private let descriptionView = TopDescriptionView()
+
+    // MARK: Lifecycle
 
     override public init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -30,16 +32,15 @@ open class TopDescriptionHeaderFooterView: UITableViewHeaderFooterView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: Functions
+
     open func bind(text: String?) {
         descriptionView.bind(text: text)
     }
-
 }
 
 extension TopDescriptionHeaderFooterView {
-
     public static func height(containerWidth: CGFloat, text: String) -> CGFloat {
         TopDescriptionView.height(containerWidth: containerWidth, text: text)
     }
-
 }

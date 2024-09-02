@@ -1,8 +1,7 @@
 //
 //  StackComponent.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/20.
+//  Created by Sun on 2022/10/6.
 //
 
 import UIKit
@@ -11,8 +10,11 @@ import SnapKit
 import ThemeKit
 
 public class StackComponent: UIView {
-    
+    // MARK: Properties
+
     public let stackView = UIStackView()
+
+    // MARK: Lifecycle
 
     public init(centered: Bool) {
         super.init(frame: .zero)

@@ -1,8 +1,7 @@
 //
 //  PrimaryButtonComponent.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/20.
+//  Created by Sun on 2021/12/1.
 //
 
 import UIKit
@@ -10,11 +9,14 @@ import UIKit
 import SnapKit
 
 public class PrimaryButtonComponent: UIView {
-    
+    // MARK: Properties
+
     public let button = PrimaryButton()
+    public var onTap: (() -> Void)?
+
     private let dummyButton = UIButton()
 
-    public var onTap: (() -> Void)?
+    // MARK: Lifecycle
 
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,9 +41,10 @@ public class PrimaryButtonComponent: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: Functions
+
     @objc
     private func handleTap() {
         onTap?()
     }
-
 }

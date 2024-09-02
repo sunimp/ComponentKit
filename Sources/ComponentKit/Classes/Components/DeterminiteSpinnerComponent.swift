@@ -1,8 +1,7 @@
 //
 //  DeterminiteSpinnerComponent.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/20.
+//  Created by Sun on 2022/10/6.
 //
 
 import UIKit
@@ -12,8 +11,11 @@ import SnapKit
 import ThemeKit
 
 public class DeterminiteSpinnerComponent: UIView {
-    
+    // MARK: Properties
+
     private let spinner: HUDProgressView
+
+    // MARK: Lifecycle
 
     public init(size: CGFloat) {
         spinner = HUDProgressView(
@@ -40,9 +42,10 @@ public class DeterminiteSpinnerComponent: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: Functions
+
     public func set(progress: Double) {
         spinner.set(progress: Float(progress))
         spinner.startAnimating()
     }
-
 }

@@ -1,8 +1,7 @@
 //
 //  TopDescriptionView.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/19.
+//  Created by Sun on 2021/12/1.
 //
 
 import UIKit
@@ -13,13 +12,18 @@ import ThemeKit
 // MARK: - TopDescriptionView
 
 open class TopDescriptionView: UIView {
-    
+    // MARK: Static Properties
+
     private static let sideMargin: CGFloat = .margin6x
     private static let topMargin: CGFloat = .margin3x
     private static let bottomMargin: CGFloat = .margin6x
     private static let font: UIFont = .subhead2
 
+    // MARK: Properties
+
     private let label = UILabel()
+
+    // MARK: Lifecycle
 
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -41,14 +45,14 @@ open class TopDescriptionView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: Functions
+
     open func bind(text: String?) {
         label.text = text
     }
-
 }
 
 extension TopDescriptionView {
-
     public static func height(containerWidth: CGFloat, text: String) -> CGFloat {
         let textHeight = text.height(
             forContainerWidth: containerWidth - 2 * TopDescriptionView.sideMargin,
@@ -56,5 +60,4 @@ extension TopDescriptionView {
         )
         return textHeight + TopDescriptionView.topMargin + TopDescriptionView.bottomMargin
     }
-
 }

@@ -1,8 +1,7 @@
 //
 //  SecondaryButtonComponent.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/20.
+//  Created by Sun on 2021/12/1.
 //
 
 import UIKit
@@ -11,11 +10,14 @@ import SnapKit
 import ThemeKit
 
 public class SecondaryButtonComponent: UIView {
-    
+    // MARK: Properties
+
     public let button = SecondaryButton()
+    public var onTap: (() -> Void)?
+
     private let dummyButton = UIButton()
 
-    public var onTap: (() -> Void)?
+    // MARK: Lifecycle
 
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,9 +42,10 @@ public class SecondaryButtonComponent: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: Functions
+
     @objc
     private func handleTap() {
         onTap?()
     }
-
 }

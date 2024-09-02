@@ -1,8 +1,7 @@
 //
 //  CellBuilder.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/20.
+//  Created by Sun on 2021/12/1.
 //
 
 import UIKit
@@ -14,9 +13,12 @@ import ThemeKit
 // MARK: - CellBuilder
 
 public enum CellBuilder {
-    
+    // MARK: Static Properties
+
     public static let defaultMargin: CGFloat = .margin16
     public static let defaultLayoutMargins: UIEdgeInsets = .symmetric(horizontal: defaultMargin)
+
+    // MARK: Static Functions
 
     public static func preparedCell(
         tableView: UITableView,
@@ -24,7 +26,8 @@ public enum CellBuilder {
         isSelectable: Bool,
         rootElement: CellElement,
         layoutMargins: UIEdgeInsets = defaultLayoutMargins
-    ) -> UITableViewCell {
+    )
+        -> UITableViewCell {
         let cellClass = isSelectable ? ComponentSelectableCell.self : ComponentCell.self
 
         let reuseIdentifier = reuseIdentifier(
@@ -54,9 +57,14 @@ public enum CellBuilder {
         bind: ((ComponentCell) -> Void)? = nil,
         action: (() -> Void)? = nil,
         actionWithCell: ((ComponentCell) -> Void)? = nil
-    ) -> RowProtocol {
+    )
+        -> RowProtocol {
         let cellClass = action != nil || actionWithCell != nil ? ComponentSelectableCell.self : ComponentCell.self
-        let reuseIdentifier = reuseIdentifier(cellClass: cellClass, rootElement: rootElement, layoutMargins: layoutMargins)
+        let reuseIdentifier = reuseIdentifier(
+            cellClass: cellClass,
+            rootElement: rootElement,
+            layoutMargins: layoutMargins
+        )
         tableView.register(cellClass, forCellReuseIdentifier: reuseIdentifier)
 
         if action != nil || actionWithCell != nil {
@@ -105,7 +113,11 @@ public enum CellBuilder {
         }
     }
 
-    public static func build(cell: ComponentCell, rootElement: CellElement, layoutMargins: UIEdgeInsets = defaultLayoutMargins) {
+    public static func build(
+        cell: ComponentCell,
+        rootElement: CellElement,
+        layoutMargins: UIEdgeInsets = defaultLayoutMargins
+    ) {
         if cell.id != nil {
             return
         }
@@ -138,7 +150,8 @@ public enum CellBuilder {
         font: UIFont,
         verticalPadding: CGFloat = defaultMargin,
         elements: [LayoutElement]
-    ) -> CGFloat {
+    )
+        -> CGFloat {
         var textWidth = containerWidth - ComponentCell.margin(backgroundStyle: backgroundStyle).horizontal
 
         var lastMargin = defaultMargin
@@ -159,7 +172,7 @@ public enum CellBuilder {
 
             case .margin32: lastMargin = .margin32
 
-            case .fixed(let width):
+            case let .fixed(width):
                 textWidth -= lastMargin + width
                 lastMargin = defaultMargin
 
@@ -178,7 +191,8 @@ public enum CellBuilder {
         axis: NSLayoutConstraint.Axis,
         elements: [CellElement],
         centered: Bool = false
-    ) -> StackComponent {
+    )
+        -> StackComponent {
         let component = StackComponent(centered: centered)
 
         var lastView: UIView?
@@ -186,7 +200,7 @@ public enum CellBuilder {
 
         for element in elements {
             switch element {
-            case .margin(let value): lastMargin = value
+            case let .margin(value): lastMargin = value
             case .margin0: lastMargin = 0
             case .margin4: lastMargin = .margin4
             case .margin8: lastMargin = .margin8
@@ -216,9 +230,9 @@ public enum CellBuilder {
 
     private static func view(element: CellElement) -> UIView? {
         switch element {
-        case .hStack(let elements, _): stackComponent(axis: .horizontal, elements: elements)
-        case .vStack(let elements, _): stackComponent(axis: .vertical, elements: elements)
-        case .vStackCentered(let elements, _): stackComponent(axis: .vertical, elements: elements, centered: true)
+        case let .hStack(elements, _): stackComponent(axis: .horizontal, elements: elements)
+        case let .vStack(elements, _): stackComponent(axis: .vertical, elements: elements)
+        case let .vStackCentered(elements, _): stackComponent(axis: .vertical, elements: elements, centered: true)
         case .text: TextComponent()
         case .textButton: TextButtonComponent()
         case .image16: ImageComponent(size: .iconSize16)
@@ -248,18 +262,17 @@ public enum CellBuilder {
         cellClass: AnyClass,
         rootElement: CellElement,
         layoutMargins: UIEdgeInsets = defaultLayoutMargins
-    ) -> String {
+    )
+        -> String {
         "\(cellClass)|\(cellID(rootElement: rootElement, layoutMargins: layoutMargins))"
     }
 
     private static func cellID(rootElement: CellElement, layoutMargins: UIEdgeInsets) -> String {
         "\(rootElement.id)|\(Int(layoutMargins.top))-\(Int(layoutMargins.left))-\(Int(layoutMargins.bottom))-\(Int(layoutMargins.right))"
     }
-
 }
 
 extension CellBuilder {
-
     public enum CellElement {
         case hStack(_ elements: [CellElement], _ bind: ((StackComponent) -> Void)? = nil)
         case vStack(_ elements: [CellElement], _ bind: ((StackComponent) -> Void)? = nil)
@@ -296,12 +309,14 @@ extension CellBuilder {
         case determiniteSpinner24(_ bind: (DeterminiteSpinnerComponent) -> Void)
         case determiniteSpinner48(_ bind: (DeterminiteSpinnerComponent) -> Void)
 
+        // MARK: Computed Properties
+
         var id: String {
             switch self {
-            case .hStack(let elements, _): "hStack[\(elements.map { $0.id }.joined(separator: "-"))]"
-            case .vStack(let elements, _): "vStack[\(elements.map { $0.id }.joined(separator: "-"))]"
-            case .vStackCentered(let elements, _): "vStackCentered[\(elements.map { $0.id }.joined(separator: "-"))]"
-            case .margin(let value): "margin\(value)"
+            case let .hStack(elements, _): "hStack[\(elements.map { $0.id }.joined(separator: "-"))]"
+            case let .vStack(elements, _): "vStack[\(elements.map { $0.id }.joined(separator: "-"))]"
+            case let .vStackCentered(elements, _): "vStackCentered[\(elements.map { $0.id }.joined(separator: "-"))]"
+            case let .margin(value): "margin\(value)"
             case .margin0: "margin0"
             case .margin4: "margin4"
             case .margin8: "margin8"
@@ -335,14 +350,25 @@ extension CellBuilder {
 
         var isView: Bool {
             switch self {
-            case .margin, .margin0, .margin4, .margin8, .margin12, .margin16, .margin24, .margin32: false
+            case .margin,
+                 .margin0,
+                 .margin4,
+                 .margin8,
+                 .margin12,
+                 .margin16,
+                 .margin24,
+                 .margin32: false
             default: true
             }
         }
 
+        // MARK: Functions
+
         func bind(view: UIView) {
             switch self {
-            case .hStack(let elements, let bind), .vStack(let elements, let bind), .vStackCentered(let elements, let bind):
+            case let .hStack(elements, bind),
+                 let .vStack(elements, bind),
+                 let .vStackCentered(elements, bind):
                 if let component = view as? StackComponent {
                     if let bind {
                         bind(component)
@@ -352,72 +378,79 @@ extension CellBuilder {
                     }
                 }
 
-            case .text(let bind):
+            case let .text(bind):
                 if let component = view as? TextComponent {
                     bind(component)
                 }
 
-            case .textButton(let bind):
+            case let .textButton(bind):
                 if let component = view as? TextButtonComponent {
                     bind(component)
                 }
 
-            case .image16(let bind), .image20(let bind), .image24(let bind), .image32(let bind):
+            case let .image16(bind),
+                 let .image20(bind),
+                 let .image24(bind),
+                 let .image32(bind):
                 if let component = view as? ImageComponent {
                     bind(component)
                 }
 
-            case .transactionImage(let bind):
+            case let .transactionImage(bind):
                 if let component = view as? TransactionImageComponent {
                     bind(component)
                 }
                 
-            case .segmentedControl(let bind):
+            case let .segmentedControl(bind):
                 if let component = view as? SegmentedControlComponent {
                     bind(component)
                 }
                 
-            case .switch(let bind):
+            case let .switch(bind):
                 if let component = view as? SwitchComponent {
                     bind(component)
                 }
 
-            case .primaryButton(let bind):
+            case let .primaryButton(bind):
                 if let component = view as? PrimaryButtonComponent {
                     bind(component)
                 }
 
-            case .primaryCircleButton(let bind):
+            case let .primaryCircleButton(bind):
                 if let component = view as? PrimaryCircleButtonComponent {
                     bind(component)
                 }
 
-            case .secondaryButton(let bind):
+            case let .secondaryButton(bind):
                 if let component = view as? SecondaryButtonComponent {
                     bind(component)
                 }
 
-            case .secondaryCircleButton(let bind):
+            case let .secondaryCircleButton(bind):
                 if let component = view as? SecondaryCircleButtonComponent {
                     bind(component)
                 }
 
-            case .sliderButton(let bind):
+            case let .sliderButton(bind):
                 if let component = view as? SliderButtonComponent {
                     bind(component)
                 }
 
-            case .badge(let bind):
+            case let .badge(bind):
                 if let component = view as? BadgeComponent {
                     bind(component)
                 }
 
-            case .spinner20(let bind), .spinner24(let bind), .spinner48(let bind):
+            case let .spinner20(bind),
+                 let .spinner24(bind),
+                 let .spinner48(bind):
                 if let component = view as? SpinnerComponent {
                     bind(component)
                 }
 
-            case .determiniteSpinner20(let bind), .determiniteSpinner24(let bind), .determiniteSpinner48(let bind):
+            case let .determiniteSpinner20(bind),
+                 let .determiniteSpinner24(bind),
+                 let .determiniteSpinner48(bind):
                 if let component = view as? DeterminiteSpinnerComponent {
                     bind(component)
                 }
@@ -439,5 +472,4 @@ extension CellBuilder {
         case margin24
         case margin32
     }
-
 }

@@ -1,8 +1,7 @@
 //
 //  CardView.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/19.
+//  Created by Sun on 2021/12/1.
 //
 
 import UIKit
@@ -11,10 +10,14 @@ import SnapKit
 import ThemeKit
 
 open class CardView: UIView {
-    
+    // MARK: Properties
+
+    public let contentView = UIView()
+
     private let roundedBackground = UIView()
     private let clippingView = UIView()
-    public let contentView = UIView()
+
+    // MARK: Lifecycle
 
     public init(insets: UIEdgeInsets) {
         super.init(frame: .zero)
@@ -53,14 +56,17 @@ open class CardView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: Overridden Functions
+
     override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
 
         updateUI()
     }
 
+    // MARK: Functions
+
     private func updateUI() {
         roundedBackground.layer.shadowColor = UIColor.zx003.cgColor
     }
-
 }

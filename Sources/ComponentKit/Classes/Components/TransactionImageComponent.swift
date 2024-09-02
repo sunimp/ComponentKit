@@ -1,8 +1,7 @@
 //
 //  TransactionImageComponent.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/20.
+//  Created by Sun on 2022/10/6.
 //
 
 import UIKit
@@ -15,7 +14,8 @@ import ThemeKit
 // MARK: - TransactionImageComponent
 
 public class TransactionImageComponent: UIView {
-    
+    // MARK: Properties
+
     private let spinner = HUDProgressView(
         progress: 0,
         strokeLineWidth: 2,
@@ -31,6 +31,8 @@ public class TransactionImageComponent: UIView {
     private let backImageView = UIImageView()
     private let frontImageMask = UIView()
     private let frontImageView = UIImageView()
+
+    // MARK: Lifecycle
 
     public init() {
         super.init(frame: .zero)
@@ -87,6 +89,8 @@ public class TransactionImageComponent: UIView {
     public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    // MARK: Functions
 
     public func set(progress: Float?) {
         if let progress {
@@ -162,16 +166,13 @@ public class TransactionImageComponent: UIView {
             options: [.onlyLoadFirstFrame, .transition(.fade(0.5))]
         )
     }
-
 }
 
 // MARK: TransactionImageComponent.ImageType
 
 extension TransactionImageComponent {
-
     public enum ImageType {
         case circle
         case squircle
     }
-
 }

@@ -1,8 +1,7 @@
 //
 //  PrimaryButton.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/19.
+//  Created by Sun on 2021/12/1.
 //
 
 import UIKit
@@ -13,7 +12,8 @@ import ThemeKit
 import UIExtensions
 
 open class PrimaryButton: ComponentButton {
-    
+    // MARK: Nested Types
+
     public enum Style {
         case blue
         case red
@@ -27,14 +27,12 @@ open class PrimaryButton: ComponentButton {
         case none
     }
 
-    public static let height: CGFloat = .heightButton
-    
-    private var style: Style = .transparent
-    private let spinnerStyle: ActivityIndicatorStyle = .medium24
-    private lazy var spinner = HUDActivityView.create(with: spinnerStyle)
+    // MARK: Static Properties
 
-    public var isScaleHighlightedEnabled = true
-    
+    public static let height: CGFloat = .heightButton
+
+    // MARK: Overridden Properties
+
     override open var isEnabled: Bool {
         didSet {
             updateSpinnerStrokeColor()
@@ -55,11 +53,23 @@ open class PrimaryButton: ComponentButton {
             updateSpinnerStrokeColor()
         }
     }
-    
+
+    // MARK: Properties
+
+    public var isScaleHighlightedEnabled = true
+
+    private var style: Style = .transparent
+    private let spinnerStyle: ActivityIndicatorStyle = .medium24
+    private lazy var spinner = HUDActivityView.create(with: spinnerStyle)
+
+    // MARK: Lifecycle
+
     public init() {
         super.init(imagePosition: .left, spacing: 0)
     }
-    
+
+    // MARK: Overridden Functions
+
     override open func setup() {
         super.setup()
         
@@ -73,6 +83,8 @@ open class PrimaryButton: ComponentButton {
         
         addSubview(spinner)
     }
+
+    // MARK: Functions
 
     open func set(
         style: Style,
@@ -118,7 +130,8 @@ open class PrimaryButton: ComponentButton {
         
         let titleColor: (normal: UIColor, highlighted: UIColor, disabled: UIColor) =
             switch style {
-            case .blue, .red:
+            case .blue,
+                 .red:
                 (.zx017, .zx017, .zx017.alpha(0.5))
             case .gray:
                 (.cg005, .cg005, .cg005.alpha(0.5))
@@ -131,7 +144,7 @@ open class PrimaryButton: ComponentButton {
         setTitleColor(titleColor.disabled, for: .disabled)
 
         switch accessoryType {
-        case .icon(let image):
+        case let .icon(image):
             setImage(image?.tint(titleColor.normal), for: .normal)
             setImage(image?.tint(titleColor.highlighted), for: .highlighted)
             setImage(image?.tint(titleColor.disabled), for: .disabled)
@@ -244,7 +257,9 @@ open class PrimaryButton: ComponentButton {
     }
     
     open func scaleHighlightedAnimation(_ isHighlighted: Bool) {
-        guard isScaleHighlightedEnabled else { return }
+        guard isScaleHighlightedEnabled else {
+            return
+        }
         
         let animation = CABasicAnimation(keyPath: "transform.scale")
         let ratio: Float = 0.96
@@ -266,7 +281,8 @@ open class PrimaryButton: ComponentButton {
             return
         }
         switch style {
-        case .blue, .red:
+        case .blue,
+             .red:
             spinner.set(strokeColor: isEnabled ? .zx017 : .zx017.alpha(0.5))
             
         case .gray:

@@ -1,8 +1,7 @@
 //
 //  ComponentCell.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/19.
+//  Created by Sun on 2021/12/1.
 //
 
 import UIKit
@@ -12,7 +11,8 @@ import SnapKit
 import ThemeKit
 
 open class ComponentCell: UITableViewCell {
-    
+    // MARK: Nested Types
+
     public enum BackgroundStyle {
         case grouped
         case bordered
@@ -20,9 +20,13 @@ open class ComponentCell: UITableViewCell {
         case transparent
     }
 
+    // MARK: Static Properties
+
     public static let leftInset: CGFloat = .margin16
     public static let rightInset: CGFloat = .margin16
     public static let middleInset: CGFloat = .margin16
+
+    // MARK: Properties
 
     public let wrapperView = BorderedView()
     public let topSeparatorView = UIView()
@@ -33,9 +37,13 @@ open class ComponentCell: UITableViewCell {
     public var isVisible = true
     public var id: String?
 
+    // MARK: Computed Properties
+
     open var cellHeight: CGFloat {
         isVisible ? .heightCell44 : 0
     }
+
+    // MARK: Lifecycle
 
     override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -77,14 +85,20 @@ open class ComponentCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: Static Functions
+
     public static func margin(backgroundStyle: BackgroundStyle) -> UIEdgeInsets {
         switch backgroundStyle {
-        case .grouped, .bordered, .externalBorderOnly:
+        case .grouped,
+             .bordered,
+             .externalBorderOnly:
             UIEdgeInsets(top: 0, left: .margin16, bottom: 0, right: .margin16)
         case .transparent:
             UIEdgeInsets.zero
         }
     }
+
+    // MARK: Functions
 
     open func corners(isFirst: Bool, isLast: Bool) -> CACornerMask {
         var maskedCorners: CACornerMask = []
@@ -123,7 +137,8 @@ open class ComponentCell: UITableViewCell {
             wrapperView.backgroundColor = .zx009
             wrapperView.borderColor = .clear
             
-        case .bordered, .externalBorderOnly:
+        case .bordered,
+             .externalBorderOnly:
             var borders: UIRectEdge = [.left, .right]
             if isFirst || isLast {
                 resolvedCornerRadius = cornerRadius
@@ -198,5 +213,4 @@ open class ComponentCell: UITableViewCell {
 
         return view
     }
-
 }

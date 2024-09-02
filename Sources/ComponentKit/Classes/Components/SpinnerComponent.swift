@@ -1,8 +1,7 @@
 //
 //  SpinnerComponent.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/20.
+//  Created by Sun on 2022/10/6.
 //
 
 import UIKit
@@ -12,8 +11,16 @@ import SnapKit
 import ThemeKit
 
 public class SpinnerComponent: UIView {
-    
+    // MARK: Properties
+
     private let spinner: HUDActivityView
+
+    // MARK: Lifecycle
+
+    @available(*, unavailable)
+    public required init?(coder _: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     init(style: ActivityIndicatorStyle) {
         spinner = HUDActivityView.create(with: style)
@@ -28,10 +35,4 @@ public class SpinnerComponent: UIView {
 
         spinner.startAnimating()
     }
-
-    @available(*, unavailable)
-    public required init?(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
 }

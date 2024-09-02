@@ -1,8 +1,7 @@
 //
 //  PrimaryCircleButton.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/19.
+//  Created by Sun on 2021/12/1.
 //
 
 import UIKit
@@ -11,21 +10,30 @@ import SnapKit
 import ThemeKit
 
 open class PrimaryCircleButton: ComponentButton {
-    
+    // MARK: Nested Types
+
     public enum Style {
         case blue
         case red
         case gray
     }
-    
+
+    // MARK: Static Properties
+
     public static let size: CGFloat = .heightButton
-    
+
+    // MARK: Properties
+
     private var style: Style?
-    
+
+    // MARK: Lifecycle
+
     public init() {
         super.init(imagePosition: .left, spacing: 0)
     }
-    
+
+    // MARK: Overridden Functions
+
     override open func setup() {
         super.setup()
     
@@ -35,7 +43,9 @@ open class PrimaryCircleButton: ComponentButton {
             maker.size.equalTo(Self.size)
         }
     }
-    
+
+    // MARK: Functions
+
     public func set(image: UIImage?) {
         guard let style else {
             setImage(image?.tint(.zx001), for: .normal)
@@ -44,7 +54,8 @@ open class PrimaryCircleButton: ComponentButton {
             return
         }
         switch style {
-        case .blue, .red:
+        case .blue,
+             .red:
             setImage(image?.tint(.zx017), for: .normal)
             setImage(image?.tint(.zx017), for: .highlighted)
             setImage(image?.tint(.zx017.alpha(0.5)), for: .disabled)
@@ -77,5 +88,4 @@ open class PrimaryCircleButton: ComponentButton {
             setBackgroundColor(.zx007.alpha(0.2), for: .disabled)
         }
     }
-
 }

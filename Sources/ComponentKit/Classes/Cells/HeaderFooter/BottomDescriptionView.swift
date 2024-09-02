@@ -1,8 +1,7 @@
 //
 //  BottomDescriptionView.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/19.
+//  Created by Sun on 2021/12/1.
 //
 
 import UIKit
@@ -13,11 +12,16 @@ import ThemeKit
 // MARK: - BottomDescriptionView
 
 open class BottomDescriptionView: UIView {
-    
+    // MARK: Static Properties
+
     private static let sideMargin: CGFloat = .margin32
     private static let font: UIFont = .subhead2
 
+    // MARK: Properties
+
     private let label = UILabel()
+
+    // MARK: Lifecycle
 
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,6 +43,8 @@ open class BottomDescriptionView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: Functions
+
     public func bind(
         text: String,
         textColor: UIColor = .zx003,
@@ -54,17 +60,16 @@ open class BottomDescriptionView: UIView {
             maker.bottom.equalToSuperview().inset(bottomMargin)
         }
     }
-
 }
 
 extension BottomDescriptionView {
-
     public static func height(
         containerWidth: CGFloat,
         text: String,
         topMargin: CGFloat = .margin12,
         bottomMargin: CGFloat = .margin32
-    ) -> CGFloat {
+    )
+        -> CGFloat {
         let textHeight = text.height(
             forContainerWidth: containerWidth - 2 * BottomDescriptionView.sideMargin,
             font: BottomDescriptionView.font

@@ -1,8 +1,7 @@
 //
 //  ImageComponent.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/20.
+//  Created by Sun on 2021/12/1.
 //
 
 import UIKit
@@ -12,8 +11,11 @@ import SnapKit
 import ThemeKit
 
 public class ImageComponent: UIView {
-    
+    // MARK: Properties
+
     public let imageView = UIImageView()
+
+    // MARK: Computed Properties
 
     public var imageRatio: CGFloat? {
         if let image = imageView.image {
@@ -22,6 +24,8 @@ public class ImageComponent: UIView {
         
         return nil
     }
+
+    // MARK: Lifecycle
 
     public init(size: CGFloat) {
         super.init(frame: .zero)
@@ -39,6 +43,8 @@ public class ImageComponent: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: Functions
+
     public func setImage(urlString: String?, placeholder: UIImage?) {
         imageView.kf.setImage(
             with: urlString.flatMap { URL(string: $0) },
@@ -46,5 +52,4 @@ public class ImageComponent: UIView {
             options: [.scaleFactor(UIScreen.main.scale)]
         )
     }
-
 }

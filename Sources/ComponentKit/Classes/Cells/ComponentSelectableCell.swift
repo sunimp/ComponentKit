@@ -1,8 +1,7 @@
 //
 //  ComponentSelectableCell.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/19.
+//  Created by Sun on 2021/12/1.
 //
 
 import UIKit
@@ -11,8 +10,11 @@ import SnapKit
 import ThemeKit
 
 open class ComponentSelectableCell: ComponentCell {
-    
+    // MARK: Properties
+
     private let selectView = UIView()
+
+    // MARK: Lifecycle
 
     override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -34,6 +36,8 @@ open class ComponentSelectableCell: ComponentCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: Overridden Functions
+
     override open func set(
         backgroundStyle: BackgroundStyle,
         cornerRadius: CGFloat = .cornerRadius12,
@@ -43,7 +47,9 @@ open class ComponentSelectableCell: ComponentCell {
         super.set(backgroundStyle: backgroundStyle, cornerRadius: cornerRadius, isFirst: isFirst, isLast: isLast)
 
         switch backgroundStyle {
-        case .grouped, .bordered, .externalBorderOnly:
+        case .grouped,
+             .bordered,
+             .externalBorderOnly:
             selectView.backgroundColor = .zx007
             selectView.layer.cornerRadius = wrapperView.cornerRadius
             selectView.layer.maskedCorners = corners(isFirst: isFirst, isLast: isLast)
@@ -73,7 +79,9 @@ open class ComponentSelectableCell: ComponentCell {
     }
 
     override open func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        guard selectionStyle != .none else { return }
+        guard selectionStyle != .none else {
+            return
+        }
 
         if animated {
             UIView.animate(withDuration: .themeAnimationDuration) {
@@ -85,7 +93,9 @@ open class ComponentSelectableCell: ComponentCell {
     }
 
     override open func setSelected(_ selected: Bool, animated: Bool) {
-        guard selectionStyle != .none else { return }
+        guard selectionStyle != .none else {
+            return
+        }
 
         if animated {
             UIView.animate(withDuration: .themeAnimationDuration) {
@@ -95,5 +105,4 @@ open class ComponentSelectableCell: ComponentCell {
             selectView.alpha = selected ? 1 : 0
         }
     }
-
 }

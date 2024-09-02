@@ -1,14 +1,14 @@
 //
 //  ContinuousCornerPath.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/20.
+//  Created by Sun on 2022/10/6.
 //
 
 import UIKit
 
 open class ContinuousCornerPath: CornerPath {
-    
+    // MARK: Static Properties
+
     private static let ellipseCoefficient: CGFloat = 1.28195
     private static let coefficients: [CGFloat] = [
         0.04641,
@@ -24,7 +24,26 @@ open class ContinuousCornerPath: CornerPath {
         0.77037,
     ]
 
+    // MARK: Overridden Properties
+
     override open var cornerCoefficient: CGFloat { Self.ellipseCoefficient }
+
+    // MARK: Overridden Functions
+
+    override open func corner(corner: UIRectCorner) -> UIBezierPath {
+        let path = UIBezierPath()
+
+        let cp = points(corner: corner)
+
+        path.move(to: cp[0].point)
+        path.addCurve(to: cp[1].point, controlPoint1: cp[0].cp1, controlPoint2: cp[0].cp2)
+        path.addCurve(to: cp[2].point, controlPoint1: cp[1].cp1, controlPoint2: cp[1].cp2)
+        path.addCurve(to: cp[3].point, controlPoint1: cp[2].cp1, controlPoint2: cp[2].cp2)
+
+        return path
+    }
+
+    // MARK: Functions
 
     private func points(corner: UIRectCorner) -> [ControlPoint] {
         let radius = cornerRadius
@@ -55,18 +74,4 @@ open class ContinuousCornerPath: CornerPath {
             ControlPoint(p3.cgPoint, .zero, .zero),
         ]
     }
-
-    override open func corner(corner: UIRectCorner) -> UIBezierPath {
-        let path = UIBezierPath()
-
-        let cp = points(corner: corner)
-
-        path.move(to: cp[0].point)
-        path.addCurve(to: cp[1].point, controlPoint1: cp[0].cp1, controlPoint2: cp[0].cp2)
-        path.addCurve(to: cp[2].point, controlPoint1: cp[1].cp1, controlPoint2: cp[1].cp2)
-        path.addCurve(to: cp[3].point, controlPoint1: cp[2].cp1, controlPoint2: cp[2].cp2)
-
-        return path
-    }
-
 }

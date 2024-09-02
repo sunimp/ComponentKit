@@ -1,8 +1,7 @@
 //
 //  BadgeView.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/19.
+//  Created by Sun on 2021/12/1.
 //
 
 import UIKit
@@ -13,13 +12,18 @@ import ThemeKit
 // MARK: - BadgeView
 
 public class BadgeView: UIView {
-    
+    // MARK: Static Properties
+
     private static let sideMargin: CGFloat = .margin6
     private static let spacing: CGFloat = .margin2
+
+    // MARK: Properties
 
     private let stackView = UIStackView()
     private let label = UILabel()
     private let changeLabel = UILabel()
+
+    // MARK: Computed Properties
 
     public var font: UIFont {
         get { label.font }
@@ -52,6 +56,8 @@ public class BadgeView: UIView {
             label.setContentCompressionResistancePriority(compressionResistance, for: .horizontal)
         }
     }
+
+    // MARK: Lifecycle
 
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -86,13 +92,17 @@ public class BadgeView: UIView {
     public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
+    // MARK: Static Functions
+
     public static func width(for text: String, change: Change?, style: Style) -> CGFloat {
         let textWidth = text.size(containerWidth: .greatestFiniteMagnitude, font: style.font).width
         let changeWidth = change
             .map { $0.text.size(containerWidth: .greatestFiniteMagnitude, font: style.font).width + spacing } ?? 0
         return textWidth + changeWidth + sideMargin * 2
     }
+
+    // MARK: Functions
 
     public func set(style: Style) {
         backgroundColor = style.backgroundColor
@@ -104,14 +114,14 @@ public class BadgeView: UIView {
             maker.height.equalTo(style.height)
         }
     }
-
 }
 
 extension BadgeView {
-
     public enum Style {
         case small
         case medium
+
+        // MARK: Computed Properties
 
         var height: CGFloat {
             switch self {
@@ -140,19 +150,13 @@ extension BadgeView {
             case .medium: .cg002
             }
         }
-
     }
 
     public enum Change {
         case up(String)
         case down(String)
 
-        private var symbol: String {
-            switch self {
-            case .up: "↑"
-            case .down: "↓"
-            }
-        }
+        // MARK: Computed Properties
 
         var color: UIColor {
             switch self {
@@ -163,10 +167,16 @@ extension BadgeView {
 
         var text: String {
             switch self {
-            case .down(let text): symbol + text
-            case .up(let text): symbol + text
+            case let .down(text): symbol + text
+            case let .up(text): symbol + text
+            }
+        }
+
+        private var symbol: String {
+            switch self {
+            case .up: "↑"
+            case .down: "↓"
             }
         }
     }
-
 }

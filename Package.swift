@@ -15,12 +15,12 @@ let package = Package(
         ],
         dependencies: [
             .package(url: "https://github.com/Juanpe/SkeletonView.git", from: "1.31.0"),
-            .package(url: "https://github.com/SnapKit/SnapKit.git", .upToNextMajor(from: "5.0.1")),
-            .package(url: "https://github.com/sunimp/HUD.Swift.git", .upToNextMajor(from: "2.1.1")),
-            .package(url: "https://github.com/sunimp/SectionsTableView.Swift.git", .upToNextMajor(from: "1.0.5")),
-            .package(url: "https://github.com/sunimp/ThemeKit.Swift.git", .upToNextMajor(from: "2.2.0")),
-            .package(url: "https://github.com/sunimp/UIExtensions.Swift.git", .upToNextMajor(from: "1.2.2")),
-            .package(url: "https://github.com/nicklockwood/SwiftFormat.git", from: "0.54.0"),
+            .package(url: "https://github.com/SnapKit/SnapKit.git", from: "5.7.1"),
+            .package(url: "https://github.com/sunimp/HUD.Swift.git", .upToNextMajor(from: "2.2.0")),
+            .package(url: "https://github.com/sunimp/SectionsTableView.Swift.git", .upToNextMajor(from: "1.1.0")),
+            .package(url: "https://github.com/sunimp/ThemeKit.Swift.git", .upToNextMajor(from: "2.3.0")),
+            .package(url: "https://github.com/sunimp/UIExtensions.Swift.git", .upToNextMajor(from: "1.3.0")),
+            .package(url: "https://github.com/nicklockwood/SwiftFormat.git", from: "0.54.3"),
         ],
         targets: [
             .target(

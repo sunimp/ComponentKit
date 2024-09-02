@@ -1,8 +1,7 @@
 //
 //  SliderButton.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/20.
+//  Created by Sun on 2023/7/13.
 //
 
 import UIKit
@@ -11,9 +10,14 @@ import SnapKit
 import ThemeKit
 
 open class SliderButton: UIView {
-    
+    // MARK: Static Properties
+
     public static let margin: CGFloat = 3
     public static let height: CGFloat = margin + .heightButton + margin
+
+    // MARK: Properties
+
+    public var onTap: (() -> Void)?
 
     private let fillView = UIView()
     private let label = UILabel()
@@ -29,7 +33,7 @@ open class SliderButton: UIView {
     private var maxPosition: CGFloat?
     private var finished = false
 
-    public var onTap: (() -> Void)?
+    // MARK: Computed Properties
 
     public var title: String? {
         get { label.text }
@@ -59,6 +63,8 @@ open class SliderButton: UIView {
         }
     }
 
+    // MARK: Lifecycle
+
     public init() {
         super.init(frame: .zero)
 
@@ -69,7 +75,9 @@ open class SliderButton: UIView {
     public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
+    // MARK: Functions
+
     open func setup() {
         backgroundColor = .zx005.alpha(0.5)
         cornerRadius = Self.height / 2
@@ -150,7 +158,10 @@ open class SliderButton: UIView {
         }
         
         finalImageView.isHidden = true
-        finalImageView.transform = CGAffineTransform(scaleX: CGFloat.leastNonzeroMagnitude, y: CGFloat.leastNonzeroMagnitude)
+        finalImageView.transform = CGAffineTransform(
+            scaleX: CGFloat.leastNonzeroMagnitude,
+            y: CGFloat.leastNonzeroMagnitude
+        )
         
         syncState()
         
@@ -160,7 +171,10 @@ open class SliderButton: UIView {
     }
     
     open func reset() {
-        finalImageView.transform = CGAffineTransform(scaleX: CGFloat.leastNonzeroMagnitude, y: CGFloat.leastNonzeroMagnitude)
+        finalImageView.transform = CGAffineTransform(
+            scaleX: CGFloat.leastNonzeroMagnitude,
+            y: CGFloat.leastNonzeroMagnitude
+        )
         finalImageView.isHidden = true
         
         slideImageView.transform = CGAffineTransform(scaleX: 1, y: 1)

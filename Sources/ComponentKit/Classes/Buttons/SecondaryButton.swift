@@ -1,8 +1,7 @@
 //
 //  SecondaryButton.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/19.
+//  Created by Sun on 2021/12/1.
 //
 
 import UIKit
@@ -13,6 +12,7 @@ import ThemeKit
 // MARK: - SecondaryButton
 
 open class SecondaryButton: ComponentButton {
+    // MARK: Nested Types
 
     public enum Style {
         case `default`
@@ -21,11 +21,15 @@ open class SecondaryButton: ComponentButton {
         case transparent3
         case tab
     }
-    
+
+    // MARK: Lifecycle
+
     public init() {
         super.init(imagePosition: .left, spacing: 0)
     }
-    
+
+    // MARK: Overridden Functions
+
     override open func setup() {
         super.setup()
         
@@ -39,7 +43,9 @@ open class SecondaryButton: ComponentButton {
             maker.height.equalTo(Self.height(style: .default))
         }
     }
-    
+
+    // MARK: Functions
+
     public func set(style: Style, imagePosition: ImagePosition = .left, image: UIImage? = nil) {
         let height = Self.height(style: style)
         self.imagePosition = imagePosition
@@ -53,9 +59,12 @@ open class SecondaryButton: ComponentButton {
         }
 
         switch style {
-        case .default, .transparent, .tab:
+        case .default,
+             .transparent,
+             .tab:
             cornerRadius = height / 2
-        case .transparent2, .transparent3:
+        case .transparent2,
+             .transparent3:
             cornerRadius = 0
         }
 
@@ -76,7 +85,9 @@ open class SecondaryButton: ComponentButton {
             setBackgroundColor(.cg005, for: .selected)
             setBackgroundColor(.cg005.alpha(0.5), for: [.selected, .highlighted])
             
-        case .transparent2, .transparent3, .tab:
+        case .transparent2,
+             .transparent3,
+             .tab:
             setBackgroundColor(.clear, for: .normal)
             setBackgroundColor(.clear, for: .highlighted)
             setBackgroundColor(.clear, for: .disabled)
@@ -85,14 +96,16 @@ open class SecondaryButton: ComponentButton {
         }
 
         switch style {
-        case .default, .transparent:
+        case .default,
+             .transparent:
             setTitleColor(.zx001, for: .normal)
             setTitleColor(.zx002, for: .highlighted)
             setTitleColor(.zx003, for: .disabled)
             setTitleColor(.zx017, for: .selected)
             setTitleColor(.zx017, for: [.selected, .highlighted])
             
-        case .transparent2, .transparent3:
+        case .transparent2,
+             .transparent3:
             setTitleColor(.zx001, for: .normal)
             setTitleColor(.zx003, for: .highlighted)
             setTitleColor(.zx005, for: .disabled)
@@ -113,14 +126,17 @@ open class SecondaryButton: ComponentButton {
 
         if let image {
             switch style {
-            case .default, .transparent, .tab:
+            case .default,
+                 .transparent,
+                 .tab:
                 setImage(image.tint(.zx002), for: .normal)
                 setImage(image.tint(.zx003), for: .highlighted)
                 setImage(image.tint(.zx003), for: .disabled)
                 setImage(image.tint(.zx017), for: .selected)
                 setImage(image.tint(.zx017), for: [.selected, .highlighted])
                 
-            case .transparent2, .transparent3:
+            case .transparent2,
+                 .transparent3:
                 setImage(image.tint(.zx002), for: .normal)
                 setImage(image.tint(.zx005), for: .highlighted)
                 setImage(image.tint(.zx005), for: .disabled)
@@ -145,48 +161,60 @@ open class SecondaryButton: ComponentButton {
 }
 
 extension SecondaryButton {
-
     private static func font(style: Style) -> UIFont {
         switch style {
-        case .default, .transparent:
+        case .default,
+             .transparent:
             .captionM
         case .tab:
             .subhead1
-        case .transparent2, .transparent3:
+        case .transparent2,
+             .transparent3:
             .subhead2
         }
     }
 
     private static func leftPadding(style: Style) -> CGFloat {
         switch style {
-        case .default, .transparent, .tab:
+        case .default,
+             .transparent,
+             .tab:
             .margin16
-        case .transparent2, .transparent3:
+        case .transparent2,
+             .transparent3:
             0
         }
     }
 
     private static func rightPadding(style: Style) -> CGFloat {
         switch style {
-        case .default, .transparent, .tab:
+        case .default,
+             .transparent,
+             .tab:
             .margin16
-        case .transparent2, .transparent3:
+        case .transparent2,
+             .transparent3:
             0
         }
     }
 
     private static func imagePadding(style: Style) -> CGFloat {
         switch style {
-        case .default, .transparent, .tab:
+        case .default,
+             .transparent,
+             .tab:
             .margin2
-        case .transparent2, .transparent3:
+        case .transparent2,
+             .transparent3:
             .margin8
         }
     }
 
     public static func height(style: Style) -> CGFloat {
         switch style {
-        case .default, .transparent, .tab:
+        case .default,
+             .transparent,
+             .tab:
             28
         case .transparent2:
             20
@@ -204,5 +232,4 @@ extension SecondaryButton {
 
         return width + leftPadding(style: style) + rightPadding(style: style)
     }
-
 }

@@ -1,6 +1,5 @@
 //
 //  SegmentedControlComponent.swift
-//  ComponentKit
 //
 //  Created by Sun on 2024/8/29.
 //
@@ -11,11 +10,14 @@ import SnapKit
 import ThemeKit
 
 public class SegmentedControlComponent: UIView {
-    
+    // MARK: Properties
+
     public let segmentedControl = UISegmentedControl()
     
     public var onChange: ((Int) -> Void)?
-    
+
+    // MARK: Lifecycle
+
     override public init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -29,11 +31,11 @@ public class SegmentedControlComponent: UIView {
         segmentedControl.setContentHuggingPriority(.required, for: .horizontal)
         segmentedControl.setTitleTextAttributes([
             .foregroundColor: UIColor.zx001,
-            .font: UIFont.subhead2
+            .font: UIFont.subhead2,
         ], for: .normal)
         segmentedControl.setTitleTextAttributes([
             .foregroundColor: UIColor.cg005,
-            .font: UIFont.subhead1
+            .font: UIFont.subhead1,
         ], for: .selected)
         segmentedControl.addTarget(self, action: #selector(handleSegmentChanged), for: .valueChanged)
     }
@@ -42,7 +44,9 @@ public class SegmentedControlComponent: UIView {
     public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
+    // MARK: Functions
+
     @objc
     private func handleSegmentChanged(_ sender: UISegmentedControl) {
         onChange?(sender.selectedSegmentIndex)

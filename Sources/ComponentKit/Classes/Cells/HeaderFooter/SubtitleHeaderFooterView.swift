@@ -1,8 +1,7 @@
 //
 //  SubtitleHeaderFooterView.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/19.
+//  Created by Sun on 2021/12/1.
 //
 
 import UIKit
@@ -13,8 +12,11 @@ import ThemeKit
 // MARK: - SubtitleHeaderFooterView
 
 open class SubtitleHeaderFooterView: UITableViewHeaderFooterView {
-    
+    // MARK: Properties
+
     private let label = UILabel()
+
+    // MARK: Lifecycle
 
     override public init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -36,14 +38,14 @@ open class SubtitleHeaderFooterView: UITableViewHeaderFooterView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: Functions
+
     open func bind(text: String?, backgroundColor: UIColor = .clear) {
         label.text = text?.uppercased()
         backgroundView?.backgroundColor = backgroundColor
     }
-
 }
 
 extension SubtitleHeaderFooterView {
-    
     public static let height: CGFloat = .margin32
 }

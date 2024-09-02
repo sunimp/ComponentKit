@@ -1,6 +1,5 @@
 //
 //  ComponentButton.swift
-//  ComponentKit
 //
 //  Created by Sun on 2024/8/25.
 //
@@ -10,14 +9,27 @@ import UIKit
 import ThemeKit
 
 open class ComponentButton: UIButton {
-    
+    // MARK: Nested Types
+
     public enum ImagePosition {
         case top
         case left
         case bottom
         case right
     }
-    
+
+    // MARK: Overridden Properties
+
+    override open var intrinsicContentSize: CGSize {
+        let size = CGSize(
+            width: CGFloat.greatestFiniteMagnitude,
+            height: CGFloat.greatestFiniteMagnitude
+        )
+        return sizeThatFits(size)
+    }
+
+    // MARK: Computed Properties
+
     open var imagePosition: ImagePosition = .left {
         didSet {
             setNeedsLayout()
@@ -38,15 +50,7 @@ open class ComponentButton: UIButton {
             contentEdgeInsets = newValue
         }
     }
-    
-    override open var intrinsicContentSize: CGSize {
-        let size = CGSize(
-            width: CGFloat.greatestFiniteMagnitude,
-            height: CGFloat.greatestFiniteMagnitude
-        )
-        return sizeThatFits(size)
-    }
-    
+
     private var _imageView: UIImageView? {
         let _imageView_ = perform(NSSelectorFromString("_imageView")).takeUnretainedValue()
         if let imageView = _imageView_ as? UIImageView {
@@ -54,7 +58,9 @@ open class ComponentButton: UIButton {
         }
         return nil
     }
-    
+
+    // MARK: Lifecycle
+
     public init(imagePosition: ImagePosition = .left, spacing: CGFloat = .margin8) {
         self.imagePosition = imagePosition
         imageSpacing = spacing
@@ -68,16 +74,9 @@ open class ComponentButton: UIButton {
     public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    open func setup() {
-        contentInsets = UIEdgeInsets(
-            top: .leastNormalMagnitude,
-            left: 0,
-            bottom: .leastNormalMagnitude,
-            right: 0
-        )
-    }
-    
+
+    // MARK: Overridden Functions
+
     override open func sizeThatFits(_ size: CGSize) -> CGSize {
         var newSize = size
         if bounds.size == size {
@@ -99,7 +98,8 @@ open class ComponentButton: UIButton {
         )
         
         switch imagePosition {
-        case .top, .bottom:
+        case .top,
+             .bottom:
             if isImageViewShowing {
                 let imageLimitWidth = contentLimitSize.width - imageEdgeInsets.horizontal
                 var imageSize: CGSize = .zero
@@ -145,7 +145,8 @@ open class ComponentButton: UIButton {
                     .height + imageSpacing + titleTotalSize.height
             }
             
-        case .left, .right:
+        case .left,
+             .right:
             if isImageViewShowing {
                 let imageLimitHeight = contentLimitSize.height - imageEdgeInsets.vertical
                 var imageSize: CGSize = .zero
@@ -196,7 +197,9 @@ open class ComponentButton: UIButton {
     override open func layoutSubviews() {
         super.layoutSubviews()
         
-        guard !bounds.isEmpty else { return }
+        guard !bounds.isEmpty else {
+            return
+        }
         
         let isImageViewShowing = currentImage != nil
         let isTitleLabelShowing = currentTitle != nil || currentAttributedTitle != nil
@@ -415,7 +418,8 @@ open class ComponentButton: UIButton {
                 case .fill:
                     
                     if isImageViewShowing, isTitleLabelShowing {
-                        imageFrame.origin.y = bounds.height - contentInsets.bottom - imageEdgeInsets.bottom - imageFrame.height
+                        imageFrame.origin.y = bounds.height - contentInsets.bottom - imageEdgeInsets.bottom - imageFrame
+                            .height
                         titleFrame.origin.y = contentInsets.top + titleEdgeInsets.top
                         titleFrame.size.height = bounds.height - contentInsets.bottom - imageTotalSize
                             .height - imageSpacing - titleEdgeInsets.bottom - titleFrame.minY
@@ -471,10 +475,12 @@ open class ComponentButton: UIButton {
                 
             case .center:
                 if isImageViewShowing {
-                    imageFrame.origin.y = contentInsets.top + (contentSize.height - imageFrame.height) / 2.0 + imageEdgeInsets.top
+                    imageFrame.origin.y = contentInsets
+                        .top + (contentSize.height - imageFrame.height) / 2.0 + imageEdgeInsets.top
                 }
                 if isTitleLabelShowing {
-                    titleFrame.origin.y = contentInsets.top + (contentSize.height - titleFrame.height) / 2.0 + titleEdgeInsets.top
+                    titleFrame.origin.y = contentInsets
+                        .top + (contentSize.height - titleFrame.height) / 2.0 + titleEdgeInsets.top
                 }
                 
             case .bottom:
@@ -526,8 +532,7 @@ open class ComponentButton: UIButton {
                 case .right:
                     if
                         imageTotalSize.width + imageSpacing + titleTotalSize
-                            .width > contentSize.width
-                    {
+                            .width > contentSize.width {
                         if isImageViewShowing {
                             imageFrame.origin.x = contentInsets.left + imageEdgeInsets.left
                         }
@@ -551,8 +556,10 @@ open class ComponentButton: UIButton {
                 case .fill:
                     if isImageViewShowing, isTitleLabelShowing {
                         imageFrame.origin.x = contentInsets.left + imageEdgeInsets.left
-                        titleFrame.origin.x = contentInsets.left + imageTotalSize.width + imageSpacing + titleEdgeInsets.left
-                        titleFrame.size.width = bounds.width - contentInsets.right - titleEdgeInsets.right - titleFrame.minX
+                        titleFrame.origin.x = contentInsets.left + imageTotalSize.width + imageSpacing + titleEdgeInsets
+                            .left
+                        titleFrame.size.width = bounds.width - contentInsets.right - titleEdgeInsets.right - titleFrame
+                            .minX
                     } else if isImageViewShowing {
                         imageFrame.origin.x = contentInsets.left + imageEdgeInsets.left
                         imageFrame.size.width = contentSize.width - imageEdgeInsets.horizontal
@@ -569,8 +576,7 @@ open class ComponentButton: UIButton {
                 case .left:
                     if
                         imageTotalSize.width + imageSpacing + titleTotalSize
-                            .width > contentSize.width
-                    {
+                            .width > contentSize.width {
                         if isImageViewShowing {
                             imageFrame.origin.x = bounds.width - contentInsets.right - imageEdgeInsets
                                 .right - imageFrame.width
@@ -643,5 +649,16 @@ open class ComponentButton: UIButton {
                 titleLabel?.frame = titleFrame
             }
         }
+    }
+
+    // MARK: Functions
+
+    open func setup() {
+        contentInsets = UIEdgeInsets(
+            top: .leastNormalMagnitude,
+            left: 0,
+            bottom: .leastNormalMagnitude,
+            right: 0
+        )
     }
 }

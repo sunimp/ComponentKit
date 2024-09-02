@@ -1,8 +1,7 @@
 //
 //  MultiTextComponent.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/20.
+//  Created by Sun on 2021/12/1.
 //
 
 import UIKit
@@ -13,9 +12,7 @@ import ThemeKit
 // MARK: - MultiTextComponent
 
 public class MultiTextComponent: UIView {
-    
-    private let titleStackView = UIStackView()
-    private let subtitleStackView = UIStackView()
+    // MARK: Properties
 
     public let title = TextComponent()
     public let titleBadge = BadgeView()
@@ -27,9 +24,16 @@ public class MultiTextComponent: UIView {
     public let subtitleLeft = TextComponent()
     public let subtitleRight = TextComponent()
 
+    private let titleStackView = UIStackView()
+    private let subtitleStackView = UIStackView()
+
+    // MARK: Computed Properties
+
     public var subtitle: TextComponent {
         subtitleRight
     }
+
+    // MARK: Lifecycle
 
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -90,7 +94,9 @@ public class MultiTextComponent: UIView {
     public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
+    // MARK: Functions
+
     public func set(style: Style) {
         title.isHidden = true
         titleBadge.isHidden = true
@@ -138,13 +144,11 @@ public class MultiTextComponent: UIView {
             subtitleRight.isHidden = false
         }
     }
-
 }
 
 // MARK: MultiTextComponent.Style
 
 extension MultiTextComponent {
-
     public enum Style {
         case m1
         case m2
@@ -154,5 +158,4 @@ extension MultiTextComponent {
         case m6
         case m7
     }
-
 }

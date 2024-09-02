@@ -1,8 +1,7 @@
 //
 //  SwitchComponent.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/20.
+//  Created by Sun on 2021/12/1.
 //
 
 import UIKit
@@ -11,10 +10,13 @@ import SnapKit
 import ThemeKit
 
 public class SwitchComponent: UIView {
-    
+    // MARK: Properties
+
     public let switchView = UISwitch()
 
     public var onSwitch: ((Bool) -> Void)?
+
+    // MARK: Lifecycle
 
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,9 +39,10 @@ public class SwitchComponent: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: Functions
+
     @objc
     private func handleToggle() {
         onSwitch?(switchView.isOn)
     }
-
 }

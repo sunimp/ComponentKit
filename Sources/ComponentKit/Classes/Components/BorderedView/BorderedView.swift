@@ -1,8 +1,7 @@
 //
 //  BorderedView.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/20.
+//  Created by Sun on 2022/10/6.
 //
 
 import UIKit
@@ -10,12 +9,7 @@ import UIKit
 // MARK: - BorderedView
 
 public class BorderedView: UIView {
-    
-    private let borderLayer = CAShapeLayer()
-
-    private var _cornerRadius: CGFloat = 0
-    private var _borderWidth: CGFloat = 0
-    private var _borderColor: UIColor?
+    // MARK: Overridden Properties
 
     override public var cornerRadius: CGFloat {
         get { _cornerRadius }
@@ -42,6 +36,16 @@ public class BorderedView: UIView {
         }
     }
 
+    // MARK: Properties
+
+    private let borderLayer = CAShapeLayer()
+
+    private var _cornerRadius: CGFloat = 0
+    private var _borderWidth: CGFloat = 0
+    private var _borderColor: UIColor?
+
+    // MARK: Computed Properties
+
     public var borderStyle: BorderStyle = .solid {
         didSet {
             updateSubLayers()
@@ -53,6 +57,8 @@ public class BorderedView: UIView {
             updateSubLayers()
         }
     }
+
+    // MARK: Lifecycle
 
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,16 +75,32 @@ public class BorderedView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func styledLinePath(border: UIRectEdge, cornerPath _: CornerPath, start: CGPoint, end: CGPoint) -> UIBezierPath {
+    // MARK: Overridden Functions
+
+    override public func layoutSubviews() {
+        super.layoutSubviews()
+        updateSubLayers()
+    }
+
+    // MARK: Functions
+
+    private func styledLinePath(
+        border: UIRectEdge,
+        cornerPath _: CornerPath,
+        start: CGPoint,
+        end: CGPoint
+    )
+        -> UIBezierPath {
         let path = UIBezierPath()
         switch borderStyle {
         case .solid:
             path.move(to: start)
             path.addLine(to: end)
 
-        case .corners(let length):
+        case let .corners(length):
             switch border {
-            case .top, .bottom:
+            case .top,
+                 .bottom:
                 let leftBorderX = min(max(length, start.x), end.x)
                 let rightBorderX = max(min(bounds.width - length, end.x), start.x)
                 if leftBorderX != 0 {
@@ -90,7 +112,8 @@ public class BorderedView: UIView {
                     path.addLine(to: end)
                 }
 
-            case .right, .left:
+            case .right,
+                 .left:
                 let topBorderY = min(max(length, start.y), end.y)
                 let bottomBorderY = max(min(bounds.height - length, end.y), start.y)
                 if topBorderY != 0 {
@@ -121,18 +144,21 @@ public class BorderedView: UIView {
             return styledLinePath(border: border, cornerPath: cornerPath, start: start, end: end)
 
         case .bottom:
-            let start = cornerPath.point(edgeType: hasLeft ? .start : nil, corner: .bottomLeft, xOffset: hasLeft).cgPoint
+            let start = cornerPath.point(edgeType: hasLeft ? .start : nil, corner: .bottomLeft, xOffset: hasLeft)
+                .cgPoint
             let end = cornerPath.point(edgeType: hasRight ? .end : nil, corner: .bottomRight, xOffset: hasRight).cgPoint
             return styledLinePath(border: border, cornerPath: cornerPath, start: start, end: end)
 
         case .left:
             let start = cornerPath.point(edgeType: hasTop ? .start : nil, corner: .topLeft, yOffset: hasTop).cgPoint
-            let end = cornerPath.point(edgeType: hasBottom ? .end : nil, corner: .bottomLeft, yOffset: hasBottom).cgPoint
+            let end = cornerPath.point(edgeType: hasBottom ? .end : nil, corner: .bottomLeft, yOffset: hasBottom)
+                .cgPoint
             return styledLinePath(border: border, cornerPath: cornerPath, start: start, end: end)
 
         case .right:
             let start = cornerPath.point(edgeType: hasTop ? .end : nil, corner: .topRight, yOffset: hasTop).cgPoint
-            let end = cornerPath.point(edgeType: hasBottom ? .start : nil, corner: .bottomRight, yOffset: hasBottom).cgPoint
+            let end = cornerPath.point(edgeType: hasBottom ? .start : nil, corner: .bottomRight, yOffset: hasBottom)
+                .cgPoint
             return styledLinePath(border: border, cornerPath: cornerPath, start: start, end: end)
 
         default:
@@ -171,17 +197,11 @@ public class BorderedView: UIView {
 
         borderLayer.removeAllAnimations()
     }
-
-    override public func layoutSubviews() {
-        super.layoutSubviews()
-        updateSubLayers()
-    }
 }
 
 // MARK: BorderedView.BorderStyle
 
 extension BorderedView {
-    
     public enum BorderStyle {
         case solid
         case corners(length: CGFloat)

@@ -1,8 +1,7 @@
 //
 //  ActivityIndicators.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/20.
+//  Created by Sun on 2021/12/1.
 //
 
 import UIKit
@@ -13,10 +12,11 @@ import ThemeKit
 // MARK: - ActivityIndicatorStyle
 
 public enum ActivityIndicatorStyle {
-    
     case small20
     case medium24
     case large48
+
+    // MARK: Computed Properties
 
     public var dashHeight: CGFloat {
         switch self {
@@ -75,7 +75,6 @@ public enum ActivityIndicatorStyle {
 }
 
 extension HUDActivityView {
-
     public static func create(with style: ActivityIndicatorStyle, strokeColor: UIColor = .gray) -> HUDActivityView {
         let activityView = HUDActivityView(
             dashHeight: style.dashHeight,
@@ -92,5 +91,4 @@ extension HUDActivityView {
 
         return activityView
     }
-
 }

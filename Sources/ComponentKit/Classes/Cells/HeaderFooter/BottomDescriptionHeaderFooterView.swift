@@ -1,8 +1,7 @@
 //
 //  BottomDescriptionHeaderFooterView.swift
-//  ComponentKit
 //
-//  Created by Sun on 2024/8/19.
+//  Created by Sun on 2021/12/1.
 //
 
 import UIKit
@@ -13,8 +12,11 @@ import ThemeKit
 // MARK: - BottomDescriptionHeaderFooterView
 
 open class BottomDescriptionHeaderFooterView: UITableViewHeaderFooterView {
-    
+    // MARK: Properties
+
     private let descriptionView = BottomDescriptionView()
+
+    // MARK: Lifecycle
 
     override public init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -30,6 +32,8 @@ open class BottomDescriptionHeaderFooterView: UITableViewHeaderFooterView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: Functions
+
     public func bind(
         text: String,
         textColor: UIColor = .zx003,
@@ -38,17 +42,16 @@ open class BottomDescriptionHeaderFooterView: UITableViewHeaderFooterView {
     ) {
         descriptionView.bind(text: text, textColor: textColor, topMargin: topMargin, bottomMargin: bottomMargin)
     }
-
 }
 
 extension BottomDescriptionHeaderFooterView {
-
     public static func height(
         containerWidth: CGFloat,
         text: String,
         topMargin: CGFloat = .margin12,
         bottomMargin: CGFloat = .margin32
-    ) -> CGFloat {
+    )
+        -> CGFloat {
         BottomDescriptionView.height(
             containerWidth: containerWidth,
             text: text,
@@ -56,5 +59,4 @@ extension BottomDescriptionHeaderFooterView {
             bottomMargin: bottomMargin
         )
     }
-
 }
