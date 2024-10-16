@@ -1,5 +1,6 @@
 //
 //  DeterminiteSpinnerComponent.swift
+//  ComponentKit
 //
 //  Created by Sun on 2022/10/6.
 //

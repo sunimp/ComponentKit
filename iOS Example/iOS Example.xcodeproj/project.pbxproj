@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,7 +12,8 @@
 		3A39D0AE275769A10022CB8B /* ButtonsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A39D0A3275769A00022CB8B /* ButtonsController.swift */; };
 		3A39D0AF275769A10022CB8B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A39D0A4275769A00022CB8B /* Images.xcassets */; };
 		3A39D0B0275769A10022CB8B /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A39D0A5275769A00022CB8B /* MainController.swift */; };
-		A45FF6952C7751D6000CC7E3 /* LookinServer in Frameworks */ = {isa = PBXBuildFile; productRef = A45FF6942C7751D6000CC7E3 /* LookinServer */; };
+		A46AFF8F2CBFDC99000086AC /* ComponentKit in Frameworks */ = {isa = PBXBuildFile; productRef = A46AFF8E2CBFDC99000086AC /* ComponentKit */; };
+		A46AFF922CBFDCAA000086AC /* ComponentKit in Frameworks */ = {isa = PBXBuildFile; productRef = A46AFF912CBFDCAA000086AC /* ComponentKit */; };
 		D3C59F2C2A5EA43300D5F439 /* ExperimentalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C59F2B2A5EA43300D5F439 /* ExperimentalView.swift */; };
 		D945030C261F99CC00F6BF2E /* ComponentKit in Frameworks */ = {isa = PBXBuildFile; productRef = D945030B261F99CC00F6BF2E /* ComponentKit */; };
 /* End PBXBuildFile section */
@@ -24,7 +25,7 @@
 		3A39D0A4275769A00022CB8B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3A39D0A5275769A00022CB8B /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		D3C59F2B2A5EA43300D5F439 /* ExperimentalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperimentalView.swift; sourceTree = "<group>"; };
-		D94502F5261F98A400F6BF2E /* ComponentKit Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ComponentKit Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D94502F5261F98A400F6BF2E /* ComponentKit-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ComponentKit-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9450301261F98A500F6BF2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -34,7 +35,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D945030C261F99CC00F6BF2E /* ComponentKit in Frameworks */,
-				A45FF6952C7751D6000CC7E3 /* LookinServer in Frameworks */,
+				A46AFF922CBFDCAA000086AC /* ComponentKit in Frameworks */,
+				A46AFF8F2CBFDC99000086AC /* ComponentKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,7 +55,7 @@
 		D94502F6261F98A400F6BF2E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D94502F5261F98A400F6BF2E /* ComponentKit Demo.app */,
+				D94502F5261F98A400F6BF2E /* ComponentKit-Example.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -97,10 +99,11 @@
 			name = "iOS Example";
 			packageProductDependencies = (
 				D945030B261F99CC00F6BF2E /* ComponentKit */,
-				A45FF6942C7751D6000CC7E3 /* LookinServer */,
+				A46AFF8E2CBFDC99000086AC /* ComponentKit */,
+				A46AFF912CBFDCAA000086AC /* ComponentKit */,
 			);
 			productName = "iOS Example";
-			productReference = D94502F5261F98A400F6BF2E /* ComponentKit Demo.app */;
+			productReference = D94502F5261F98A400F6BF2E /* ComponentKit-Example.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -129,7 +132,7 @@
 			);
 			mainGroup = D94502EC261F98A400F6BF2E;
 			packageReferences = (
-				A45FF6932C7751D6000CC7E3 /* XCRemoteSwiftPackageReference "LookinServer" */,
+				A46AFF902CBFDCAA000086AC /* XCLocalSwiftPackageReference "../../ComponentKit" */,
 			);
 			productRefGroup = D94502F6261F98A400F6BF2E /* Products */;
 			projectDirPath = "";
@@ -300,7 +303,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sunimp.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "ComponentKit Demo";
+				PRODUCT_NAME = "ComponentKit-Example";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -325,7 +328,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sunimp.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "ComponentKit Demo";
+				PRODUCT_NAME = "ComponentKit-Example";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -357,22 +360,21 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		A45FF6932C7751D6000CC7E3 /* XCRemoteSwiftPackageReference "LookinServer" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/QMUI/LookinServer.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.8;
-			};
+/* Begin XCLocalSwiftPackageReference section */
+		A46AFF902CBFDCAA000086AC /* XCLocalSwiftPackageReference "../../ComponentKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../ComponentKit;
 		};
-/* End XCRemoteSwiftPackageReference section */
+/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A45FF6942C7751D6000CC7E3 /* LookinServer */ = {
+		A46AFF8E2CBFDC99000086AC /* ComponentKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A45FF6932C7751D6000CC7E3 /* XCRemoteSwiftPackageReference "LookinServer" */;
-			productName = LookinServer;
+			productName = ComponentKit;
+		};
+		A46AFF912CBFDCAA000086AC /* ComponentKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ComponentKit;
 		};
 		D945030B261F99CC00F6BF2E /* ComponentKit */ = {
 			isa = XCSwiftPackageProductDependency;

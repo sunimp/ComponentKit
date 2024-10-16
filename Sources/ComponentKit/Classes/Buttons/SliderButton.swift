@@ -1,5 +1,6 @@
 //
 //  SliderButton.swift
+//  ComponentKit
 //
 //  Created by Sun on 2023/7/13.
 //

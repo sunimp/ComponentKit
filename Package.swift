@@ -11,16 +11,17 @@ let package = Package(
         products: [
             .library(
                     name: "ComponentKit",
-                    targets: ["ComponentKit"]),
+                    targets: ["ComponentKit"]
+            ),
         ],
         dependencies: [
             .package(url: "https://github.com/Juanpe/SkeletonView.git", from: "1.31.0"),
             .package(url: "https://github.com/SnapKit/SnapKit.git", from: "5.7.1"),
-            .package(url: "https://github.com/sunimp/HUD.Swift.git", .upToNextMajor(from: "2.2.0")),
-            .package(url: "https://github.com/sunimp/SectionsTableView.Swift.git", .upToNextMajor(from: "1.1.0")),
-            .package(url: "https://github.com/sunimp/ThemeKit.Swift.git", .upToNextMajor(from: "2.3.0")),
-            .package(url: "https://github.com/sunimp/UIExtensions.Swift.git", .upToNextMajor(from: "1.3.0")),
-            .package(url: "https://github.com/nicklockwood/SwiftFormat.git", from: "0.54.3"),
+            .package(url: "https://github.com/sunimp/HUD.git", .upToNextMajor(from: "1.0.0")),
+            .package(url: "https://github.com/sunimp/SectionsTableView.git", .upToNextMajor(from: "1.0.0")),
+            .package(url: "https://github.com/sunimp/ThemeKit.git", .upToNextMajor(from: "1.0.0")),
+            .package(url: "https://github.com/sunimp/UIExtensions.git", .upToNextMajor(from: "1.0.0")),
+            .package(url: "https://github.com/nicklockwood/SwiftFormat.git", from: "0.54.6"),
         ],
         targets: [
             .target(
@@ -28,10 +29,10 @@ let package = Package(
                     dependencies: [
                         "SkeletonView",
                         "SnapKit",
-                        .product(name: "HUD", package: "HUD.Swift"),
-                        .product(name: "SectionsTableView", package: "SectionsTableView.Swift"),
-                        .product(name: "ThemeKit", package: "ThemeKit.Swift"),
-                        .product(name: "UIExtensions", package: "UIExtensions.Swift"),
+                        "HUD",
+                        "SectionsTableView",
+                        "ThemeKit",
+                        "UIExtensions"
                     ]
             ),
         ]
