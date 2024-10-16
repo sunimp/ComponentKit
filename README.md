@@ -1,4 +1,4 @@
-# ComponentKit.Swift
+# ComponentKit
 
 UI components
 
@@ -14,10 +14,10 @@ UI components
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/sunimp/ComponentKit.Swift.git", .upToNextMajor(from: "2.3.0"))
+    .package(url: "https://github.com/sunimp/ComponentKit.git", .upToNextMajor(from: "1.0.0"))
 ]
 ```
 
 ## License
 
-`ComponentKit.Swift` is available under the MIT license. See the LICENSE file for more info.
+`ComponentKit` is available under the MIT license. See the LICENSE file for more info.
